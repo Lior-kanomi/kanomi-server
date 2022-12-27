@@ -4,20 +4,22 @@ const nodemon = require('nodemon');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require("path");
-
 const buttonRoute = require("./routes/buttonRoute");
+
+// Initial database connection
+const db = require("./data/db");
 
 // Load the environment variables from the .env file
 dotenv.config();
 
 const app = express();
 
-// Initial database connection
-const db = require("./data/db");
-
+// Use the express.json() middleware to parse incoming request bodies
+app.use(express.json());
 
 // Create an express app
 app.use(cors());
+
 // Set the port for the application
 const port = process.env.PORT || 5000;
 
