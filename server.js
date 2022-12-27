@@ -7,6 +7,9 @@ const path = require("path");
 const buttonRoute = require("./routes/buttonRoute");
 const app = express();
 
+// Initial database connection
+const db = require("./data/db");
+
 // Load the environment variables from the .env file
 dotenv.config();
 
@@ -16,7 +19,6 @@ app.use(cors());
 const port = process.env.PORT || 5000;
 
 // Mount the routes to the express app
-app.use('/', (req,res) => res.status(200).json({message:"Success",data:[]}));
 app.use('/api/button',buttonRoute);
 
 // Start the server
