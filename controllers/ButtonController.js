@@ -8,7 +8,7 @@ exports.createButton = async (req, res) => {
     }
     if (!button) {
       const newButton = new Button({ name: req.params.ButtonName });
-        newButton.create(button)
+        Button.create(newButton)
     .then((createdButton) => {
       // If the Button was successfully created, send a 200 OK response with the created Button document
       res.status(200).json({ message: 'User updated successfully', data: createdButton });
