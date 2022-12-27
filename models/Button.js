@@ -7,6 +7,7 @@ const buttonSchema = new mongoose.Schema({
      'SnippingToolButton','CalculatorButton','SnippingTool','KanomiSearchBar',
      'WhatsappWebButton','BluetoothButton','WeatherButton',
     'AmazonButton','EbayButton','MainAppBarBrowserButton',
+    'ChatGptButton'
   ],
   required: true,
   },
