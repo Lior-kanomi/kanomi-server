@@ -2,7 +2,7 @@ const Button = require('../models/Button');
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
-  Button.findOne({ buttonName: req.body.ButtonName }, (error, button) => {
+  Button.findOne({ buttonName: "SnippingToolButton" }, (error, button) => {
     if (error) {
       return res.status(500).json({ message: error.message + "validation error"});
     }
