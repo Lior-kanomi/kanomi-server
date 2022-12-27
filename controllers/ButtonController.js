@@ -7,7 +7,7 @@ exports.createButton = async (req, res) => {
       return res.status(500).json({ message: error.message + "validation error"});
     }
     if (!button) {
-      const newButton = new Button({ name: req.params.ButtonName });
+      const newButton = new Button({ name: req.params.ButtonName, counter: 0 });
       newButton.save((error) => {
         if (error) {
           return res.status(500).json({ message: error.message + "Saving error"});
