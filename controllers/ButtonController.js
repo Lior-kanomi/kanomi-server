@@ -31,7 +31,7 @@ exports.createButton = async (req, res) => {
 };
 
 exports.getLink = async (req, res) => {
-  Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
+  Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
     if (error) {
       return res.status(500).json({ message: error.message});
     }

@@ -3,7 +3,7 @@ const router = express.Router();
 const buttonController = require('../controllers/ButtonController');
 
 router.post('/addButton', buttonController.createButton);
-router.get('/getLink', buttonController.getLink);
+router.get('/getLink/:buttonName', buttonController.getLink);
 
 
 
