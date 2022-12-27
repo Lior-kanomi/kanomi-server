@@ -36,7 +36,8 @@ exports.getLink = async (req, res) => {
       return res.status(500).json({ message: error.message});
     }
     if (button) {
-      return res.status(200).json({ message: "Success",data:button.buttonName});
+      console.log(button);
+      return res.status(200).json({ message: "Success",data:button.url});
     }
     return res.status(400).json({ message: "faliure, the button isn't found",data:""});
   })
