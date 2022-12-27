@@ -1,14 +1,14 @@
 const Button = require('../models/Button');
-
+const ga = require('google-analytics')(process.env.PROPERTY_ID);
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
-  Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
+  Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
     if (error) {
       return res.status(500).json({ message: error.message});
     }
     if (!button) {
-      console.log(`${req.params.buttonName} name of the`);
-      const newButton = new Button({ buttonName: req.params.buttonName });
+      console.log(`${req.body.buttonName} name of the`);
+      const newButton = new Button({ buttonName: req.body.buttonName,url:req.body.url });
         Button.create(newButton)
     .then((createdButton) => {
       // If the Button was successfully created, send a 200 OK response with the created Button document

@@ -13,6 +13,11 @@ const buttonSchema = new mongoose.Schema({
   counter: {
     type: Number,
     default: 1
+  },
+ url: {
+    type: String,
+    required: true,
+    match: /^https?:\/\/.+/
   }
 });
 
