@@ -4,7 +4,7 @@ const Button = require('../models/Button');
 exports.createButton = async (req, res) => {
   Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
     if (error) {
-      return res.status(500).json({ message: error.message + "validation error"});
+      return res.status(500).json({ message: error.message});
     }
     if (!button) {
       console.log(`${req.params.buttonName} name of the`);
