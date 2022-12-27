@@ -5,13 +5,15 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require("path");
 const buttonRoute = require("./routes/buttonRoute");
+
+// Load the environment variables from the .env file
+dotenv.config();
+
 const app = express();
 
 // Initial database connection
 const db = require("./data/db");
 
-// Load the environment variables from the .env file
-dotenv.config();
 
 // Create an express app
 app.use(cors());

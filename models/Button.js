@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const buttonSchema = new mongoose.Schema({
   buttonName: {
+    type:{
      type:String,
      enum: ['SnippingToolButton','PowerOptionsButton','SettingsMenuButton',
      'SnippingToolButton','CalculatorButton','SnippingTool','KanomiSearchBar',
@@ -9,7 +10,7 @@ const buttonSchema = new mongoose.Schema({
     'AmazonButton','EbayButton','MainAppBarBrowserButton',
   ],
   required: true,
-    
+    },
   },
   counter: {
     type: Number,
