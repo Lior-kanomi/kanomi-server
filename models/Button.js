@@ -4,11 +4,6 @@ const buttonSchema = new mongoose.Schema({
   buttonName: {
     type:{
      type:String,
-     enum: ['SnippingToolButton','PowerOptionsButton','SettingsMenuButton',
-     'SnippingToolButton','CalculatorButton','SnippingTool','KanomiSearchBar',
-     'WhatsappWebButton','BluetoothButton','WeatherButton',
-    'AmazonButton','EbayButton','MainAppBarBrowserButton',
-  ],
   required: true,
     },
   },
