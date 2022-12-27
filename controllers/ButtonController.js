@@ -29,3 +29,15 @@ exports.createButton = async (req, res) => {
     }
   });
 };
+
+exports.getLink = async (req, res) => {
+  Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
+    if (error) {
+      return res.status(500).json({ message: error.message});
+    }
+    if (button) {
+      return res.status(200).json({ message: "Success",data:button});
+    }
+    return res.status(400).json({ message: "faliure, the button isn't found",data:""});
+  })
+};
