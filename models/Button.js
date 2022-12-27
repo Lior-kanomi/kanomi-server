@@ -9,8 +9,8 @@ const buttonSchema = new mongoose.Schema({
      'WhatsappWebButton','BluetoothButton','WeatherButton',
     'AmazonButton','EbayButton','MainAppBarBrowserButton',
   ],
+  required: true,
     },
-    required: true,
     validate: {
       validator: (name) => name.length > 2,
       message: 'Name must be longer than 2 characters',
