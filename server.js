@@ -2,9 +2,7 @@
 const express = require('express');
 const nodemon = require('nodemon');
 const dotenv = require('dotenv');
-const userRouter = require('./routes/userRoute');
 const path = require("path");
-const apiRoutes = require('./routes/apiRoutes');
 const cors = require('cors');
 
 
