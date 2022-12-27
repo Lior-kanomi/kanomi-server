@@ -18,11 +18,9 @@ app.use(cors());
 // Set the port for the application
 const port = process.env.PORT || 5000;
 
-
-
 // Mount the routes to the express app
 app.use('/', (req,res) => res.status(200).json({message:"Success",data:[]}));
-app.use(path.join(__dirname,'/api/users'), userRouter);
+
 
 
 // Start the server
