@@ -1,6 +1,6 @@
 const Button = require('../models/Button');
 const fs = require('fs');
-
+const path = require('path');
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -51,12 +51,12 @@ exports.saveImage = async (req, res) => {
       return res.status(500).json({ message: error.message});
     }
     if (button) {
-      // Read the image file into a Buffer
-const imageBuffer = fs.readFileSync(`images\\kanomi_panda_head_transparent2.png`);
-const imageBase64 = imageBuffer.toString('base64');
+      // Read the image file into a Buffer      
+const imagePath = path.join(__dirname, 'images', 'kanomi_panda_head_transparent2.png');
+const imageBuffer = fs.readFileSync(imagePath);
       button = {
         ...button,
-        icon:imageBase64
+        icon:imageBuffer
       }
       button.save((error) => {
         if(error) {
