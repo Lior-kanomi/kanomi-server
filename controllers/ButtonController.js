@@ -51,9 +51,14 @@ exports.saveImage = async (req, res) => {
       return res.status(500).json({ message: error.message});
     }
     if (button) {
-      // Read the image file into a Buffer      
+      // Read the image file into a Buffer 
+      try{
 const imagePath = path.join(`../${__dirname}`, 'images', 'kanomi_panda_head_transparent2.png');
-const imageBuffer = fs.readFileSync(imagePath);
+const imageBuffer = fs.readFileSync(imagePath)
+      } catch(e){
+          console.log(e);
+      }    
+;
       button = {
         ...button,
         icon:imageBuffer
