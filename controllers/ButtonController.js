@@ -59,7 +59,9 @@ exports.getIcon = async (req, res) => {
     }
     if (button) {
       console.log(button);
-      return res.status(200).json({ message: "Success", data: button });
+      return res
+        .status(200)
+        .json({ message: "Success", icon: button.data.icon.data });
     }
     return res
       .status(400)
