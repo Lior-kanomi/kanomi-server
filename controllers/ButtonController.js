@@ -45,6 +45,8 @@ exports.getLink = async (req, res) => {
 
 exports.saveImage = async (req, res) => {
   Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
+      console.log(button + "The button that returned from the DB");
+      console.log(req.body + "The body of the request");
     if (error) {
       return res.status(500).json({ message: error.message});
     }
