@@ -3,14 +3,17 @@ const express = require('express');
 const nodemon = require('nodemon');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
+// Load the environment variables from the .env file
+dotenv.config();
+
 const path = require("path");
 const buttonRoute = require("./routes/buttonRoute");
 
 // Initial database connection
 const db = require("./data/db");
 
-// Load the environment variables from the .env file
-dotenv.config();
+
 
 // Create an express app
 const app = express();
