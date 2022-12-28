@@ -49,6 +49,8 @@ exports.saveImage = async (req, res) => {
       return res.status(500).json({ message: error.message});
     }
     if (button) {
+      console.log(button + "The button that returned from the DB");
+      console.log(req.body + "The body of the request");
       button = {
         ...button,
         icon:req.body.icon
