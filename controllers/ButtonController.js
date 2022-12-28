@@ -1,32 +1,37 @@
-const Button = require('../models/Button');
-const fs = require('fs');
-const path = require('path');
+const Button = require("../models/Button");
+const fs = require("fs");
+const path = require("path");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
   Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
     if (error) {
-      return res.status(500).json({ message: error.message});
+      return res.status(500).json({ message: error.message });
     }
     if (!button) {
-      const {buttonName,url,icon} = req.body;
-      const newButton = new Button({ buttonName,url,icon });
-        Button.create(newButton)
-    .then((createdButton) => {
-      // If the Button was successfully created, send a 200 OK response with the created Button document
-      res.status(200).json({ message: 'User updated successfully', data: createdButton });
-    })
-    .catch((error) => {
-      // If there is an error, send a 500 error response
-      res.status(500).send(error);
-    });
+      const { buttonName, url, icon } = req.body;
+      const newButton = new Button({ buttonName, url, icon });
+      Button.create(newButton)
+        .then((createdButton) => {
+          // If the Button was successfully created, send a 200 OK response with the created Button document
+          res.status(200).json({
+            message: "User updated successfully",
+            data: createdButton,
+          });
+        })
+        .catch((error) => {
+          // If there is an error, send a 500 error response
+          res.status(500).send(error);
+        });
     } else {
       button.counter += 1;
       button.save((error) => {
         if (error) {
           return res.status(500).json({ message: error.message });
         }
-        res.json({ message: 'User updated successfully', data: button });
+        res
+          .status(200)
+          .json({ message: "User updated successfully", data: button });
       });
     }
   });
@@ -35,37 +40,29 @@ exports.createButton = async (req, res) => {
 exports.getLink = async (req, res) => {
   Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
     if (error) {
-      return res.status(500).json({ message: error.message});
+      return res.status(500).json({ message: error.message });
     }
     if (button) {
       console.log(button);
-      return res.status(200).json({ message: "Success",data:button.url});
+      return res.status(200).json({ message: "Success", data: button.url });
     }
-    return res.status(400).json({ message: "faliure, the button isn't found",data:""});
-  })
+    return res
+      .status(400)
+      .json({ message: "faliure, the button isn't found", data: "" });
+  });
 };
 
-exports.saveImage = async (req, res) => {
-  Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
+exports.getIcon = async (req, res) => {
+  Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
     if (error) {
-      return res.status(500).json({ message: error.message});
+      return res.status(500).json({ message: error.message });
     }
     if (button) {
-      // Read the image file into a Buffer 
-      const parentDirectory = path.dirname(__dirname);
-      const imagePath = path.join(parentDirectory, 'images', 'kanomi_panda_head_transparent2.png');
-      const imageBuffer = fs.readFileSync(imagePath);
-      button.icon = imageBuffer;
-      
-       button.save((error) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log('Button updated successfully!');
-      }
-    });
-      
+      console.log(button);
+      return res.status(200).json({ message: "Success", data: button });
     }
-    return res.status(400).json({ message: "faliure, the button isn't found",data:""});
-  })
+    return res
+      .status(400)
+      .json({ message: "faliure, the button isn't found", data: "" });
+  });
 };
