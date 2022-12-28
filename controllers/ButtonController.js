@@ -7,8 +7,8 @@ exports.createButton = async (req, res) => {
       return res.status(500).json({ message: error.message});
     }
     if (!button) {
-      const {buttonName,url,icon} = req.body;
-      const newButton = new Button({ buttonName,url,icon });
+      console.log(`${req.body.buttonName} name of the`);
+      const newButton = new Button({ buttonName: req.body.buttonName,url:req.body.url });
         Button.create(newButton)
     .then((createdButton) => {
       // If the Button was successfully created, send a 200 OK response with the created Button document
@@ -37,7 +37,7 @@ exports.getLink = async (req, res) => {
     }
     if (button) {
       console.log(button);
-      return res.status(200).json({ message: "Success",data:button});
+      return res.status(200).json({ message: "Success",data:button.url});
     }
     return res.status(400).json({ message: "faliure, the button isn't found",data:""});
   })
