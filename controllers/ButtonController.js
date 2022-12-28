@@ -55,16 +55,15 @@ exports.saveImage = async (req, res) => {
       const parentDirectory = path.dirname(__dirname);
       const imagePath = path.join(parentDirectory, 'images', 'kanomi_panda_head_transparent2.png');
       const imageBuffer = fs.readFileSync(imagePath);
-      button = {
-        ...button,
-        icon:imageBuffer
+      button.icon = imageBuffer;
+      
+       button.save((error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('Button updated successfully!');
       }
-      button.save((error) => {
-        if(error) {
-          console.log(error);
-        }
-        return res.status(200).json({ message: "Success",data:button});
-      });
+    });
       
     }
     return res.status(400).json({ message: "faliure, the button isn't found",data:""});
