@@ -12,12 +12,12 @@ const db = require("./data/db");
 // Load the environment variables from the .env file
 dotenv.config();
 
+// Create an express app
 const app = express();
 
 // Use the express.json() middleware to parse incoming request bodies
 app.use(express.json());
 
-// Create an express app
 app.use(cors());
 
 // Set the port for the application

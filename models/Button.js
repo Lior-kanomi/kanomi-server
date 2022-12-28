@@ -19,7 +19,10 @@ const buttonSchema = new mongoose.Schema({
     type: String,
     required: true,
     match: /^https?:\/\/.+/
-  }
+  },
+    icon: {
+    type: Buffer,
+  },
 });
 
 const Button = mongoose.model('Button', buttonSchema);
