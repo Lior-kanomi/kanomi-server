@@ -52,7 +52,7 @@ exports.saveImage = async (req, res) => {
     }
     if (button) {
       // Read the image file into a Buffer      
-const imagePath = path.join(__dirname, 'images', 'kanomi_panda_head_transparent2.png');
+const imagePath = path.join(`../${__dirname}`, 'images', 'kanomi_panda_head_transparent2.png');
 const imageBuffer = fs.readFileSync(imagePath);
       button = {
         ...button,
