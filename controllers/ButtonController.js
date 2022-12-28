@@ -1,4 +1,6 @@
 const Button = require('../models/Button');
+const fs = require('fs');
+
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -44,21 +46,17 @@ exports.getLink = async (req, res) => {
 };
 
 exports.saveImage = async (req, res) => {
-  console.log(req.body.icon + "The body of the request");
-  console.log(req.body.ButtonName + "The body of the request");
-
   Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
-      console.log(button + "The button that returned from the DB");
-      console.log(req.body + "The body of the request");
     if (error) {
       return res.status(500).json({ message: error.message});
     }
     if (button) {
-      console.log(button + "The button that returned from the DB");
-      console.log(req.body + "The body of the request");
+      // Read the image file into a Buffer
+const imageBuffer = fs.readFileSync(`images\\kanomi_panda_head_transparent2.png`);
+const imageBase64 = imageBuffer.toString('base64');
       button = {
         ...button,
-        icon:req.body.icon
+        icon:imageBase64
       }
       button.save((error) => {
         if(error) {
