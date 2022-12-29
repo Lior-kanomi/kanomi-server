@@ -58,16 +58,11 @@ exports.getIcon = async (req, res) => {
       return res.status(500).json({ message: error.message });
     }
     if (button) {
+      console.log(button);
       const imageBuffer = Buffer.from(button.icon, "base64");
       button.icon = imageBuffer.toString("base64");
-      button.save((error, button) => {
-        if (error) {
-          console.log(error);
-        }
-        return res
-          .status(200)
-          .json({ message: "Button convert successfully", data: button.icon });
-      });
+      console.log(button.icon);
+      return res.status(200).json({ message: "Success", icon: button.icon });
     }
     return res
       .status(400)
