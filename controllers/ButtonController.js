@@ -58,13 +58,14 @@ exports.getIcon = async (req, res) => {
       return res.status(500).json({ message: error.message });
     }
     if (button) {
-      console.log(button);
-      const imageBuffer = Buffer.from(button.icon, "base64");
-      const imageData = imageBuffer.toString("base64");
-      button.icon = imageBuffer.toString("base64");
+      const imageBuffer = fs.readFile(
+        "C:\\Users\\Lior\\Kanomi-AppBar-Server\\node-js-getting-started\\images\\kanomi_panda_head_transparent2.png"
+      );
 
-      console.log(imageData);
-      return res.status(200).json({ message: "Success", icon: imageData });
+      const base64String = imageBuffer.toString("base64");
+
+      console.log(base64String);
+      return res.status(200).json({ message: "Success", icon: base64String });
     }
     return res
       .status(400)
