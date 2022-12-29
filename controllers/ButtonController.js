@@ -62,16 +62,11 @@ exports.getIcon = async (req, res) => {
       button.icon = imageBuffer.toString("base64");
       button.save((error, button) => {
         if (error) {
-          return res
-            .status(400)
-            .json({
-              message: "faliure, the button isn't found",
-              data: button.icon,
-            });
+          console.log(error);
         }
         return res
           .status(200)
-          .json({ message: "Button convert successfully", data: "" });
+          .json({ message: "Button convert successfully", data: button.icon });
       });
     }
     return res
