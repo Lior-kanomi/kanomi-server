@@ -31,7 +31,7 @@ const buttonSchema = new mongoose.Schema({
     match: /^https?:\/\/.+/,
   },
   icon: {
-    type: Buffer,
+    type: String,
   },
 });
 

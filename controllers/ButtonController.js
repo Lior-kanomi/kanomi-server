@@ -41,13 +41,12 @@ exports.updateButton = async (req, res) => {
   const imageData = fs
     .readFileSync(`${__dirname}/../images/kanomi_panda_head_transparent2.png`)
     .toString("base64");
-  var base64data = Buffer.from(imageData, "binary").toString("base64");
-  console.log(base64data);
+
   try {
     const updatedDocument = await Button.findOne({
       buttonName: "MainAppBarBrowserButton",
     });
-    updatedDocument.icon = imageData;
+    updatedDocument.icon = `data:image/gif;base64,${imageData}`;
     console.log(updatedDocument);
     await updatedDocument.save();
     res
