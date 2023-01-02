@@ -41,7 +41,7 @@ exports.updateButton = async (req, res) => {
   const imageData = fs
     .readFileSync(`${__dirname}/../images/kanomi_panda_head_transparent2.png`)
     .toString("base64");
-  var base64data = Buffer.from("some binary data", "binary").toString("base64");
+  var base64data = Buffer.from(imageData, "binary").toString("base64");
   console.log(base64data);
   try {
     const updatedDocument = await Button.findOne({
@@ -81,7 +81,8 @@ exports.getIcon = async (req, res) => {
       return res.status(500).json({ message: error.message });
     }
     if (button) {
-      return res.status(200).json({ message: "Success", icon: imageData });
+      console.log(button);
+      return res.status(200).json({ message: "Success", icon: button.icon });
     }
     return res
       .status(400)
