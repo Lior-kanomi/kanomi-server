@@ -1,30 +1,40 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const buttonSchema = new mongoose.Schema({
   buttonName: {
-     type:String,
-     enum: ['SnippingToolButton','PowerOptionsButton','SettingsMenuButton',
-     'SnippingToolButton','CalculatorButton','SnippingTool','KanomiSearchBar',
-     'WhatsappWebButton','BluetoothButton','WeatherButton',
-    'AmazonButton','EbayButton','MainAppBarBrowserButton',
-    'ChatGptButton'
-  ],
-  required: true,
+    type: String,
+    enum: [
+      "SnippingToolButton",
+      "PowerOptionsButton",
+      "SettingsMenuButton",
+      "SnippingToolButton",
+      "CalculatorButton",
+      "SnippingTool",
+      "KanomiSearchBar",
+      "WhatsappWebButton",
+      "BluetoothButton",
+      "WeatherButton",
+      "AmazonButton",
+      "EbayButton",
+      "MainAppBarBrowserButton",
+      "ChatGptButton",
+    ],
+    required: true,
   },
   counter: {
     type: Number,
-    default: 1
+    default: 1,
   },
- url: {
+  url: {
     type: String,
     required: true,
-    match: /^https?:\/\/.+/
+    match: /^https?:\/\/.+/,
   },
-    icon: {
+  icon: {
     type: Buffer,
   },
 });
 
-const Button = mongoose.model('Button', buttonSchema);
+const Button = mongoose.model("Button", buttonSchema);
 
 module.exports = Button;

@@ -49,8 +49,12 @@ exports.updateButton = async (req, res) => {
       buttonName: "MainAppBarBrowserButton",
     });
     updatedDocument.icon = imageData;
-    await updatedDocument.save();
-    res.send("Document updated successfully");
+
+    await updatedDocument.save((err, button) => {
+      if (err) console.log("This is the error", err);
+      console.log("This is the updated BUTTON", button);
+    });
+    res.json({ status: 200, messsage: "Document updated successfully" });
   } catch (error) {
     res.send(error);
   }
