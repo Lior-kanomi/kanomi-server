@@ -49,7 +49,12 @@ exports.updateButton = async (req, res) => {
     updatedDocument.icon = imageData;
     console.log(updatedDocument);
     await updatedDocument.save();
-    res.json({ status: 200, messsage: "Document updated successfully" });
+    res
+      .json({
+        data: updatedDocument,
+        messsage: "Document updated successfully",
+      })
+      .status(200);
   } catch (error) {
     res.status(400).json({ message: "document error" });
   }
