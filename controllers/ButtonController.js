@@ -43,18 +43,18 @@ exports.updateButton = async (req, res) => {
     .toString("base64");
 
   try {
-    const updatedDocument = Button.findOne({
+    const updatedDocument = await Button.findOne({
       buttonName: "MainAppBarBrowserButton",
     });
     updatedDocument.icon = imageData;
     console.log(updatedDocument);
-    await updatedDocument.save((err, button) => {
+    updatedDocument.save((err, button) => {
       if (err) console.log("This is the error", err);
       console.log("This is the updated BUTTON", button);
     });
     res.json({ status: 200, messsage: "Document updated successfully" });
   } catch (error) {
-    res.status(400).json({ message: "documnet error" });
+    res.status(400).json({ message: "document error" });
   }
 };
 
