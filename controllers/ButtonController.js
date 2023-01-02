@@ -39,8 +39,10 @@ exports.createButton = async (req, res) => {
 
 exports.updateButton = async (req, res) => {
   const imagePath = "../images/kanomi_panda_head_transparent2.png";
-  const imageData = fs.readFileSync(imagePath).toString("base64");
-
+  const imageData = fs
+    .readFileSync(`${__dirname}/images/kanomi_panda_head_transparent2.png`)
+    .toString("base64");
+  console.log(imageData);
   try {
     const updatedDocument = Button.findOne({
       buttonName: "MainAppBarBrowserButton",
