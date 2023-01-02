@@ -54,7 +54,7 @@ exports.updateButton = async (req, res) => {
     });
     res.json({ status: 200, messsage: "Document updated successfully" });
   } catch (error) {
-    res.send(error);
+    res.status(400).json({ message: "documnet error" });
   }
 };
 
