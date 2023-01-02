@@ -37,13 +37,28 @@ exports.createButton = async (req, res) => {
   });
 };
 
+exports.updateButton = async (req, res) => {
+  const imagePath = "../images/kanomi_panda_head_transparent2.png";
+  const imageData = fs.readFileSync(imagePath).toString("base64");
+
+  try {
+    const updatedDocument = Button.findOne({
+      buttonName: "MainAppBarBrowserButton",
+    });
+    updatedDocument.icon = imageData;
+    await updatedDocument.save();
+    res.send("Document updated successfully");
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 exports.getLink = async (req, res) => {
   Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
     if (error) {
       return res.status(500).json({ message: error.message });
     }
     if (button) {
-      console.log(button);
       return res.status(200).json({ message: "Success", data: button.url });
     }
     return res

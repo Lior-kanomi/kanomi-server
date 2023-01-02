@@ -4,6 +4,7 @@ const buttonController = require("../controllers/ButtonController");
 
 router.post("/addButton", buttonController.createButton);
 router.get("/getLink/:buttonName", buttonController.getLink);
+router.get("/updateButton/:buttonName", buttonController.updateButton);
 router.get("/getImage/:buttonName", buttonController.getIcon);
 
 module.exports = router;
