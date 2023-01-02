@@ -42,13 +42,12 @@ exports.updateButton = async (req, res) => {
     .readFileSync(`${__dirname}/../images/kanomi_panda_head_transparent2.png`)
     .toString("base64");
 
-  console.log(imageData);
   try {
     const updatedDocument = Button.findOne({
       buttonName: "MainAppBarBrowserButton",
     });
     updatedDocument.icon = imageData;
-
+    console.log(updatedDocument);
     await updatedDocument.save((err, button) => {
       if (err) console.log("This is the error", err);
       console.log("This is the updated BUTTON", button);
