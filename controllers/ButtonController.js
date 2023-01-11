@@ -24,7 +24,6 @@ exports.createButton = async (req, res) => {
           res.status(500).send(error);
         });
     } else {
-      button.counter += 1;
       button.save((error) => {
         if (error) {
           return res.status(500).json({ message: error.message });
@@ -66,6 +65,7 @@ exports.getLink = async (req, res) => {
       return res.status(500).json({ message: error.message });
     }
     if (button) {
+      button.counter += 1;
       return res.status(200).json({ message: "Success", data: button.url });
     }
     return res
