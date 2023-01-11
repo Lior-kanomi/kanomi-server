@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
+// Defining the button schema for the MongoDB collection
 const buttonSchema = new mongoose.Schema({
   buttonName: {
     type: String,
+    // Enumerated list of possible button names
     enum: [
       "SnippingToolButton",
       "PowerOptionsButton",
@@ -19,22 +21,24 @@ const buttonSchema = new mongoose.Schema({
       "MainAppBarBrowserButton",
       "ChatGptButton",
     ],
-    required: true,
+    required: true, // buttonName is a required field
   },
   counter: {
     type: Number,
-    default: 1,
+    default: 1, // sets a default value of 1 for the counter field
   },
   url: {
     type: String,
-    required: true,
-    match: /^https?:\/\/.+/,
+    required: true, // url is a required field
+    match: /^https?:\/\/.+/, // url should match this pattern
   },
   icon: {
-    type: String,
+    type: String, // field for storing the icon
   },
 });
 
+// Creating the Mongoose model for the button collection
 const Button = mongoose.model("Button", buttonSchema);
 
+// Exports the button model for use in other parts of the application
 module.exports = Button;
