@@ -13,9 +13,6 @@ const buttonRoute = require("./routes/buttonRoute");
 // Initial database connection
 const db = require("./data/db");
 
-// Use EJS as the template engine
-app.set("view engine", "ejs");
-
 // Create an express app
 const app = express();
 
@@ -34,6 +31,9 @@ app.use((req, res, next) => {
 
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
+
+// Use EJS as the template engine
+app.set("view engine", "ejs");
 
 // Start the server
 app.listen(port, () => {
