@@ -60,18 +60,22 @@ exports.updateButton = async (req, res) => {
 };
 
 exports.getLink = async (req, res) => {
-  Button.findOne({ buttonName: req.params.buttonName }, (error, button) => {
-    if (error) {
-      return res.status(500).json({ message: error.message });
+  Button.findOne(
+    { buttonName: req.params.buttonName },
+    async (error, button) => {
+      if (error) {
+        return res.status(500).json({ message: error.message, data: "" });
+      }
+      if (button) {
+        button.counter += 1;
+        await button.save();
+        return res.status(200).json({ message: "Success", data: button.url });
+      }
+      return res
+        .status(400)
+        .json({ message: "faliure, the button isn't found", data: "" });
     }
-    if (button) {
-      button.counter += 1;
-      return res.status(200).json({ message: "Success", data: button.url });
-    }
-    return res
-      .status(400)
-      .json({ message: "faliure, the button isn't found", data: "" });
-  });
+  );
 };
 
 exports.getIcon = async (req, res) => {
