@@ -14,5 +14,10 @@ router.get("/updateButton/:buttonName", buttonController.updateButton);
 // Route for getting the icon of a button based on its name
 router.get("/getImage/:buttonName", buttonController.getIcon);
 
+// Define a catch-all route to handle invalid routes
+router.use((req, res, next) => {
+  res.status(404).render("error");
+});
+
 // Exports the router to be used in the main application
 module.exports = router;

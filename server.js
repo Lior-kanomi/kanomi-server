@@ -27,6 +27,11 @@ const port = process.env.PORT || 5000;
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
 
+// Define a catch-all route to handle invalid routes
+app.use((req, res, next) => {
+  res.status(404).render("error");
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
