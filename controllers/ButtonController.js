@@ -68,7 +68,11 @@ exports.getLink = async (req, res) => {
       }
       if (button) {
         button.counter += 1;
-        await button.save();
+        await button.save((error) => {
+          if (error) {
+            console.log(error);
+          }
+        });
         return res.status(200).json({ message: "Success", data: button.url });
       }
       return res
@@ -91,4 +95,13 @@ exports.getIcon = async (req, res) => {
       .status(400)
       .json({ message: "faliure, the button isn't found", data: "" });
   });
+};
+
+exports.resetCounters = async (req, res) => {
+  try {
+    await Button.updateMany({}, { $set: { counter: 0 } });
+    return res.status(200).json({ message: "Counters successfully reset." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
