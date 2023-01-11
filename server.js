@@ -24,6 +24,9 @@ app.use(cors());
 // Set the port for the application
 const port = process.env.PORT || 5000;
 
+// Use EJS as the template engine
+app.set("view engine", "ejs");
+
 // Define the error page route
 app.use((req, res, next) => {
   res.status(404).render("error", { error: "404: Page Not Found" });
@@ -31,9 +34,6 @@ app.use((req, res, next) => {
 
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
-
-// Use EJS as the template engine
-app.set("view engine", "ejs");
 
 // Start the server
 app.listen(port, () => {
