@@ -66,13 +66,7 @@ exports.getLink = async (req, res) => {
     }
     if (button) {
       button.counter += 1;
-      button.save((error, button) => {
-        if (error) {
-          console.log(error);
-          return res.status(500).json({ message: error.message, data: "" });
-        }
-        return res.status(200).json({ message: "Success", data: button.url });
-      });
+      return res.status(200).json({ message: "Success", data: button.url });
     }
     return res
       .status(400)
