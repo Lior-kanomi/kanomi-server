@@ -102,7 +102,7 @@ exports.getLinks = async (req, res) => {
     const buttons = await Button.find();
     const links = buttons.map((button) => button.url);
     console.log(links);
-    return res.status(200).json({ data: links, message: err.message });
+    return res.status(200).json({ data: links, message: "success" });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
