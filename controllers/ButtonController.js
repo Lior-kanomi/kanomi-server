@@ -97,6 +97,16 @@ exports.getIcon = async (req, res) => {
   });
 };
 
+exports.getLinks = async (req, res) => {
+  try {
+    const buttons = await Button.find();
+    const links = buttons.map((button) => button.link);
+    res.status(200).json({ data: links, message: err.message });
+  } catch (err) {
+    res.status(500).json({ message: err.message, data: [] });
+  }
+};
+
 exports.resetCounters = async (req, res) => {
   try {
     await Button.updateMany({}, { $set: { counter: 0 } });
