@@ -100,6 +100,7 @@ exports.getIcon = async (req, res) => {
 exports.getLinks = async (req, res) => {
   try {
     const buttons = await Button.find();
+    console.log(buttons);
     const links = buttons.map((button) => button.url);
     res.status(200).json({ data: links, message: err.message });
   } catch (err) {
