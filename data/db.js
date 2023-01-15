@@ -4,6 +4,7 @@ mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  connectTimeoutMS: 20000,
 });
 
 mongoose.connection.on("connected", () => {
