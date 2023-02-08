@@ -102,7 +102,6 @@ exports.getLinks = async (req, res) => {
     const buttons = await Button.find();
     const newButtons = buttons.map((button) => {
       return {
-        Icon: button.icon,
         Name: button.buttonName,
         URL: button.url,
       };
