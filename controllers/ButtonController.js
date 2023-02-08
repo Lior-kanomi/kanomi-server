@@ -46,7 +46,6 @@ exports.updateButton = async (req, res) => {
     const updatedDocument = await Button.findOne({ buttonName: buttonName });
 
     // Add or update the hint field
-    updatedDocument.hint = hint;
     updatedDocument.icon = icon;
 
     // Save the updated document
