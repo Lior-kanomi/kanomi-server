@@ -37,17 +37,20 @@ exports.createButton = async (req, res) => {
 };
 
 exports.updateButton = async (req, res) => {
-  const imageData = fs
-    .readFileSync(`${__dirname}/../images/kanomi_panda_head_transparent2.png`)
-    .toString("base64");
-
   try {
-    const updatedDocument = await Button.findOne({
-      buttonName: "MainAppBarBrowserButton",
-    });
-    updatedDocument.icon = `data:image/gif;base64,${imageData}`;
-    console.log(updatedDocument);
+    const buttonName = req.params.buttonName;
+    const hint = req.body.hint;
+
+    // Find the button with the specified button name
+    const updatedDocument = await Button.findOne({ buttonName: buttonName });
+
+    // Add or update the hint field
+    updatedDocument.hint = hint;
+
+    // Save the updated document
     await updatedDocument.save();
+
+    // Return the updated document along with a success message
     res
       .json({
         data: updatedDocument,

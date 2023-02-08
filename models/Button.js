@@ -35,6 +35,10 @@ const buttonSchema = new mongoose.Schema({
   icon: {
     type: String, // field for storing the icon
   },
+
+  hint: {
+    type: String, // a tooltip field
+  },
 });
 
 // Creating the Mongoose model for the button collection

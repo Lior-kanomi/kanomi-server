@@ -1,0 +1,2 @@
+ heroku logs --tail - display the logs
+ git push heroku main - push to the remote branch
