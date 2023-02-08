@@ -47,6 +47,7 @@ exports.updateButton = async (req, res) => {
 
     // Add or update the hint field
     updatedDocument.icon = icon;
+    updatedDocument.hint = hint;
 
     // Save the updated document
     await updatedDocument.save();
