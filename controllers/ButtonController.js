@@ -115,6 +115,7 @@ exports.getLinks = async (req, res) => {
         Name: button.buttonName,
         URL: button.url,
         Icon: button.icon,
+        Hint: button.hint,
       };
     });
     return res.status(200).json({ data: newButtons, message: "success" });
