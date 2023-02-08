@@ -106,10 +106,10 @@ exports.getLinks = async (req, res) => {
     const buttons = await Button.find();
     const filteredButtons = buttons.filter(
       (button) =>
-        button.buttonName != "KanomiSearchBar" ||
+        button.buttonName != "KanomiSearchBar" &&
         button.buttonName != "MainAppBarBrowserButton"
     );
-    const newButtons = buttons.map((button) => {
+    const newButtons = filteredButtons.map((button) => {
       return {
         Name: button.buttonName,
         URL: button.url,
