@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
+
+console.log("Initiating Mongo");
+
 mongoose.set("strictQuery", true);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  connectTimeoutMS: 20000,
+  connectTimeoutMS: 60 * 1000,
 });
 
 mongoose.connection.on("connected", () => {
@@ -30,6 +33,6 @@ mongoose.connection.on("disconnected", (error) => {
 process.on("SIGINT", () => {
   mongoose.connection.close(() => {
     console.log("Mongoose connection disconnected through app termination");
-    process.exit(0);
+    // process.exit(0);
   });
 });
