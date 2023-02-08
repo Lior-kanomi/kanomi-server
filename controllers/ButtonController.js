@@ -104,6 +104,11 @@ exports.getIcon = async (req, res) => {
 exports.getLinks = async (req, res) => {
   try {
     const buttons = await Button.find();
+    const filteredButtons = buttons.filter(
+      (button) =>
+        button.buttonName != "KanomiSearchBar" ||
+        button.buttonName != "MainAppBarBrowserButton"
+    );
     const newButtons = buttons.map((button) => {
       return {
         Name: button.buttonName,
