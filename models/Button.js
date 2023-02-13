@@ -39,6 +39,10 @@ const buttonSchema = new mongoose.Schema({
   hint: {
     type: String, // a tooltip field
   },
+
+  order: {
+    type: Number, // a tooltip field
+  },
 });
 
 // Creating the Mongoose model for the button collection
