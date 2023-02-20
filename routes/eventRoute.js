@@ -3,7 +3,7 @@ const router = express.Router();
 const eventController = require("../controllers/EventController");
 
 // Route for adding a new Event
-router.get("/addEvent", eventController.createEvent);
+router.post("/addEvent", eventController.createEvent);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
