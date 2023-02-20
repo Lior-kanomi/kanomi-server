@@ -1,7 +1,7 @@
 const Event = require("../models/Button");
 
 // Create a new user and save it to the database
-exports.createButton = async (req, res) => {
+exports.createEvent = async (req, res) => {
   Event.findOne({ eventName: req.body.buttonName }, (error, event) => {
     if (error) {
       return res.status(500).json({ message: error.message });
