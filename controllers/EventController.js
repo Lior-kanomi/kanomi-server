@@ -8,7 +8,7 @@ exports.createEvent = async (req, res) => {
     }
     if (!event) {
       const { properties, type } = req.body;
-      const newEvent = new Event({ properties, date, type });
+      const newEvent = new Event({ properties, type });
       Event.create(newEvent)
         .then((createdEvent) => {
           // If the Event was successfully created, send a 200 OK response with the created Button document
