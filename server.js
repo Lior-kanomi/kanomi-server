@@ -7,8 +7,11 @@ const cors = require("cors");
 // Load the environment variables from the .env file
 dotenv.config();
 
-const path = require("path");
+// The Buttons' route
 const buttonRoute = require("./routes/buttonRoute");
+
+// The Buttons' route
+const eventRoute = require("./routes/eventRoute");
 
 // Initial database connection
 const db = require("./data/db");
@@ -26,6 +29,7 @@ const port = process.env.PORT || 5000;
 
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
+app.use("/api/event", eventRoute);
 
 // Define a catch-all route to handle invalid routes
 app.use((req, res, next) => {
