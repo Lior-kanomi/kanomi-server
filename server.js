@@ -29,11 +29,6 @@ const port = process.env.PORT || 5000;
 
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
-app.use("/api/event", eventRoute);
-
-// Engine
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
 
 // Define a catch-all route to handle invalid routes
 app.use((req, res, next) => {
