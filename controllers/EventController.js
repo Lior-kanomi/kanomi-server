@@ -8,7 +8,9 @@ exports.createEvent = async (req, res) => {
       return res.status(500).json({ message: error.message });
     }
     if (!event) {
+      console.log("Inside the event's creation block");
       const { properties, eventName } = req.body;
+      console.log(`destruction of the req.body ${properties} ${eventName}`);
       const newEvent = new Event({ properties, eventName });
       console.log(`New event has been created ${newEvent}`);
 
