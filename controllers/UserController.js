@@ -13,7 +13,7 @@ exports.createUser = async (req, res) => {
   console.log(
     `destruction of the req.body ${geo_location} ${device_type} ${operating_system_version} ${browser} ${error_log}`
   );
-  const newUser = new Event({
+  const newUser = new User({
     geo_location,
     device_type,
     error_log,
@@ -22,7 +22,7 @@ exports.createUser = async (req, res) => {
   });
   console.log(`New event has been created ${newUser}`);
 
-  Event.create(newUser)
+  User.create(newUser)
     .then((createdUser) => {
       console.log(`Event has been stored in DB ${createdUser}`);
       // If the Event was successfully created, send a 200 OK response with the created Button document
