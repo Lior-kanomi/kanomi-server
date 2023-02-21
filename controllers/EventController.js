@@ -4,7 +4,7 @@ const Event = require("../models/Button");
 exports.createEvent = async (req, res) => {
   console.log("fired!", req.body.eventName);
   Event.findOne({ eventName: req.body.eventName }, (error, event) => {
-    console.log("The event is: ", req.body.eventName);
+    console.log("The event is: ", event);
     if (error) {
       return res.status(500).json({ message: error.message });
     }
