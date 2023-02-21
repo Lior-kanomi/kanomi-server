@@ -1,4 +1,5 @@
 const Event = require("../models/Event");
+const User = require("../models/User");
 
 // Create a new user and save it to the database
 exports.createEvent = async (req, res) => {
