@@ -45,11 +45,14 @@ const User = require("../models/User");
 // create a new event and save it to the corresponding user's events array
 exports.createEvent = async (req, res, next) => {
   try {
+    console.log(req.body);
+
     const { user_id, eventName, properties } = req.body;
 
     // create the new event
     const newEvent = new Event({ user_id, eventName, properties });
 
+    console.log(req.body);
     // save the new event to the database
     await newEvent.save();
 
