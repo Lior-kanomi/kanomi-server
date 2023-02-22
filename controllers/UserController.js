@@ -2,28 +2,13 @@ const User = require("../models/User");
 
 exports.createUser = async (req, res) => {
   try {
-    const {
-      geo_location,
-      device_type,
-      operating_system_version,
-      browser,
-      error_log,
-    } = req.body;
-    if (
-      !geo_location ||
-      !device_type ||
-      !operating_system_version ||
-      !browser ||
-      !error_log
-    ) {
+    const { _id, operating_system_version } = req.body;
+    if (!_id || !operating_system_version) {
       return res.status(400).json({ message: "Missing fields" });
     }
 
     const newUser = new User({
-      geo_location,
-      device_type,
-      error_log,
-      browser,
+      _id,
       operating_system_version,
     });
 
