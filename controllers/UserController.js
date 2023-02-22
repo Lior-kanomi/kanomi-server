@@ -12,6 +12,7 @@ exports.createUser = async (req, res) => {
       operating_system_version,
     });
 
+    console.log(`Before the create of the User`, _id, operating_system_version);
     const createdUser = await User.create(newUser);
 
     // If the User was successfully created, send a 200 OK response with the created User document

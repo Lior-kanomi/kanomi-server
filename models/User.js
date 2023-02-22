@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     },
     coordinates: {
       type: [Number],
-      required: true,
     },
   },
   device_type: String,
