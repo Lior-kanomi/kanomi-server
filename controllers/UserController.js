@@ -2,11 +2,11 @@ const User = require("../models/User");
 
 exports.createUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { _id, operating_system_version } = req.body;
     if (!_id || !operating_system_version) {
       return res.status(400).json({ message: "Missing fields" });
     }
-
     const newUser = new User({
       _id,
       operating_system_version,
