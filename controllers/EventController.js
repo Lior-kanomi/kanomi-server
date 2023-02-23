@@ -47,10 +47,10 @@ exports.createEvent = async (req, res, next) => {
   try {
     console.log(req.body);
 
-    const { user_id, eventName, properties } = req.body;
+    const { user_id, eventName, properties, date } = req.body;
 
     // create the new event
-    const newEvent = new Event({ user_id, eventName, properties });
+    const newEvent = new Event({ user_id, eventName, properties, date });
 
     console.log(req.body);
     // save the new event to the database
