@@ -42,26 +42,37 @@ const User = require("../models/User");
 //   });
 // };
 
-// create a new event and save it to the corresponding user's events array
 exports.createEvent = async (req, res, next) => {
   try {
     console.log(req.body);
 
-    const { user_id, eventName, properties, date } = req.body;
+    const events = req.body;
 
-    // create the new event
-    const newEvent = new Event({ user_id, eventName, properties, date });
+    // validate each event in the array
+    const validEvents = [];
+    events.forEach((event) => {
+      const { user_id, eventName, properties, date } = event;
+      const newEvent = new Event({ user_id, eventName, properties, date });
+      const validationError = newEvent.validateSync();
+      if (validationError) {
+        throw new Error(validationError);
+      }
+      validEvents.push(newEvent);
+    });
 
-    console.log(req.body);
-    // save the new event to the database
-    await newEvent.save();
+    // save all the new events to the database
+    const savedEvents = await Event.insertMany(validEvents);
 
-    // add the new event to the corresponding user's events array
-    await User.findByIdAndUpdate(user_id, { $push: { events: newEvent._id } });
+    // add the new events to the corresponding user's events array
+    const userIds = events.map((event) => event.user_id);
+    await User.updateMany(
+      { _id: { $in: userIds } },
+      { $push: { events: { $each: savedEvents.map((event) => event._id) } } }
+    );
 
     res
       .status(201)
-      .json({ message: "Event created successfully", event: newEvent });
+      .json({ message: "Events created successfully", events: savedEvents });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
