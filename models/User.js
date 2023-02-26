@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema({
   // browser: String,
   operating_system_version: String,
 
-  // error_log: [
-  //   {
-  //     message: String,
-  //     status: String,
-  //   },
-  // ],
+  error_log: [
+    {
+      message: String,
+      status: String,
+    },
+  ],
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
 });
 
