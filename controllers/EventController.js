@@ -78,3 +78,15 @@ exports.createEvent = async (req, res, next) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+exports.deleteEvents = async (req, res, next) => {
+  try {
+    const result = await Event.deleteMany({});
+    res.json({
+      message: `${result.deletedCount} events deleted successfully`,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error deleting events" });
+  }
+};
