@@ -5,6 +5,9 @@ const eventController = require("../controllers/EventController");
 // Route for adding a new Event
 router.post("/addEvent", eventController.createEvent);
 
+// Route for deleting all the events
+router.delete("/deleteEvents", eventController.deleteEvents);
+
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
   res.status(404).render("error");
