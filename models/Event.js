@@ -14,7 +14,7 @@ const eventSchema = new mongoose.Schema({
   },
   properties: {
     type: Map,
-    of: String,
+    of: String | Object,
     required: true,
   },
 });
