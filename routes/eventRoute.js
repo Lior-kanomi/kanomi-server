@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const eventController = require("../controllers/EventController");
+const logError = require("../middlewares/logError");
 
 // Route for adding a new Event
-router.post("/addEvent", eventController.createEvent);
+router.post("/addEvent", logError, eventController.createEvent);
 
 // Route for deleting all the events
 router.delete("/deleteEvents", eventController.deleteEvents);

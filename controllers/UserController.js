@@ -51,3 +51,15 @@ exports.addUserError = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.deleteUsers = async (req, res, next) => {
+  try {
+    const result = await User.deleteMany({});
+    res.json({
+      message: `${result.deletedCount} users deleted successfully`,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error deleting events" });
+  }
+};
