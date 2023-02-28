@@ -12,7 +12,7 @@ const logError = async (req, res, next) => {
       await User.updateOne(
         { _id: userId },
         {
-          $push: { error_logs: { message: errorMessage } },
+          $push: { errors_log: { message: errorMessage } },
         }
       );
     }

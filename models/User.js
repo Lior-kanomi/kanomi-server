@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   // browser: String,
   operating_system_version: String,
 
-  error_log: [
+  errors_log: [
     {
       message: String,
     },
