@@ -10,7 +10,7 @@ const logError = async (req, res, next) => {
       const errorMessage = user.properties.Error.message;
 
       await User.updateOne(
-        { _id: userId },
+        { user_id: userId },
         {
           $push: { error_logs: { message: errorMessage } },
         }
