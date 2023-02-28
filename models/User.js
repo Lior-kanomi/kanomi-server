@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
   error_log: [
     {
       message: String,
-      status: String,
     },
   ],
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
