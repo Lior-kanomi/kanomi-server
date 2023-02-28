@@ -6,7 +6,7 @@ const logError = async (req, res, next) => {
     console.log(req.body.properties);
     if (req.body.properties.Error) {
       const userId = req.body.user._id;
-      const errorMessage = req.error.message;
+      const errorMessage = req.body.properties.Error.message;
 
       await User.updateOne(
         { _id: userId },
