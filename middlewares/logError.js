@@ -4,7 +4,6 @@ const logError = async (req, res, next) => {
   try {
     console.log(req.body);
     console.log(req.body.properties);
-    console.log(req.body.properties.Error);
     // if (req.body.properties.Error) {
     //   const userId = req.body.user._id;
     //   const errorMessage = req.error.message;
