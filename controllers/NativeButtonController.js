@@ -7,7 +7,7 @@ exports.createNativeButton = async (req, res) => {
       buttonName: req.body.buttonName,
     });
     if (!nativeButton) {
-      const { buttonName, hint, icon, index } = req.body;
+      const { buttonName, hint, icon } = req.body;
       const newButton = new NativeButton({ buttonName, icon, hint });
       const createdButton = await NativeButton.create(newButton);
       res.status(200).json({
