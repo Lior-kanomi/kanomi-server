@@ -7,10 +7,10 @@ const NativeButtonSchema = new mongoose.Schema({
     // Enumerated list of possible button names
     enum: [
       // Need to add the Media button
-      { value: "CalculatorButton", order: 3 },
-      { value: "SnippingToolButton", order: 2 },
-      { value: "BluetoothButton", order: 1 },
-      { value: "ThemeChangeButton", order: 4 },
+      "CalculatorButton",
+      "SnippingToolButton",
+      "BluetoothButton",
+      "ThemeChangeButton",
     ],
     required: true, // buttonName is a required field
   },
