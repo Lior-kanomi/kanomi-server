@@ -26,20 +26,20 @@ const NativeButtonSchema = new mongoose.Schema({
   hint: {
     type: String, // a tooltip field
   },
-  index: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
+  // index: {
+  //   type: Number,
+  //   required: true,
+  //   unique: true,
+  // },
 });
 
-NativeButtonSchema.pre("save", async function (next) {
-  if (!this.index) {
-    const maxIndexButton = await this.constructor.findOne().sort("-index");
-    this.index = (maxIndexButton ? maxIndexButton.index : 0) + 1;
-  }
-  next();
-});
+// NativeButtonSchema.pre("save", async function (next) {
+//   if (!this.index) {
+//     const maxIndexButton = await this.constructor.findOne().sort("-index");
+//     this.index = (maxIndexButton ? maxIndexButton.index : 0) + 1;
+//   }
+//   next();
+// });
 
 NativeButtonSchema.index({ buttonName: 1 });
 // Creating the Mongoose model for the button collection
