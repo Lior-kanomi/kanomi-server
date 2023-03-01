@@ -6,6 +6,11 @@ const buttonSchema = new mongoose.Schema({
     type: String,
     // Enumerated list of possible button names
     enum: [
+      // { value: "ChatGptButton", order: 1 },
+      // { value: "AmazonButton", order: 2 },
+      // { value: "EbayButton", order: 3 },
+      // { value: "WeatherButton", order: 4 },
+      // { value: "WhatsappWebButton", order: 5 },
       "SnippingToolButton",
       "PowerOptionsButton",
       "SettingsMenuButton",
