@@ -41,7 +41,6 @@ const NativeButtonSchema = new mongoose.Schema({
 //   next();
 // });
 
-NativeButtonSchema.index({ buttonName: 1 });
 // Creating the Mongoose model for the button collection
 const NativeButton = mongoose.model("NativeButton", NativeButtonSchema);
 
