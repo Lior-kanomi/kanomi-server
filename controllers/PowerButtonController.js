@@ -3,7 +3,7 @@ const PowerOptionButton = require("../models/PowerOptionButton");
 // Create a new user and save it to the database
 exports.createPowerOptionButton = async (req, res) => {
   try {
-    const powerOptionButton = await PowerButton.findOne({
+    const powerOptionButton = await PowerOptionButton.findOne({
       buttonName: req.body.buttonName,
     });
     if (!powerOptionButton) {
