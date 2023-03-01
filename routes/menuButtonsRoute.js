@@ -1,13 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const powerButtonController = require("../controllers/PowerButtonController");
+const menuButtonsController = require("../controllers/MenuButtonsController");
 
-// Route for adding a new button
-router.post(
-  "/addPowerOptionButton",
-  powerButtonController.createPowerOptionButton
-);
-
+router.get("/getMenuButtons", menuButtonsController.getMenuButtons);
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
   res.status(404).render("error");
