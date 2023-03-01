@@ -10,6 +10,9 @@ dotenv.config();
 // The Buttons' route
 const buttonRoute = require("./routes/buttonRoute");
 
+// The Native Buttons' route
+const nativeButtonRoute = require("./routes/nativeButtonRoute");
+
 // The Events' route
 const eventRoute = require("./routes/eventRoute");
 
@@ -32,6 +35,7 @@ const port = process.env.PORT || 5000;
 
 // Mount the routes to the express app
 app.use("/api/button", buttonRoute);
+app.use("/api/nativeButton", nativeButtonRoute);
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 
