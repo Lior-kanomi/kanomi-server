@@ -19,6 +19,9 @@ const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute");
 // The Native Buttons' route
 const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute");
 
+// The Menu Buttons' route
+const menuButtonsRoute = require("./routes/menuButtonsRoute");
+
 // The Events' route
 const eventRoute = require("./routes/eventRoute");
 
@@ -44,6 +47,7 @@ app.use("/api/button", buttonRoute);
 app.use("/api/nativeButton", nativeButtonRoute);
 app.use("/api/powerOptionButton", powerOptionButtonRoute);
 app.use("/api/settingOptionButton", settingOptionButtonRoute);
+app.use("/api/menuButton", menuButtonsRoute);
 
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
