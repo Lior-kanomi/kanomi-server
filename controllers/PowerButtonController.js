@@ -49,3 +49,18 @@ exports.getPowerOptionsButtons = async (req, res) => {
     return res.status(500).json({ message: err.message, data: [] });
   }
 };
+
+exports.removeButtonSuffix = async () => {
+  try {
+    const buttons = await PowerOptionButton.find({});
+    for (let i = 0; i < buttons.length; i++) {
+      const button = buttons[i];
+      const updatedName = button.buttonName.replace(/Button$/i, "");
+      button.buttonName = updatedName;
+      await button.save();
+    }
+    console.log("Button names updated successfully");
+  } catch (error) {
+    console.error("Error updating button names: ", error);
+  }
+};
