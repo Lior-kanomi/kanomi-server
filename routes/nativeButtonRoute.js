@@ -5,7 +5,7 @@ const nativeButtonController = require("../controllers/NativeButtonController");
 // Route for adding a new button
 router.post("/addNativeButton", nativeButtonController.createNativeButton);
 
-router.get("/getLinks", nativeButtonController.getLinks);
+router.get("/getNativeButtons", nativeButtonController.getNativeButtons);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {

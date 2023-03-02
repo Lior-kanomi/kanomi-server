@@ -98,18 +98,12 @@ exports.getIcon = async (req, res) => {
   });
 };
 
-exports.getLinks = async (req, res) => {
+exports.getNativeButtons = async (req, res) => {
   try {
-    const buttons = await Button.find();
-    const filteredButtons = buttons.filter(
-      (button) =>
-        button.buttonName != "KanomiSearchBar" &&
-        button.buttonName != "MainAppBarBrowserButton"
-    );
+    const nativeButtons = await NativeButton.find();
     const newButtons = filteredButtons.map((button) => {
       return {
         Name: button.buttonName,
-        URL: button.url,
         Icon: button.icon,
         Hint: button.hint,
       };
