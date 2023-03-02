@@ -108,6 +108,7 @@ exports.getNativeButtons = async (req, res) => {
         Hint: button.hint,
       };
     });
+    newButtons.reverse();
     return res.status(200).json({ data: newButtons, message: "success" });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
