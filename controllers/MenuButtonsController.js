@@ -4,10 +4,10 @@ const SettingOptionButton = require("../models/SettingOptionButton");
 exports.getMenuButtons = async (req, res) => {
   try {
     const PowerButton = await PowerOptionButton.findOne({
-      buttonName: "PowerButton",
+      buttonName: "Power",
     });
     const SettingButton = await SettingOptionButton.findOne({
-      buttonName: "SettingButton",
+      buttonName: "Setting",
     });
     const menuButtons = [SettingButton, PowerButton].map((button) => {
       return {
