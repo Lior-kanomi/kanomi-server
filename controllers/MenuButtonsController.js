@@ -16,7 +16,7 @@ exports.getMenuButtons = async (req, res) => {
         Hint: button.hint,
       };
     });
-    return res.status(200).json({ data: menuButtons, message: "success" });
+    return menuButtons;
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
