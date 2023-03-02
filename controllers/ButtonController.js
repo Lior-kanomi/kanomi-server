@@ -112,8 +112,11 @@ exports.getLinks = async (req, res) => {
         button.buttonName != "MainAppBarBrowserButton"
     );
     console.log(`NEW Buttons: ${newButtons}`);
-    const nativeButtons = await NativeController.getNativeButtons();
-    const menuButtons = await MenuController.getMenuButtons();
+    const nativeResult = await NativeController.getNativeButtons();
+    const nativeButtons = nativeResult.data;
+    console.log(`Native Buttons data: ${nativeButtons}`);
+
+    const menuResult = await MenuController.getMenuButtons();
 
     console.log(`Menu Buttons: ${menuButtons}`);
     console.log(`Native Buttons: ${menuButtons}`);
@@ -133,6 +136,7 @@ exports.getLinks = async (req, res) => {
       menuButtons,
       linksButtons,
     };
+
     console.log(`data: ${data}`);
 
     return res.status(200).json({ data, message: "success" });
