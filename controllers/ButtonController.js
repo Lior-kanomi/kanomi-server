@@ -1,6 +1,6 @@
 const Button = require("../models/Button");
-const fs = require("fs");
-const path = require("path");
+const MenuController = require("./MenuButtonsController");
+const NativeController = require("./NativeButtonController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -106,12 +106,15 @@ exports.getIcon = async (req, res) => {
 exports.getLinks = async (req, res) => {
   try {
     const buttons = await Button.find();
-    const filteredButtons = buttons.filter(
+    const linksButtons = buttons.filter(
       (button) =>
         button.buttonName != "KanomiSearchBar" &&
         button.buttonName != "MainAppBarBrowserButton"
     );
-    const newButtons = filteredButtons.map((button) => {
+    const nativeButtons = await NativeController.getNativeButtons();
+    const menuButtons = await MenuController.getMenuButtons();
+
+    const newButtons = buttons.map((button) => {
       return {
         Name: button.buttonName,
         URL: button.url,
@@ -119,7 +122,14 @@ exports.getLinks = async (req, res) => {
         Hint: button.hint,
       };
     });
-    return res.status(200).json({ data: newButtons, message: "success" });
+
+    const data = {
+      nativeButtons,
+      menuButtons,
+      linksButtons,
+    };
+
+    return res.status(200).json({ data, message: "success" });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
