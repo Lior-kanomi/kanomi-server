@@ -115,8 +115,14 @@ exports.getLinks = async (req, res) => {
     );
     console.log(`NEW Buttons: ${newButtons}`);
     const nativeButtons = await NativeController.getNativeButtons();
+    console.log(`Native Buttons: ${nativeButtons}`);
+
     const menuButtons = await MenuController.getMenuButtons();
+    console.log(`Menu Buttons: ${nativeButtons}`);
+
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
+    console.log(`Power Buttons: ${nativeButtons}`);
+
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
 
