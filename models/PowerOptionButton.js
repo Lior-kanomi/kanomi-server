@@ -7,13 +7,13 @@ const PowerOptionButtonSchema = new mongoose.Schema({
     // Enumerated list of possible button names
     enum: [
       // Need to add the Media button
-      "PowerButton",
-      "HibernateButton",
-      "LogOffbutton",
-      "LockButton",
-      "ShutDownButton",
-      "RestartButton",
-      "SleepButton",
+      "Power",
+      "Hibernate",
+      "LogOff",
+      "Lock",
+      "ShutDown",
+      "Restart",
+      "Sleep",
     ],
     required: true, // buttonName is a required field
   },

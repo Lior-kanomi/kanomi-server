@@ -7,11 +7,11 @@ const SettingOptionButtonSchema = new mongoose.Schema({
     // Enumerated list of possible button names
     enum: [
       // Need to add the Media button
-      "SettingButton",
-      "AboutButton",
-      "MinimizeButton",
-      "SendFeedbackButton",
-      "ThemeChangeButton",
+      "Setting",
+      "About",
+      "Minimize",
+      "SendFeedback",
+      "ThemeChange",
     ],
     required: true, // buttonName is a required field
   },
