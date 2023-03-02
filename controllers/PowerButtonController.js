@@ -50,7 +50,7 @@ exports.getPowerOptionsButtons = async (req, res) => {
   }
 };
 
-exports.removeButtonSuffix = async () => {
+exports.removeButtonSuffix = async (req, res) => {
   try {
     const buttons = await PowerOptionButton.find({});
     for (let i = 0; i < buttons.length; i++) {

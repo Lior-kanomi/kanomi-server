@@ -49,7 +49,7 @@ exports.getSettingOptionsButtons = async (req, res) => {
   }
 };
 
-exports.removeButtonSuffix = async () => {
+exports.removeButtonSuffix = async (req, res) => {
   try {
     const buttons = await SettingOptionButton.find({});
     for (let i = 0; i < buttons.length; i++) {
