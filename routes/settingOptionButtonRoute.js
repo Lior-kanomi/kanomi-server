@@ -9,7 +9,7 @@ router.post(
 );
 
 // Route for updating a new button
-router.post("/update", settingButtonController.removeButtonSuffix);
+router.get("/update", settingButtonController.removeButtonSuffix);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
