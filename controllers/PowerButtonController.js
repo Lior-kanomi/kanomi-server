@@ -28,3 +28,24 @@ exports.createPowerOptionButton = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getPowerOptionsButtons = async (req, res) => {
+  try {
+    const buttons = await PowerOptionButton.find({
+      buttonName: { $ne: "PowerButton" },
+    })
+      .lean()
+      .exec();
+    console.log(buttons);
+    const optionsButtons = buttons.map((button) => {
+      return {
+        Name: button.buttonName,
+        Icon: button.icon,
+        Hint: button.hint,
+      };
+    });
+    return optionsButtons;
+  } catch (err) {
+    return res.status(500).json({ message: err.message, data: [] });
+  }
+};

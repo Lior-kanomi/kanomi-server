@@ -1,6 +1,8 @@
 const Button = require("../models/Button");
 const MenuController = require("./MenuButtonsController");
 const NativeController = require("./NativeButtonController");
+const PowerController = require("./PowerButtonController");
+const SettingController = require("./SettingButtonController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -114,6 +116,9 @@ exports.getLinks = async (req, res) => {
     console.log(`NEW Buttons: ${newButtons}`);
     const nativeButtons = await NativeController.getNativeButtons();
     const menuButtons = await MenuController.getMenuButtons();
+    const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
+    const settingOptionsButtons =
+      await SettingController.getSettingOptionsButtons();
 
     console.log(`Menu Buttons: ${menuButtons}`);
     console.log(`Native Buttons: ${menuButtons}`);
@@ -132,6 +137,8 @@ exports.getLinks = async (req, res) => {
       nativeButtons,
       menuButtons,
       linksButtons,
+      powerOptionsButtons,
+      settingOptionsButtons,
     };
 
     console.log(`data: ${data}`);
