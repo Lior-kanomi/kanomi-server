@@ -101,7 +101,7 @@ exports.getIcon = async (req, res) => {
 exports.getNativeButtons = async (req, res) => {
   try {
     const nativeButtons = await NativeButton.find();
-    const newButtons = filteredButtons.map((button) => {
+    const newButtons = nativeButtons.map((button) => {
       return {
         Name: button.buttonName,
         Icon: button.icon,
