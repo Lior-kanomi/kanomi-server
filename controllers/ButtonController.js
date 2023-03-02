@@ -106,15 +106,19 @@ exports.getIcon = async (req, res) => {
 exports.getLinks = async (req, res) => {
   try {
     const buttons = await Button.find();
-    const linksButtons = buttons.filter(
+    const newButtons = buttons.filter(
       (button) =>
         button.buttonName != "KanomiSearchBar" &&
         button.buttonName != "MainAppBarBrowserButton"
     );
+    console.log(`NEW Buttons: ${newButtons}`);
     const nativeButtons = await NativeController.getNativeButtons();
     const menuButtons = await MenuController.getMenuButtons();
 
-    const newButtons = buttons.map((button) => {
+    console.log(`Menu Buttons: ${menuButtons}`);
+    console.log(`Native Buttons: ${menuButtons}`);
+
+    const linksButtons = newButtons.map((button) => {
       return {
         Name: button.buttonName,
         URL: button.url,
@@ -122,12 +126,14 @@ exports.getLinks = async (req, res) => {
         Hint: button.hint,
       };
     });
+    console.log(`links Buttons: ${linksButtons}`);
 
     const data = {
       nativeButtons,
       menuButtons,
       linksButtons,
     };
+    console.log(`data: ${data}`);
 
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
