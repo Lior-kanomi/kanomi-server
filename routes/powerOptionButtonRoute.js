@@ -8,9 +8,6 @@ router.post(
   powerButtonController.createPowerOptionButton
 );
 
-// Route for updating a new button
-router.get("/update", powerButtonController.removeButtonSuffix);
-
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
   res.status(404).render("error");
