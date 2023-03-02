@@ -32,7 +32,7 @@ exports.createSettingOptionButton = async (req, res) => {
 exports.getSettingOptionsButtons = async (req, res) => {
   try {
     const buttons = await SettingOptionButton.find({
-      buttonName: { $ne: "SettingButton" },
+      buttonName: { $ne: "Setting" },
     })
       .lean()
       .exec();

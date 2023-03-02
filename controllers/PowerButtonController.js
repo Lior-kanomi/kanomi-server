@@ -32,7 +32,7 @@ exports.createPowerOptionButton = async (req, res) => {
 exports.getPowerOptionsButtons = async (req, res) => {
   try {
     const buttons = await PowerOptionButton.find({
-      buttonName: { $ne: "PowerButton" },
+      buttonName: { $ne: "Power" },
     })
       .lean()
       .exec();
