@@ -3,7 +3,7 @@ const User = require("../models/User");
 exports.createUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { operating_system_version } = req.body;
+    const { operating_system_version, browser } = req.body;
     if (!browser || !operating_system_version) {
       return res.status(400).json({ message: "Missing fields" });
     }
