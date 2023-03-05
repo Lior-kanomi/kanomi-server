@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     ],
     default: [],
   },
-  events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+  events: [{ type: String, ref: "Event", as: "_id" }],
 });
 
 userSchema.index({ geo_location: "2dsphere" });
