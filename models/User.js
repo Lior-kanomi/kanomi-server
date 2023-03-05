@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   //   },
   // },
   // device_type: String,
-  // browser: String,
+  browser: String,
   operating_system_version: String,
 
   errors_log: [

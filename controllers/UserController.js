@@ -4,14 +4,19 @@ exports.createUser = async (req, res) => {
   try {
     console.log(req.body);
     const { operating_system_version } = req.body;
-    if (!operating_system_version) {
+    if (!browser || !operating_system_version) {
       return res.status(400).json({ message: "Missing fields" });
     }
     const newUser = new User({
+      browser,
       operating_system_version,
     });
 
-    console.log(`Before the create of the User`, operating_system_version);
+    console.log(
+      `Before the create of the User`,
+      browser,
+      operating_system_version
+    );
     const createdUser = await User.create(newUser);
 
     // If the User was successfully created, send a 200 OK response with the created User document
