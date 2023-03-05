@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "node test.js",
-    "dev":"nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -7,6 +7,8 @@ const cors = require("cors");
 // Load the environment variables from the .env file
 dotenv.config();
 
+app.set("view engine", "ejs");
+
 // The Buttons' route
 const buttonRoute = require("./routes/buttonRoute");
 
