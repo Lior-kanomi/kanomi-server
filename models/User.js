@@ -16,11 +16,14 @@ const userSchema = new mongoose.Schema({
   browser: String,
   operating_system_version: String,
 
-  errors_log: [
-    {
-      message: String,
-    },
-  ],
+  errors_log: {
+    type: [
+      {
+        message: String,
+      },
+    ],
+    default: [],
+  },
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
 });
 
