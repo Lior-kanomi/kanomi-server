@@ -18,7 +18,7 @@ exports.createUser = async (req, res) => {
       browser,
       operating_system_version
     );
-    const createdUser = await User.save(newUser);
+    const createdUser = await newUser.save();
     console.log(createdUser);
     // If the User was successfully created, send a 200 OK response with the created User document
     res.status(200).json({
