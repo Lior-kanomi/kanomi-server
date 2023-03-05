@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  // _id: String,
+  _id: String,
   // geo_location: {
   //   type: {
   //     type: String,
