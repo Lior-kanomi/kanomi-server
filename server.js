@@ -7,8 +7,6 @@ const cors = require("cors");
 // Load the environment variables from the .env file
 dotenv.config();
 
-app.set("view engine", "ejs");
-
 // The Buttons' route
 const buttonRoute = require("./routes/buttonRoute");
 
@@ -35,6 +33,8 @@ const db = require("./data/db");
 
 // Create an express app
 const app = express();
+
+app.set("view engine", "ejs");
 
 // Use the express.json() middleware to parse incoming request bodies
 app.use(express.json());
