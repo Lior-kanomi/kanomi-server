@@ -5,10 +5,7 @@ const AIOptionButtonSchema = new mongoose.Schema({
   buttonName: {
     type: String,
     // Enumerated list of possible button names
-    enum: [
-      // Need to add the Media button
-      "Chat GPT",
-    ],
+    enum: ["AI", "Chat GPT"],
     required: true, // buttonName is a required field
   },
   icon: {
