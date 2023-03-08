@@ -1,5 +1,6 @@
 const PowerOptionButton = require("../models/PowerOptionButton");
 const SettingOptionButton = require("../models/SettingOptionButton");
+const AIOptionButton = require("../models/AIOptionButton");
 
 exports.getMenuButtons = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ exports.getMenuButtons = async (req, res) => {
     const SettingButton = await SettingOptionButton.findOne({
       buttonName: "Setting",
     });
-    const AIButton = await SettingOptionButton.findOne({
+    const AIButton = await AIOptionButton.findOne({
       buttonName: "AI",
     });
     const menuButtons = [SettingButton, PowerButton, AIButton].map((button) => {
@@ -21,6 +22,6 @@ exports.getMenuButtons = async (req, res) => {
     });
     return menuButtons;
   } catch (err) {
-    return res.status(500).json({ message: err.message, data: [] });
+    return { message: err.message, data: [] };
   }
 };
