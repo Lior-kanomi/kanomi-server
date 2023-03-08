@@ -29,40 +29,40 @@ exports.createAIOptionButton = async (req, res) => {
   }
 };
 
-// exports.getSettingOptionsButtons = async (req, res) => {
-//   try {
-//     const buttons = await SettingOptionButton.find({
-//       buttonName: { $ne: "Setting" },
-//     })
-//       .lean()
-//       .exec();
-//     const optionsButtons = buttons.map((button) => {
-//       return {
-//         Name: button.buttonName,
-//         Icon: button.icon,
-//         Hint: button.hint,
-//       };
-//     });
-//     return optionsButtons;
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message, data: [] });
-//   }
-// };
+exports.getAIOptionsButtons = async (req, res) => {
+  try {
+    const buttons = await AIOptionButton.find({
+      buttonName: { $ne: "AI" },
+    })
+      .lean()
+      .exec();
+    const optionsButtons = buttons.map((button) => {
+      return {
+        Name: button.buttonName,
+        Icon: button.icon,
+        Hint: button.hint,
+      };
+    });
+    return optionsButtons;
+  } catch (err) {
+    return res.status(500).json({ message: err.message, data: [] });
+  }
+};
 
-// exports.removeButtonSuffix = async (req, res) => {
-//   try {
-//     const buttons = await SettingOptionButton.find({});
-//     for (let i = 0; i < buttons.length; i++) {
-//       const button = buttons[i];
-//       const updatedName = button.buttonName.replace(/Button$/i, "");
-//       button.buttonName = updatedName;
-//       await button.save();
-//     }
-//     console.log("Button names updated successfully");
+exports.removeButtonSuffix = async (req, res) => {
+  try {
+    const buttons = await SettingOptionButton.find({});
+    for (let i = 0; i < buttons.length; i++) {
+      const button = buttons[i];
+      const updatedName = button.buttonName.replace(/Button$/i, "");
+      button.buttonName = updatedName;
+      await button.save();
+    }
+    console.log("Button names updated successfully");
 
-//     res.send("success");
-//   } catch (error) {
-//     console.error("Error updating button names: ", error);
-//     res.send("Fail");
-//   }
-// };
+    res.send("success");
+  } catch (error) {
+    console.error("Error updating button names: ", error);
+    res.send("Fail");
+  }
+};
