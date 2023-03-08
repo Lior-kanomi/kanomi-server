@@ -16,7 +16,7 @@ const nativeButtonRoute = require("./routes/nativeButtonRoute");
 // The Power Buttons' route
 const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute");
 
-// The Native Buttons' route
+// The Setting Buttons' route
 const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute");
 
 // The Menu Buttons' route
@@ -27,6 +27,9 @@ const eventRoute = require("./routes/eventRoute");
 
 // The Users' route
 const userRoute = require("./routes/userRoute");
+
+// The AI Buttons' route
+const AIOptionRoute = require("./routes/AIOptionButtonRoute");
 
 // Initial database connection
 const db = require("./data/db");
@@ -50,6 +53,7 @@ app.use("/api/nativeButton", nativeButtonRoute);
 app.use("/api/powerOptionButton", powerOptionButtonRoute);
 app.use("/api/settingOptionButton", settingOptionButtonRoute);
 app.use("/api/menuButton", menuButtonsRoute);
+app.use("/api/AIButton", AIOptionRoute);
 
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);

@@ -60,7 +60,7 @@ exports.removeButtonSuffix = async (req, res) => {
     }
     console.log("Button names updated successfully");
 
-    res.send("sucsses");
+    res.send("success");
   } catch (error) {
     console.error("Error updating button names: ", error);
     res.send("Fail");
