@@ -3,6 +3,7 @@ const MenuController = require("./MenuButtonsController");
 const NativeController = require("./NativeButtonController");
 const PowerController = require("./PowerButtonController");
 const SettingController = require("./SettingButtonController");
+const AIController = require("./AIButtonController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -123,6 +124,8 @@ exports.getLinks = async (req, res) => {
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
     console.log(`Power Buttons: ${nativeButtons}`);
 
+    const AIOptionsButtons = await AIController.getAIOptionsButtons();
+
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
 
@@ -145,6 +148,7 @@ exports.getLinks = async (req, res) => {
       linksButtons,
       powerOptionsButtons,
       settingOptionsButtons,
+      AIOptionsButtons,
     };
 
     console.log(`data: ${data}`);
