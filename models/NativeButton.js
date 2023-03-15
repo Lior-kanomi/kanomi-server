@@ -14,7 +14,7 @@ const NativeButtonSchema = new mongoose.Schema({
       "MediaButton",
       "NextButton",
       "PreviousButton",
-      "PlayButton",
+      "PausePlayButton",
     ],
     required: true, // buttonName is a required field
   },
