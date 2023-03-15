@@ -108,6 +108,62 @@ exports.getLinks = async (req, res) => {
         button.buttonName != "MainAppBarBrowserButton"
     );
 
+    // Todo: remove this block after finish the creation of the Media button control
+
+    const nativeButtonsWithMedia = await NativeController.getNativeButtons();
+
+    const nativeButtons = nativeButtonsWithMedia.filter(
+      (button) => button.buttonName != "MediaButton"
+    );
+
+    const menuButtons = await MenuController.getMenuButtons();
+
+    const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
+
+    const AIOptionsButtons = await AIController.getAIOptionsButtons();
+
+    const settingOptionsButtons =
+      await SettingController.getSettingOptionsButtons();
+
+    console.log(`Menu Buttons: ${menuButtons}`);
+    console.log(`Native Buttons: ${menuButtons}`);
+
+    const linksButtons = newButtons.map((button) => {
+      return {
+        Name: button.buttonName,
+        URL: button.url,
+        Icon: button.icon,
+        Hint: button.hint,
+      };
+    });
+    console.log(`links Buttons: ${linksButtons}`);
+
+    const data = {
+      nativeButtons,
+      menuButtons,
+      linksButtons,
+      powerOptionsButtons,
+      settingOptionsButtons,
+      AIOptionsButtons,
+    };
+
+    console.log(`data: ${data}`);
+
+    return res.status(200).json({ data, message: "success" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message, data: [] });
+  }
+};
+
+exports.getLinksDemo = async (req, res) => {
+  try {
+    const buttons = await Button.find();
+    const newButtons = buttons.filter(
+      (button) =>
+        button.buttonName != "KanomiSearchBar" &&
+        button.buttonName != "MainAppBarBrowserButton"
+    );
+
     const nativeButtons = await NativeController.getNativeButtons();
 
     const menuButtons = await MenuController.getMenuButtons();
