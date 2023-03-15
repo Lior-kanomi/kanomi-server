@@ -11,6 +11,7 @@ const NativeButtonSchema = new mongoose.Schema({
       "SnippingToolButton",
       "BluetoothButton",
       "ThemeChangeButton",
+      "MediaButton",
     ],
     required: true, // buttonName is a required field
   },
@@ -26,20 +27,7 @@ const NativeButtonSchema = new mongoose.Schema({
   hint: {
     type: String, // a tooltip field
   },
-  // index: {
-  //   type: Number,
-  //   required: true,
-  //   unique: true,
-  // },
 });
-
-// NativeButtonSchema.pre("save", async function (next) {
-//   if (!this.index) {
-//     const maxIndexButton = await this.constructor.findOne().sort("-index");
-//     this.index = (maxIndexButton ? maxIndexButton.index : 0) + 1;
-//   }
-//   next();
-// });
 
 // Creating the Mongoose model for the button collection
 const NativeButton = mongoose.model("NativeButton", NativeButtonSchema);

@@ -7,32 +7,18 @@ const cors = require("cors");
 // Load the environment variables from the .env file
 dotenv.config();
 
-// The Buttons' route
-const buttonRoute = require("./routes/buttonRoute");
-
-// The Native Buttons' route
-const nativeButtonRoute = require("./routes/nativeButtonRoute");
-
-// The Power Buttons' route
-const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute");
-
-// The Setting Buttons' route
-const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute");
-
-// The Menu Buttons' route
-const menuButtonsRoute = require("./routes/menuButtonsRoute");
-
-// The Events' route
-const eventRoute = require("./routes/eventRoute");
-
-// The Users' route
-const userRoute = require("./routes/userRoute");
-
-// The AI Buttons' route
-const AIOptionRoute = require("./routes/AIOptionButtonRoute");
-
 // Initial database connection
 const db = require("./data/db");
+
+// Import routes
+const buttonRoute = require("./routes/buttonRoute");
+const nativeButtonRoute = require("./routes/nativeButtonRoute"); // The Native Buttons' route
+const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute"); // The Power Buttons' route
+const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute"); // The Setting Buttons' route
+const menuButtonsRoute = require("./routes/menuButtonsRoute"); // The Menu Buttons' route
+const eventRoute = require("./routes/eventRoute"); // The Events' route
+const userRoute = require("./routes/userRoute"); // The Users' route
+const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons' route
 
 // Create an express app
 const app = express();
@@ -54,7 +40,6 @@ app.use("/api/powerOptionButton", powerOptionButtonRoute);
 app.use("/api/settingOptionButton", settingOptionButtonRoute);
 app.use("/api/menuButton", menuButtonsRoute);
 app.use("/api/AIButton", AIOptionRoute);
-
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 

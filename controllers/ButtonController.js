@@ -7,25 +7,16 @@ const AIController = require("./AIButtonController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
-  Button.findOne({ buttonName: req.body.buttonName }, (error, button) => {
-    if (error) {
-      return res.status(500).json({ message: error.message });
-    }
+  try {
+    const button = await Button.findOne({ buttonName: req.body.buttonName });
     if (!button) {
       const { buttonName, url, icon } = req.body;
       const newButton = new Button({ buttonName, url, icon });
-      Button.create(newButton)
-        .then((createdButton) => {
-          // If the Button was successfully created, send a 200 OK response with the created Button document
-          res.status(200).json({
-            message: "User updated successfully",
-            data: createdButton,
-          });
-        })
-        .catch((error) => {
-          // If there is an error, send a 500 error response
-          res.status(500).send(error);
-        });
+      const createdButton = await Button.create(newButton);
+      res.status(200).json({
+        message: "Button created successfully",
+        data: createdButton,
+      });
     } else {
       button.save((error) => {
         if (error) {
@@ -33,10 +24,12 @@ exports.createButton = async (req, res) => {
         }
         res
           .status(200)
-          .json({ message: "User updated successfully", data: button });
+          .json({ message: "Button updated successfully", data: button });
       });
     }
-  });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 exports.updateButton = async (req, res) => {
@@ -114,15 +107,12 @@ exports.getLinks = async (req, res) => {
         button.buttonName != "KanomiSearchBar" &&
         button.buttonName != "MainAppBarBrowserButton"
     );
-    console.log(`NEW Buttons: ${newButtons}`);
+
     const nativeButtons = await NativeController.getNativeButtons();
-    console.log(`Native Buttons: ${nativeButtons}`);
 
     const menuButtons = await MenuController.getMenuButtons();
-    console.log(`Menu Buttons: ${nativeButtons}`);
 
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
-    console.log(`Power Buttons: ${nativeButtons}`);
 
     const AIOptionsButtons = await AIController.getAIOptionsButtons();
 
