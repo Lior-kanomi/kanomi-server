@@ -12,6 +12,9 @@ const NativeButtonSchema = new mongoose.Schema({
       "BluetoothButton",
       "ThemeChangeButton",
       "MediaButton",
+      "NextButton",
+      "PreviousButton",
+      "PlayButton",
     ],
     required: true, // buttonName is a required field
   },
