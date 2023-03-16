@@ -4,10 +4,14 @@ console.log("Initiating Mongo");
 
 mongoose.set("strictQuery", true);
 
-mongoose.connect(process.env.MONGODB_URI, {
+const isDev = process.env.NODE_ENV !== "production";
+const dbURI = isDev
+  ? "mongodb://localhost:27017/test"
+  : process.env.MONGODB_URI;
+
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  connectTimeoutMS: 60 * 1000,
 });
 
 mongoose.connection.on("connected", () => {
@@ -30,9 +34,13 @@ mongoose.connection.on("disconnected", (error) => {
   }
 });
 
-process.on("SIGINT", () => {
-  mongoose.connection.close(() => {
-    console.log("Mongoose connection disconnected through app termination");
-    // process.exit(0);
+// Handle SIGINT event for graceful shutdown
+process.on("SIGINT", (err) => {
+  if (err) {
+    console.error(err);
+  }
+  connection.close(() => {
+    console.log("MongoDB connection closed due to app termination");
+    process.exit(0);
   });
 });
