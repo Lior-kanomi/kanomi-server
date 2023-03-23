@@ -11,7 +11,7 @@ dotenv.config();
 const db = require("./data/db");
 
 // Import routes
-const buttonRoute = require("./routes/buttonRoute");
+const linkButtonRoute = require("./routes/linkButtonRoute");
 const nativeButtonRoute = require("./routes/nativeButtonRoute"); // The Native Buttons' route
 const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute"); // The Power Buttons' route
 const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute"); // The Setting Buttons' route
@@ -34,7 +34,7 @@ app.use(cors());
 const port = process.env.PORT || 5000;
 
 // Mount the routes to the express app
-app.use("/api/button", buttonRoute);
+app.use("/api/linkButton", linkButtonRoute);
 app.use("/api/nativeButton", nativeButtonRoute);
 app.use("/api/powerOptionButton", powerOptionButtonRoute);
 app.use("/api/settingOptionButton", settingOptionButtonRoute);
