@@ -39,8 +39,7 @@ exports.updateButtons = async (req, res) => {
       // Create new object with updated schema
       const updatedButton = {
         buttonName: button.buttonName,
-        lightThemeIcon: button.icon,
-        darkThemeIcon: null, // Set the default value of darkThemeIcon
+        icon: button.lightThemeIcon,
         counter: button.counter,
         hint: button.hint,
       };
