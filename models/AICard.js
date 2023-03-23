@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Defining the button schema for the MongoDB collection
-const AIOptionButtonSchema = new mongoose.Schema({
+const AICardSchema = new mongoose.Schema({
   cardName: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const AIOptionButtonSchema = new mongoose.Schema({
 });
 
 // Creating the Mongoose model for the button collection
-const AIptionButton = mongoose.model("AIOptionButton", AIOptionButtonSchema);
+const AICard = mongoose.model("AICard", AICardSchema);
 
 // Exports the button model for use in other parts of the application
-module.exports = AIptionButton;
+module.exports = AICard;
