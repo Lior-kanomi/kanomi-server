@@ -12,6 +12,9 @@ const AIOptionButtonSchema = new mongoose.Schema({
   isHotWebsite: {
     type: Boolean,
   },
+  url: {
+    type: String,
+  },
   categories: {
     type: [
       {
