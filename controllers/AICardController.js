@@ -7,12 +7,13 @@ exports.createAICard = async (req, res) => {
       cardName: req.body.cardName,
     });
     if (!aiCard) {
-      const { isHotWebsite, description, cardName, categories } = req.body;
+      const { isHotWebsite, description, cardName, categories, url } = req.body;
       const newCard = new AICard({
         isHotWebsite,
         description,
         cardName,
         categories,
+        url,
       });
       const createdCard = await aiCard.create(newCard);
       res.status(200).json({
@@ -23,6 +24,9 @@ exports.createAICard = async (req, res) => {
       newCard.isHotWebsite = req.body.isHotWebsite;
       newCard.cardName = req.body.cardName;
       newCard.categories = req.body.categories;
+      newCard.url = req.body.url;
+      newCard.categories = req.body.categories;
+
       const updatedCard = await AICard.save();
       res.status(200).json({
         message: "AI option button updated successfully",
