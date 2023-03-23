@@ -34,7 +34,7 @@ exports.createButton = async (req, res) => {
 
 exports.updateButtons = async (req, res) => {
   try {
-    const buttons = await PowerOptionButton.updateMany(
+    const buttons = await Button.updateMany(
       {},
       { $unset: { darkThemeIcon: "" } },
       { new: true }
