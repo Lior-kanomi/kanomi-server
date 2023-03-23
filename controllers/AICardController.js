@@ -15,7 +15,7 @@ exports.createAICard = async (req, res) => {
         categories,
         url,
       });
-      const createdCard = await aiCard.create(newCard);
+      const createdCard = await AICard.create(newCard);
       res.status(200).json({
         message: "AI option button created successfully",
         data: createdCard,
