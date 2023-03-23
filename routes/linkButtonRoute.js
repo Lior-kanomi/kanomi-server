@@ -8,8 +8,8 @@ router.post("/addButton", buttonController.createButton);
 // Route for retrieving the link of a button based on its name
 router.get("/getLink/:buttonName", buttonController.getLink);
 
-// Route for updating a button's details
-router.post("/updateButton/:buttonName", buttonController.updateButton);
+// Route for updating button's details
+router.post("/updateButtons", buttonController.updateButtons);
 
 // Route for getting the icon of a button based on its name
 router.get("/getImage/:buttonName", buttonController.getIcon);

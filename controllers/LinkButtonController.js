@@ -32,7 +32,7 @@ exports.createButton = async (req, res) => {
   }
 };
 
-exports.updateButton = async (req, res) => {
+exports.updateButtons = async (req, res) => {
   try {
     const buttons = await Button.find();
     for (const button of buttons) {
