@@ -6,13 +6,6 @@ const AIOptionButtonSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cardName: {
-    type: String,
-    required: true,
-  },
-  icon: {
-    type: String, // field for storing the icon
-  },
   description: {
     type: String, // field for storing the icon
   },

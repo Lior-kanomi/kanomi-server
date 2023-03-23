@@ -19,6 +19,7 @@ const menuButtonsRoute = require("./routes/menuButtonsRoute"); // The Menu Butto
 const eventRoute = require("./routes/eventRoute"); // The Events' route
 const userRoute = require("./routes/userRoute"); // The Users' route
 const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons' route
+const AICardRoute = require("./routes/AICardRoute"); // The AI Buttons' route
 
 // Create an express app
 const app = express();
@@ -40,6 +41,8 @@ app.use("/api/powerOptionButton", powerOptionButtonRoute);
 app.use("/api/settingOptionButton", settingOptionButtonRoute);
 app.use("/api/menuButton", menuButtonsRoute);
 app.use("/api/AIButton", AIOptionRoute);
+app.use("/api/AICard", AICardRoute);
+
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 
