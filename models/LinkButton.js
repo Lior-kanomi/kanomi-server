@@ -6,11 +6,6 @@ const buttonSchema = new mongoose.Schema({
     type: String,
     // Enumerated list of possible button names
     enum: [
-      // { value: "ChatGptButton", order: 1 },
-      // { value: "AmazonButton", order: 2 },
-      // { value: "EbayButton", order: 3 },
-      // { value: "WeatherButton", order: 4 },
-      // { value: "WhatsappWebButton", order: 5 },
       "SnippingToolButton",
       "PowerOptionsButton",
       "SettingsMenuButton",
@@ -37,8 +32,11 @@ const buttonSchema = new mongoose.Schema({
     required: true, // url is a required field
     match: /^https?:\/\/.+/, // url should match this pattern
   },
-  icon: {
-    type: String, // field for storing the icon
+  lightThemeIcon: {
+    type: String,
+  },
+  darkThemeIcon: {
+    type: String,
   },
 
   hint: {

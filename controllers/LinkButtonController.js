@@ -1,4 +1,4 @@
-const Button = require("../models/Button");
+const Button = require("../models/LinkButton");
 const MenuController = require("./MenuButtonsController");
 const NativeController = require("./NativeButtonController");
 const PowerController = require("./PowerButtonController");
@@ -34,30 +34,26 @@ exports.createButton = async (req, res) => {
 
 exports.updateButton = async (req, res) => {
   try {
-    const buttonName = req.params.buttonName;
-    const hint = req.body.hint;
-    const icon = req.body.icon;
-
-    // Find the button with the specified button name
-    const updatedDocument = await Button.findOne({ buttonName: buttonName });
-
-    // Add or update the hint field
-    updatedDocument.icon = icon;
-    updatedDocument.hint = hint;
-    updatedDocument.hint = hint;
-
-    // Save the updated document
-    await updatedDocument.save();
-
-    // Return the updated document along with a success message
-    res
-      .json({
-        data: updatedDocument,
-        messsage: "Document updated successfully",
-      })
-      .status(200);
+    const buttons = await Button.find();
+    for (const button of buttons) {
+      // Create new object with updated schema
+      const updatedButton = {
+        buttonName: button.buttonName,
+        lightThemeIcon: button.icon,
+        darkThemeIcon: null, // Set the default value of darkThemeIcon
+        counter: button.counter,
+        hint: button.hint,
+      };
+      // Save the updated object
+      await Button.findByIdAndUpdate(button._id, updatedButton);
+    }
+    const newButtons = await Button.find();
+    return res.status(200).json({ message: "Success", data: newButtons });
   } catch (error) {
-    res.status(400).json({ message: "document error" });
+    console.error(error);
+    return res
+      .status(400)
+      .json({ message: "faliure, the button isn't found", data: error });
   }
 };
 
@@ -145,6 +141,7 @@ exports.getLinks = async (req, res) => {
 exports.resetCounters = async (req, res) => {
   try {
     await Button.updateMany({}, { $set: { counter: 0 } });
+
     return res.status(200).json({ message: "Counters successfully reset." });
   } catch (error) {
     return res.status(500).json({ message: error.message });
