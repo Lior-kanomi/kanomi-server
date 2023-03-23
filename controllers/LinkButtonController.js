@@ -34,20 +34,12 @@ exports.createButton = async (req, res) => {
 
 exports.updateButtons = async (req, res) => {
   try {
-    const buttons = await Button.find();
-    for (const button of buttons) {
-      // Create new object with updated schema
-      const updatedButton = {
-        buttonName: button.buttonName,
-        icon: button.lightThemeIcon,
-        counter: button.counter,
-        hint: button.hint,
-      };
-      // Save the updated object
-      await Button.findByIdAndUpdate(button._id, updatedButton);
-    }
-    const newButtons = await Button.find();
-    return res.status(200).json({ message: "Success", data: newButtons });
+    const buttons = await PowerOptionButton.updateMany(
+      {},
+      { $unset: { darkThemeIcon: "" } },
+      { new: true }
+    );
+    return res.status(200).json({ message: "Success", data: buttons });
   } catch (error) {
     console.error(error);
     return res
