@@ -16,14 +16,12 @@ const AIOptionButtonSchema = new mongoose.Schema({
     type: String,
   },
   categories: {
-    type: [
-      {
-        text: Boolean,
-        audio: Boolean,
-        video: Boolean,
-        image: Boolean,
-      },
-    ],
+    type: {
+      text: Boolean,
+      audio: Boolean,
+      video: Boolean,
+      image: Boolean,
+    },
   },
 });
 
