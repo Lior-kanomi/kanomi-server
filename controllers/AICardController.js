@@ -17,7 +17,7 @@ exports.createAICard = async (req, res) => {
       });
       const createdCard = await AICard.create(newCard);
       res.status(200).json({
-        message: "AI option button created successfully",
+        message: "AI Card created successfully",
         data: createdCard,
       });
     } else {
@@ -42,7 +42,7 @@ exports.createAICard = async (req, res) => {
 exports.getAICards = async (req, res) => {
   try {
     const AICards = await AICard.find();
-    return res.status(200).json({ message: err.message, data: AICards });
+    return res.status(200).json({ message: "Success", data: AICards });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
