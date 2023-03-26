@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const AICardController = require("../controllers/AICardController");
+
 // Route for adding a new button
 router.post("/addAICard", AICardController.createAICard);
+
+// Route for adding a new button
+router.get("/getAICards", AICardController.getAICards);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
