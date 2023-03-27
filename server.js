@@ -47,9 +47,9 @@ app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 
 // Define a catch-all route to handle invalid routes
-app.use((req, res, next) => {
-  res.status(404).render("error");
-});
+// app.use((req, res, next) => {
+//   res.status(404).render("error");
+// });
 
 // Start the server
 app.listen(port, () => {
