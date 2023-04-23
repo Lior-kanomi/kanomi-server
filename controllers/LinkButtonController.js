@@ -100,7 +100,6 @@ exports.getLinks = async (req, res) => {
     const menuButtons = await MenuController.getMenuButtons();
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
     const AIOptionsButtons = await AIController.getAIOptionsButtons();
-    const AICards = await AICardController.getAICards();
 
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
@@ -121,7 +120,6 @@ exports.getLinks = async (req, res) => {
       powerOptionsButtons,
       settingOptionsButtons,
       AIOptionsButtons,
-      AICards,
     };
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
