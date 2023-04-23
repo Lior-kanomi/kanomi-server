@@ -4,6 +4,7 @@ const NativeController = require("./NativeButtonController");
 const PowerController = require("./PowerButtonController");
 const SettingController = require("./SettingButtonController");
 const AIController = require("./AIButtonController");
+const AICardController = require("./AICardController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -96,12 +97,10 @@ exports.getLinks = async (req, res) => {
     );
 
     const nativeButtons = await NativeController.getNativeButtons();
-
     const menuButtons = await MenuController.getMenuButtons();
-
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
-
     const AIOptionsButtons = await AIController.getAIOptionsButtons();
+    const AICards = await AICardController.getAICards();
 
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
@@ -122,6 +121,7 @@ exports.getLinks = async (req, res) => {
       powerOptionsButtons,
       settingOptionsButtons,
       AIOptionsButtons,
+      AICards,
     };
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
