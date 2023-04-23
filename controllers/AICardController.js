@@ -1,5 +1,26 @@
 const AICard = require("../models/AICard");
+const cloudinary = require("cloudinary").v2;
 
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Method to get all icons from Cloudinary
+async function getAllIcons() {
+  try {
+    const result = await cloudinary.search
+      .expression("folder:OneClick icons")
+      .execute();
+
+    return result.resources;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
 // Create a AI card and save it to the database
 exports.createAICard = async (req, res) => {
   try {
@@ -42,6 +63,7 @@ exports.createAICard = async (req, res) => {
 exports.getAICards = async (req, res) => {
   try {
     const AICards = await AICard.find();
+    getAllIcons();
     return AICards;
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
