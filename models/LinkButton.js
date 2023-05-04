@@ -32,6 +32,9 @@ const buttonSchema = new mongoose.Schema({
     required: true, // url is a required field
     match: /^https?:\/\/.+/, // url should match this pattern
   },
+  lightThemeIcon: {
+    type: String,
+  },
   icon: {
     type: String,
   },
