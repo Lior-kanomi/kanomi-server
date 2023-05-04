@@ -113,7 +113,7 @@ exports.getLinks = async (req, res) => {
         LightThemeIcon: button.lightThemeIcon,
       };
     });
-
+    console.log(linksButtons);
     const data = {
       AICards,
       nativeButtons,
