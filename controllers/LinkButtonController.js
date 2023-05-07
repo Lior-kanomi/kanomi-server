@@ -41,9 +41,6 @@ exports.updateButtons = async (req, res) => {
       required: true,
     },
   });
-
-  // Rename the "icon" field to "DarkThemeIcon"
-  Button.schema.rename("icon", "DarkThemeIcon");
 };
 
 exports.getLink = async (req, res) => {
