@@ -38,7 +38,7 @@ exports.updateButtons = async (req, res) => {
     const buttons = await Button.updateMany(
       {}, // Update all documents in the collection
       {
-        $rename: { lightThemeIcon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
+        $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
         $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
       }
     );
