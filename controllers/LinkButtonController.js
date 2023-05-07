@@ -109,7 +109,6 @@ exports.getLinks = async (req, res) => {
         URL: button.url,
         Icon: button.DarkThemeIcon,
         Hint: button.hint,
-        DarkThemeIcon: button.DarkThemeIcon,
       };
     });
     console.log(linksButtons);
