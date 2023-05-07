@@ -29,6 +29,21 @@ exports.createPowerOptionButton = async (req, res) => {
   }
 };
 
+exports.updatePowerOptionButton = async (req, res) => {
+  try {
+    const buttons = await PowerOptionButton.updateMany(
+      {}, // Update all documents in the collection
+      {
+        $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
+        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+      }
+    );
+    return res.status(200).json({ message: "success", data: buttons });
+  } catch (error) {
+    res.send("error");
+  }
+};
+
 exports.getPowerOptionsButtons = async (req, res) => {
   try {
     const buttons = await PowerOptionButton.find({

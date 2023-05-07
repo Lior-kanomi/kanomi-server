@@ -7,6 +7,10 @@ router.post(
   "/addPowerOptionButton",
   powerButtonController.createPowerOptionButton
 );
+router.post(
+  "/updatePowerOptionButton",
+  powerButtonController.updatePowerOptionButton
+);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
