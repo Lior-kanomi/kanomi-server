@@ -4,7 +4,7 @@ const applicationVarsController = require("../controllers/ApplicationVarsControl
 
 // Route for adding a new button
 router.post(
-  "/getApplicationVars",
+  "/createApplicationVars",
   applicationVarsController.createApplicationVar
 );
 
