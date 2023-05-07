@@ -29,56 +29,12 @@ exports.createApplicationVar = async (req, res) => {
   }
 };
 
-exports.getAIOptionsButtons = async (req, res) => {
+exports.getApplicationVars = async (req, res) => {
   try {
-    const buttons = await applicationVars
-      .find({
-        buttonName: { $ne: "AI" },
-      })
-      .lean()
-      .exec();
-    const optionsButtons = buttons.map((button) => {
-      return {
-        Name: button.buttonName,
-        Icon: button.DarkThemeIcon,
-        Hint: button.hint,
-      };
-    });
-    return optionsButtons;
+    const applicationVars = await ApplicationVars.find({});
+
+    return res.status(200).json({ message: "success", data: applicationVars });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
-  }
-};
-
-exports.removeButtonSuffix = async (req, res) => {
-  try {
-    const buttons = await SettingOptionButton.find({});
-    for (let i = 0; i < buttons.length; i++) {
-      const button = buttons[i];
-      const updatedName = button.buttonName.replace(/Button$/i, "");
-      button.buttonName = updatedName;
-      await button.save();
-    }
-    console.log("Button names updated successfully");
-
-    res.send("success");
-  } catch (error) {
-    console.error("Error updating button names: ", error);
-    res.send("Fail");
-  }
-};
-
-exports.updateapplicationVars = async (req, res) => {
-  try {
-    const buttons = await applicationVars.updateMany(
-      {}, // Update all documents in the collection
-      {
-        $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
-        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
-      }
-    );
-    return res.status(200).json({ message: "success", data: buttons });
-  } catch (error) {
-    res.send("error");
   }
 };
