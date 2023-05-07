@@ -66,3 +66,18 @@ exports.removeButtonSuffix = async (req, res) => {
     res.send("Fail");
   }
 };
+
+exports.updateAIOptionButton = async (req, res) => {
+  try {
+    const buttons = await AIOptionButton.updateMany(
+      {}, // Update all documents in the collection
+      {
+        $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
+        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+      }
+    );
+    return res.status(200).json({ message: "success", data: buttons });
+  } catch (error) {
+    res.send("error");
+  }
+};
