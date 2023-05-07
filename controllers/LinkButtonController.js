@@ -104,6 +104,7 @@ exports.getLinks = async (req, res) => {
       await SettingController.getSettingOptionsButtons();
 
     const linksButtons = newButtons.map((button) => {
+      button.DarkThemeIcon;
       return {
         Name: button.buttonName,
         URL: button.url,
@@ -111,7 +112,7 @@ exports.getLinks = async (req, res) => {
         Hint: button.hint,
       };
     });
-    console.log(linksButtons);
+
     const data = {
       AICards,
       nativeButtons,
