@@ -42,7 +42,7 @@ exports.updateButtons = async (req, res) => {
         $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
       }
     );
-    res.status(200).json({ message: "success", data: buttons });
+    return res.status(200).json({ message: "success", data: buttons });
   } catch (error) {
     res.send("error");
   }
