@@ -17,7 +17,7 @@ const PowerOptionButtonSchema = new mongoose.Schema({
     ],
     required: true, // buttonName is a required field
   },
-  icon: {
+  DarkThemeIcon: {
     type: String, // field for storing the icon
   },
   lightThemeIcon: {

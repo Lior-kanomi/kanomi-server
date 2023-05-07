@@ -8,6 +8,11 @@ router.post(
   settingButtonController.createSettingOptionButton
 );
 
+router.put(
+  "/updateSettingOptionButton",
+  settingButtonController.updateSettingOptionButton
+);
+
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {
   res.status(404).render("error");
