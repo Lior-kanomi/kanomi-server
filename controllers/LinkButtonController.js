@@ -34,13 +34,18 @@ exports.createButton = async (req, res) => {
 };
 
 exports.updateButtons = async (req, res) => {
-  // Add a new field called "LightThemeIcon"
-  Button.schema.add({
-    LightThemeIcon: {
-      type: String,
-      required: true,
-    },
-  });
+  try {
+    // Add a new field called "LightThemeIcon"
+    Button.schema.add({
+      LightThemeIcon: {
+        type: String,
+        required: true,
+      },
+    });
+    res.status(200).json({ message: "success" });
+  } catch (error) {
+    res.send("error");
+  }
 };
 
 exports.getLink = async (req, res) => {
