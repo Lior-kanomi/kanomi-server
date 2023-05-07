@@ -9,7 +9,7 @@ exports.createApplicationVar = async (req, res) => {
     if (!applicationVars) {
       const { applicationVariable } = req.body;
       const applicationVar = new ApplicationVars({ applicationVariable });
-      const createdApplicationVar = await applicationVars.create(
+      const createdApplicationVar = await ApplicationVars.create(
         applicationVar
       );
       res.status(200).json({
