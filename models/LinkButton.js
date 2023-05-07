@@ -35,7 +35,7 @@ const buttonSchema = new mongoose.Schema({
   lightThemeIcon: {
     type: String,
   },
-  icon: {
+  DarkThemeIcon: {
     type: String,
   },
   hint: {
