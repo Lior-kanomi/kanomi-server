@@ -8,7 +8,7 @@ const AIOptionButtonSchema = new mongoose.Schema({
     enum: ["AI", "Chat GPT"],
     required: true, // buttonName is a required field
   },
-  icon: {
+  DarkThemeIcon: {
     type: String, // field for storing the icon
   },
   lightThemeIcon: {

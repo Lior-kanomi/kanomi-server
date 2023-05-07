@@ -115,6 +115,21 @@ exports.getNativeButtons = async (req, res) => {
   }
 };
 
+exports.updateNativeButtons = async (req, res) => {
+  try {
+    const buttons = await NativeButton.updateMany(
+      {}, // Update all documents in the collection
+      {
+        $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
+        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+      }
+    );
+    return res.status(200).json({ message: "success", data: buttons });
+  } catch (error) {
+    res.send("error");
+  }
+};
+
 exports.resetCounters = async (req, res) => {
   try {
     await NativeButton.updateMany({}, { $set: { counter: 0 } });
