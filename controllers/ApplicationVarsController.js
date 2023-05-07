@@ -4,11 +4,11 @@ const ApplicationVars = require("../models/ApplicationVars");
 exports.createApplicationVar = async (req, res) => {
   try {
     const applicationVars = await ApplicationVars.findOne({
-      variableName: req.body.variableName,
+      applicationVariable: req.body.applicationVariable,
     });
     if (!applicationVars) {
-      const { variableName } = req.body;
-      const applicationVar = new ApplicationVars({ variableName });
+      const { applicationVariable } = req.body;
+      const applicationVar = new ApplicationVars({ applicationVariable });
       const createdApplicationVar = await applicationVars.create(
         applicationVar
       );
