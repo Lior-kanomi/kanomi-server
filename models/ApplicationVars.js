@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const applicationVarsSchema = new mongoose.Schema({
-  name: {
+  variableName: {
     type: String,
   },
 });
