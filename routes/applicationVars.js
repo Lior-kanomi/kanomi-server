@@ -8,10 +8,7 @@ router.post(
   applicationVarsController.createApplicationVar
 );
 
-router.get(
-  "/getApplicationVars",
-  applicationVarsController.createApplicationVar
-);
+router.get("/getApplicationVars", applicationVarsController.getApplicationVars);
 
 // Exports the router to be used in the main application
 module.exports = router;
