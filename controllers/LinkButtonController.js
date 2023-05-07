@@ -107,9 +107,9 @@ exports.getLinks = async (req, res) => {
       return {
         Name: button.buttonName,
         URL: button.url,
-        Icon: button.icon,
+        Icon: button.DarkThemeIcon,
         Hint: button.hint,
-        LightThemeIcon: button.lightThemeIcon,
+        DarkThemeIcon: button.DarkThemeIcon,
       };
     });
     console.log(linksButtons);
