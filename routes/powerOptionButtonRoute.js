@@ -7,7 +7,7 @@ router.post(
   "/addPowerOptionButton",
   powerButtonController.createPowerOptionButton
 );
-router.post(
+router.put(
   "/updatePowerOptionButton",
   powerButtonController.updatePowerOptionButton
 );
