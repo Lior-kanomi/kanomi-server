@@ -35,14 +35,14 @@ exports.createButton = async (req, res) => {
 
 exports.updateButtons = async (req, res) => {
   try {
-    // Add a new field called "LightThemeIcon"
-    Button.schema.add({
-      LightThemeIcon: {
-        type: String,
-        required: true,
-      },
-    });
-    res.status(200).json({ message: "success" });
+    const buttons = await Button.updateMany(
+      {}, // Update all documents in the collection
+      {
+        $rename: { lightThemeIcon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
+        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+      }
+    );
+    res.status(200).json({ message: "success", data: buttons });
   } catch (error) {
     res.send("error");
   }
