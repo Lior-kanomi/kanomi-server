@@ -4,6 +4,7 @@ const AIButtonController = require("../controllers/AIButtonController");
 
 // Route for adding a new button
 router.post("/addAIOptionButton", AIButtonController.createAIOptionButton);
+router.put("/updateAIOptionButton", AIButtonController.updateAIOptionButton);
 
 // Define a catch-all route to handle invalid routes
 router.use((req, res, next) => {

@@ -20,6 +20,9 @@ const PowerOptionButtonSchema = new mongoose.Schema({
   icon: {
     type: String, // field for storing the icon
   },
+  lightThemeIcon: {
+    type: String,
+  },
 
   counter: {
     type: Number,

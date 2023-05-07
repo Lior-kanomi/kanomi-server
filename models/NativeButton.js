@@ -21,7 +21,9 @@ const NativeButtonSchema = new mongoose.Schema({
   icon: {
     type: String, // field for storing the icon
   },
-
+  lightThemeIcon: {
+    type: String,
+  },
   counter: {
     type: Number,
     default: 1, // sets a default value of 1 for the counter field
