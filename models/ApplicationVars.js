@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 const applicationVarsSchema = new mongoose.Schema({
-  variableName: {
-    type: String,
+  applicationVariable: {
+    applicationVariableName: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    applicationVariableValue: {
+      type: String,
+      required: true,
+    },
   },
 });
 
