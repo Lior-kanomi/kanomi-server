@@ -104,7 +104,7 @@ exports.getNativeButtons = async (req, res) => {
     const newButtons = nativeButtons.map((button) => {
       return {
         Name: button.buttonName,
-        Icon: button.icon,
+        Icon: button.DarkThemeIcon,
         Hint: button.hint,
       };
     });

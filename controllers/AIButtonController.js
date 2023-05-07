@@ -39,7 +39,7 @@ exports.getAIOptionsButtons = async (req, res) => {
     const optionsButtons = buttons.map((button) => {
       return {
         Name: button.buttonName,
-        Icon: button.icon,
+        Icon: button.DarkThemeIcon,
         Hint: button.hint,
       };
     });
