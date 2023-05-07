@@ -11,7 +11,9 @@ cloudinary.config({
 // Method to get all icons from Cloudinary
 async function getAllIcons() {
   try {
-    const result = await cloudinary.search.execute();
+    const result = await cloudinary.search
+      .expression("folder:OneClick icons")
+      .execute();
     console.log(result.resources);
     return result.resources;
   } catch (error) {

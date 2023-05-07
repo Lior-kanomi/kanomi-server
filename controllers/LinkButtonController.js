@@ -34,19 +34,16 @@ exports.createButton = async (req, res) => {
 };
 
 exports.updateButtons = async (req, res) => {
-  try {
-    const buttons = await Button.updateMany(
-      {},
-      { $unset: { darkThemeIcon: "" } },
-      { new: true }
-    );
-    return res.status(200).json({ message: "Success", data: buttons });
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(400)
-      .json({ message: "faliure, the button isn't found", data: error });
-  }
+  // Add a new field called "LightThemeIcon"
+  Button.schema.add({
+    LightThemeIcon: {
+      type: String,
+      required: true,
+    },
+  });
+
+  // Rename the "icon" field to "DarkThemeIcon"
+  Button.schema.rename("icon", "DarkThemeIcon");
 };
 
 exports.getLink = async (req, res) => {
