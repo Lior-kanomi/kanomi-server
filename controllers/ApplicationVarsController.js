@@ -31,7 +31,8 @@ exports.createApplicationVar = async (req, res) => {
 
 exports.getApplicationVars = async (req, res) => {
   try {
-    const applicationVars = await ApplicationVars.find({}).map((item) => {
+    let applicationVars = await ApplicationVars.find({});
+    applicationVars = applicationVars.map((item) => {
       return {
         ApplicationVariable: {
           ApplicationVariableName:
