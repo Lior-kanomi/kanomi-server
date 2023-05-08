@@ -18,6 +18,7 @@ exports.getMenuButtons = async (req, res) => {
         Name: button.buttonName,
         Icon: button.DarkThemeIcon,
         Hint: button.hint,
+        LightThemeIcon: button.lightThemeIcon,
       };
     });
     return menuButtons;
