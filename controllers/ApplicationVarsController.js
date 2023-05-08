@@ -31,7 +31,16 @@ exports.createApplicationVar = async (req, res) => {
 
 exports.getApplicationVars = async (req, res) => {
   try {
-    const applicationVars = await ApplicationVars.find({});
+    const applicationVars = await ApplicationVars.find({}).map((item) => {
+      return {
+        ApplicationVariable: {
+          ApplicationVariableName:
+            item.applicationVariable.applicationVariableName,
+          ApplicationVariableValue:
+            item.applicationVariable.applicationVariableValue,
+        },
+      };
+    });
 
     return res.status(200).json({ message: "success", data: applicationVars });
   } catch (err) {
