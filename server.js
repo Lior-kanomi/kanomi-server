@@ -20,7 +20,8 @@ const eventRoute = require("./routes/eventRoute"); // The Events' route
 const userRoute = require("./routes/userRoute"); // The Users' route
 const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons' route
 const AICardRoute = require("./routes/AICardRoute"); // The AI Buttons' route
-const applicationVarsRoute = require("./routes/applicationVars"); // The AI Buttons' route
+const applicationVarsRoute = require("./routes/applicationVars"); // The Application Variables route
+const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The Application Variables route
 
 // Create an express app
 const app = express();
@@ -47,6 +48,7 @@ app.use("/api/AICard", AICardRoute);
 app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);
+app.use("/api/autoSuggest", autoSuggestRoute);
 
 // Define a catch-all route to handle invalid routes
 // app.use((req, res, next) => {
