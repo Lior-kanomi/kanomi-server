@@ -1,4 +1,6 @@
 // Create a new user and save it to the database
+const axios = require("axios");
+
 exports.getUserSuggestions = async (req, res) => {
   try {
     const langCode = "iw";
