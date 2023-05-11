@@ -2,7 +2,7 @@
 const axios = require("axios");
 exports.getUserSuggestions = async (req, res) => {
   try {
-    const langCode = "iw";
+    const langCode = "en";
     const countryCode = "us";
     console.log(req.params.query);
     console.log(req.param.query);
