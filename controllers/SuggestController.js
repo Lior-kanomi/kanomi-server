@@ -6,9 +6,8 @@ exports.getUserSuggestions = async (req, res) => {
     const countryCode = "us";
     const requestUrl = `https://www.google.com/complete/search?q=${req.body.query}&hl=${langCode}&client=chrome&gl=${countryCode}`;
     const googleRes = await axios.get(requestUrl);
-    console.log(googleRes);
-    res.status(200).json(googleRes.data);
+    res.status(200).json({ message: "success", data: googleRes.data[1] });
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: "failure", data: [] });
   }
 };
