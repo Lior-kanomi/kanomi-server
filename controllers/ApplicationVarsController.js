@@ -34,12 +34,10 @@ exports.getApplicationVars = async (req, res) => {
     let applicationVars = await ApplicationVars.find({});
     applicationVars = applicationVars.map((item) => {
       return {
-        ApplicationVariable: {
-          ApplicationVariableName:
-            item.applicationVariable.applicationVariableName,
-          ApplicationVariableValue:
-            item.applicationVariable.applicationVariableValue,
-        },
+        ApplicationVariableName:
+          item.applicationVariable.applicationVariableName,
+        ApplicationVariableValue:
+          item.applicationVariable.applicationVariableValue,
       };
     });
 
