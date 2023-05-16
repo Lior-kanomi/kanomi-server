@@ -114,13 +114,11 @@ exports.getLinks = async (req, res) => {
     });
 
     const data = {
-      AICards,
       nativeButtons,
       menuButtons,
       linksButtons,
       powerOptionsButtons,
       settingOptionsButtons,
-      AIOptionsButtons,
     };
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
