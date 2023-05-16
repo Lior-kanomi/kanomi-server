@@ -13,7 +13,7 @@ exports.getMenuButtons = async (req, res) => {
     const AIButton = await AIOptionButton.findOne({
       buttonName: "AI",
     });
-    const menuButtons = [SettingButton, PowerButton].map((button) => {
+    const menuButtons = [SettingButton, PowerButton, AIButton].map((button) => {
       return {
         Name: button.buttonName,
         Icon: button.DarkThemeIcon,
