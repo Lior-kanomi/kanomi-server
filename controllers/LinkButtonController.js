@@ -121,7 +121,6 @@ exports.getLinks = async (req, res) => {
       linksButtons,
       powerOptionsButtons,
       settingOptionsButtons,
-      AIOptionsButtons,
     };
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
