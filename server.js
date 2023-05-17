@@ -18,10 +18,10 @@ const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute"); /
 const menuButtonsRoute = require("./routes/menuButtonsRoute"); // The Menu Buttons' route
 const eventRoute = require("./routes/eventRoute"); // The Events' route
 const userRoute = require("./routes/userRoute"); // The Users' route
-const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons' route
-const AICardRoute = require("./routes/AICardRoute"); // The AI Buttons' route
+const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons route
+const AICardRoute = require("./routes/AICardRoute"); // The AI Cards route
 const applicationVarsRoute = require("./routes/applicationVars"); // The Application Variables route
-const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The Application Variables route
+const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSuggest Variables route
 
 // Create an express app
 const app = express();
