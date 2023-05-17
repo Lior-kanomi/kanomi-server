@@ -1,4 +1,7 @@
 const axios = require("axios");
+const { v4: uuidv4 } = require("uuid");
+const { default: _ } = require("lodash");
+const regex = require("regex");
 
 exports.getUserSuggestions = async (req, res) => {
   try {
@@ -40,3 +43,35 @@ exports.getTrendsData = async (req, res) => {
     res.status(500).json({ message: DEFUALT_MESSAGE });
   }
 };
+
+function getRandomArticleTitle(response) {
+  // Select a random trending search
+  const trendingSearch = _.chain(response["default"].trendingSearchesDays)
+    .filter((day) => day.trendingSearches && day.trendingSearches.length)
+    .flatMap((day) => day.trendingSearches)
+    .filter((search) => search.articles && search.articles.length)
+    .orderBy(() => uuidv4())
+    .first()
+    .value();
+
+  // Check if trendingSearch is null
+  if (!trendingSearch) {
+    return null;
+  }
+
+  // Select a random article from the trending search
+  const article = _.chain(trendingSearch.articles)
+    .orderBy(() => uuidv4())
+    .first()
+    .value();
+
+  // If the article title is not null, return it
+  if (article && article.title) {
+    return (
+      regex.replace(article.title, /(?<=\w#)\d+|&#39;|[!@$%^&*()]/g, "") + "..."
+    );
+  }
+
+  // If article is null or article title is null, call the method recursively
+  return getRandomArticleTitle(response);
+}
