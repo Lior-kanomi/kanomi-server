@@ -25,7 +25,11 @@ exports.getTrendsData = async (req, res) => {
     )}&geo=US&ns=1`;
 
     const response = await axios.get(url);
+    console.log(response);
     let content = response.data;
+    console.log(content);
+    console.log(content);
+
     content = content.substring(5).trimStart(")]}',\r\n");
 
     if (response.status === 200) {
