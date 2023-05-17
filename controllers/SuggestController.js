@@ -1,7 +1,4 @@
 const axios = require("axios");
-const { v4: uuidv4 } = require("uuid");
-const { default: _ } = require("lodash");
-const regex = require("regex");
 
 exports.getUserSuggestions = async (req, res) => {
   try {
