@@ -16,11 +16,13 @@ exports.getGoogleTrends = async (req, res) => {
       const responseObject = JSON.parse(
         content.slice(startIndex, endIndex + 1)
       );
-      if (responseObject.length == 0) {
-        getGoogleTrends(req, res);
-        return;
+      if (responseObject.length === 0) {
+        return getGoogleTrends(req, res); // Recursively call the method
       }
       const googleTrendsRandomTitle = getRandomArticleTitle(responseObject);
+      if (!googleTrendsRandomTitle) {
+        return getGoogleTrends(req, res); // Recursively call the method
+      }
       res
         .status(200)
         .json({ message: "success", data: googleTrendsRandomTitle });
@@ -37,7 +39,7 @@ const getRandomArticleTitle = (responseObject) => {
   const trendingSearchesDays = responseObject[0]?.trendingSearches;
 
   if (!trendingSearchesDays || trendingSearchesDays.length === 0) {
-    return "No trends found";
+    return null;
   }
 
   const randomDayIndex = Math.floor(
