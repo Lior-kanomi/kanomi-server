@@ -3,7 +3,7 @@ const express = require("express");
 const nodemon = require("nodemon");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
+const axios = require("axios");
 // Load the environment variables from the .env file
 dotenv.config();
 
@@ -22,6 +22,7 @@ const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons
 const AICardRoute = require("./routes/AICardRoute"); // The AI Cards route
 const applicationVarsRoute = require("./routes/applicationVars"); // The Application Variables route
 const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSuggest Variables route
+const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The autoSuggest Variables route
 
 // Create an express app
 const app = express();
@@ -49,11 +50,65 @@ app.use("/api/event", eventRoute);
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);
 app.use("/api/autoSuggest", autoSuggestRoute);
+app.use("/api/googleTrends", googleTrendsRoute);
 
 // Define a catch-all route to handle invalid routes
 // app.use((req, res, next) => {
 //   res.status(404).render("error");
 // });
+
+// app.get("/", async (req, res) => {
+//   const url = `https://trends.google.com/trends/api/dailytrends?hl=en-US&ed=${new Date()
+//     .toISOString()
+//     .slice(0, 10)
+//     .replace(/-/g, "")}&geo=US&ns=15`;
+
+//   try {
+//     const response = await axios.get(url);
+//     const content = response.data;
+//     const startIndex = content.indexOf("[");
+//     const endIndex = content.lastIndexOf("]");
+
+//     if (response.status === 200) {
+//       const responseObject = JSON.parse(
+//         content.slice(startIndex, endIndex + 1)
+//       );
+//       if (responseObject.length == 0) {
+//         res.send("No trends found");
+//         return;
+//       }
+//       const googleTrendsRandomTitle = getRandomArticleTitle(responseObject);
+//       res.send(googleTrendsRandomTitle);
+//     } else {
+//       res.send("Search with OneClick");
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//     res.send("Search with OneClick");
+//   }
+// });
+
+// function getRandomArticleTitle(responseObject) {
+//   const trendingSearchesDays = responseObject[0]?.trendingSearches;
+
+//   if (!trendingSearchesDays || trendingSearchesDays.length === 0) {
+//     return "No trends found";
+//   }
+
+//   const randomDayIndex = Math.floor(
+//     Math.random() * trendingSearchesDays.length
+//   );
+//   const trendingSearches = trendingSearchesDays[randomDayIndex];
+
+//   if (!trendingSearches || trendingSearches.length === 0) {
+//     return "No trends found";
+//   }
+
+//   const randomSearchIndex = Math.floor(Math.random() * trendingSearches.length);
+//   const title = trendingSearches?.title?.query;
+
+//   return title;
+// }
 
 // Start the server
 app.listen(port, () => {
