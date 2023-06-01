@@ -20,7 +20,7 @@ exports.getGoogleTrends = async (req, res) => {
       if (!googleTrendsRandomTitle) {
         return getGoogleTrends(req, res); // Recursively call the method
       }
-      res
+      return res
         .status(200)
         .json({ message: "success", data: googleTrendsRandomTitle });
     } else {
