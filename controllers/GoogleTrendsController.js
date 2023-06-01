@@ -24,11 +24,10 @@ exports.getGoogleTrends = async (req, res) => {
         .status(200)
         .json({ message: "success", data: googleTrendsRandomTitle });
     } else {
-      res.status(400).json({ message: "failure", data: [] });
+      return getGoogleTrends(req, res);
     }
   } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ message: "failure", data: [] });
+    return getGoogleTrends(req, res);
   }
 };
 
