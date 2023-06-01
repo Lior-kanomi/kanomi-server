@@ -1,10 +1,7 @@
 const axios = require("axios");
 
 exports.getGoogleTrends = async (req, res) => {
-  const url = `https://trends.google.com/trends/api/dailytrends?hl=en-US&ed=${new Date()
-    .toISOString()
-    .slice(0, 10)
-    .replace(/-/g, "")}&geo=US&ns=30`;
+  const url = `https://trends.google.com/trends/api/dailytrends?hl=en-US&date=now 1-m&geo=US&ns=100`;
 
   try {
     const response = await axios.get(url);
@@ -36,7 +33,12 @@ exports.getGoogleTrends = async (req, res) => {
 };
 
 const getRandomArticleTitle = (responseObject) => {
-  const trendingSearchesDays = responseObject[0]?.trendingSearches;
+  const randomTrendingSearcheIndex = Math.floor(
+    Math.random() * responseObject.length
+  );
+
+  const trendingSearchesDays =
+    responseObject[randomTrendingSearcheIndex]?.trendingSearches;
 
   if (!trendingSearchesDays || trendingSearchesDays.length === 0) {
     return null;
@@ -48,7 +50,7 @@ const getRandomArticleTitle = (responseObject) => {
   const trendingSearches = trendingSearchesDays[randomDayIndex];
 
   if (!trendingSearches || trendingSearches.length === 0) {
-    return "No trends found";
+    return null;
   }
   const title = trendingSearches?.title?.query;
 
