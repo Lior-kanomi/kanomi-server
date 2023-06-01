@@ -41,7 +41,7 @@ exports.getFeedUrl = async (req, res) => {
     const randomIndex = Math.floor(Math.random() * feedsUrl.length);
     return res
       .status(200)
-      .json({ message: "Success", data: feedsUrl[randomIndex] });
+      .json({ message: "Success", data: feedsUrl[randomIndex].url });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
