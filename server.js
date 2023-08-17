@@ -17,6 +17,7 @@ const powerOptionButtonRoute = require("./routes/powerOptionButtonRoute"); // Th
 const settingOptionButtonRoute = require("./routes/settingOptionButtonRoute"); // The Setting Buttons' route
 const menuButtonsRoute = require("./routes/menuButtonsRoute"); // The Menu Buttons' route
 const eventRoute = require("./routes/eventRoute"); // The Events' route
+const mixpanelEventRoute = require("./routes/mixpanelEventRoute"); // The Events' route
 const userRoute = require("./routes/userRoute"); // The Users' route
 const AIOptionRoute = require("./routes/AIOptionButtonRoute"); // The AI Buttons route
 const AICardRoute = require("./routes/AICardRoute"); // The AI Cards route
@@ -48,6 +49,8 @@ app.use("/api/AIButton", AIOptionRoute);
 app.use("/api/AICard", AICardRoute);
 
 app.use("/api/event", eventRoute);
+app.use("/api/mixpanelEvent", mixpanelEventRoute);
+
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);
 app.use("/api/autoSuggest", autoSuggestRoute);
