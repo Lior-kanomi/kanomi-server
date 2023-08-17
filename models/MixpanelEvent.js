@@ -15,7 +15,7 @@ const mixpanelEventSchema = new mongoose.Schema({
     default: Date.now(),
   },
   MixpanelErrorValue: {
-    type: string,
+    type: String,
   },
 });
 
