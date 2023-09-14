@@ -26,6 +26,9 @@ const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSugges
 const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The google trends route
 const feedUrlRoute = require("./routes/feedUrlRoute"); // The feedUrl route
 
+// Browser Chrome extension
+const userAgentRoute = require("./routes/UserAgentRoute"); // The feedUrl route
+
 // Create an express app
 const app = express();
 
@@ -56,6 +59,8 @@ app.use("/api/applicationVars", applicationVarsRoute);
 app.use("/api/autoSuggest", autoSuggestRoute);
 app.use("/api/googleTrends", googleTrendsRoute);
 app.use("/api/Feed", feedUrlRoute);
+
+app.use("/api/userAgent", userAgentRoute);
 
 // Define a catch-all route to handle invalid routes
 // app.use((req, res, next) => {
