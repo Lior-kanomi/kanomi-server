@@ -29,7 +29,6 @@ exports.getChromeVersions = async (req, res) => {
     const randomDoc = await UserAgent.findOne().skip(random);
     res.status(200).json({
       ChromeVersion: randomDoc.chromeVersion,
-      VersionInterval: interval,
     });
   } catch (error) {
     res
@@ -43,6 +42,18 @@ exports.getChromeVersionTimer = (req, res) => {
     const interval = 10; // in hours
     res.status(200).json({
       VersionInterval: interval,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching the Chrome version." });
+  }
+};
+
+exports.getChromeVersioForUser = (req, res) => {
+  try {
+    res.status(200).json({
+      message: "Success",
     });
   } catch (error) {
     res
