@@ -24,9 +24,13 @@ exports.createChromeVersion = async (req, res) => {
 exports.getChromeVersions = async (req, res) => {
   try {
     const count = await UserAgent.countDocuments();
+    const interval = 10; // in hours
     const random = Math.floor(Math.random() * count);
     const randomDoc = await UserAgent.findOne().skip(random);
-    res.status(200).json({ chromeVersion: randomDoc.chromeVersion });
+    res.status(200).json({
+      ChromeVersion: randomDoc.chromeVersion,
+      VersionInterval: interval,
+    });
   } catch (error) {
     res
       .status(500)
