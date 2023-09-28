@@ -37,3 +37,16 @@ exports.getChromeVersions = async (req, res) => {
       .json({ error: "An error occurred while fetching the Chrome version." });
   }
 };
+
+exports.getChromeVersionTimer = (req, res) => {
+  try {
+    const interval = 10; // in hours
+    res.status(200).json({
+      VersionInterval: interval,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching the Chrome version." });
+  }
+};
