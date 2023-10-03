@@ -11,7 +11,9 @@ exports.addMixpanelEvent = async (req, res) => {
     // Save the new event to the database
     await newEvent.save();
 
-    res.status(201).json({ message: "Mixpanel event added successfully" });
+    res
+      .status(201)
+      .json({ message: "Mixpanel event added successfully", data: newEvent });
   } catch (error) {
     console.error("Error adding Mixpanel event:", error);
     res

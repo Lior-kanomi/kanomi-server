@@ -6,8 +6,8 @@ const UserAgentController = require("../controllers/UserAgentController");
 router.get("/getChromeVersions", UserAgentController.getChromeVersions);
 
 router.get(
-  "/getChromeVersions?id={userId}&version={currentVersion}",
-  UserAgentController.getChromeVersioForUser
+  "/getChromeVersion",
+  UserAgentController.getChromeVersionForUser
 );
 
 router.get("/getChromeVersionTimer", UserAgentController.getChromeVersionTimer);

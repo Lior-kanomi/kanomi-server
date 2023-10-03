@@ -13,7 +13,7 @@ exports.createFeedUrl = async (req, res) => {
       });
       const createdFeed = await FeedUrl.create(newFeed);
       res.status(200).json({
-        message: "AI Card created successfully",
+        message: "Feed url created successfully",
         data: createdFeed,
       });
     } else {
@@ -44,5 +44,26 @@ exports.getFeedUrl = async (req, res) => {
       .json({ message: "Success", data: feedsUrl[randomIndex].url });
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
+  }
+};
+
+exports.getApplicationVariableFeed = async () => {
+  try {
+    const ApplicationVariableName = "FeedUrl"; // The feed.
+    const feedsUrl = await FeedUrl.find();
+    if (!feedsUrl.length) {
+      return { message: "Feeds collection is empty", data: null };
+    }
+    const randomIndex = Math.floor(Math.random() * feedsUrl.length);
+    const ApplicationVariableValue = feedsUrl[randomIndex].url;
+    return {
+      message: "success",
+      data: {
+        ApplicationVariableName,
+        ApplicationVariableValue,
+      },
+    };
+  } catch (err) {
+    return { message: "Connection error", data: null };
   }
 };
