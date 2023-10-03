@@ -83,7 +83,12 @@ exports.getChromeVersionForUser = async (req, res) => {
     const userId = req.query.id;
     const currentVersion = req.query.version;
 
-    if (userId === undefined || userId === null || !currentVersion) {
+    if (
+      userId === undefined ||
+      userId === null ||
+      currentVersion === undefined ||
+      currentVersion === null
+    ) {
       return res
         .status(400)
         .json({ error: "Bad Request: Missing required parameters" });
