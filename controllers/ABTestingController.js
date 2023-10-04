@@ -10,12 +10,15 @@ exports.getABTestingGroup = async (req, res) => {
       return;
     }
 
+    console.log(groups);
     // Calculate the cumulative stats
     const cumulativeStats = groups.reduce((acc, doc) => acc + doc.stats, 0);
 
+    console.log(cumulativeStats, "before random number");
+
     // Randomly generate a number between 0 and the cumulative stats
     const randomNum = Math.random() * cumulativeStats;
-
+    console.log(cumulativeStats, randomNum, "after random number");
     // Determine which document to select based on the random number and cumulative stats
     let cumulativeCount = 0;
     let selectedDoc;
