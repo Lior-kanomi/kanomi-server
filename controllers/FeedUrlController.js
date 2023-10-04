@@ -32,16 +32,9 @@ exports.createFeedUrl = async (req, res) => {
 // Create a new user and save it to the database
 exports.getFeedUrl = async (req, res) => {
   try {
-    const feedsUrl = await FeedUrl.find();
-    if (!feedsUrl.length) {
-      return res
-        .status(400)
-        .json({ message: "No feeds exist in Database", data: [] });
-    }
-    const randomIndex = Math.floor(Math.random() * feedsUrl.length);
-    return res
-      .status(200)
-      .json({ message: "Success", data: feedsUrl[randomIndex].url });
+    const { query } = req.params;
+
+    return res.redirect(302, `https://duckduckgo.com/?q=${query}`);
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
