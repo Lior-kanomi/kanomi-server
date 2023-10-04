@@ -25,6 +25,7 @@ const applicationVarsRoute = require("./routes/applicationVars"); // The Applica
 const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSuggest Variables route
 const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The google trends route
 const feedUrlRoute = require("./routes/feedUrlRoute"); // The feedUrl route
+const ABTestingRoute = require("./routes/ABTesting"); // The feedUrl route
 
 // Browser Chrome extension
 const userAgentRoute = require("./routes/UserAgentRoute"); // The feedUrl route
@@ -61,6 +62,7 @@ app.use("/api/googleTrends", googleTrendsRoute);
 app.use("/api/Feed", feedUrlRoute);
 
 app.use("/api/userAgent", userAgentRoute);
+app.use("/api/ab-test", ABTestingRoute);
 
 // Define a catch-all route to handle invalid routes
 // app.use((req, res, next) => {
