@@ -27,7 +27,7 @@ exports.getABTestingGroup = async (req, res) => {
       }
     }
 
-    res.status(201).json({ message: "Success", docName: selectedDoc.name });
+    res.status(201).json({ message: "Success", docName: selectedDoc.group });
   } catch (error) {
     res
       .status(500)
