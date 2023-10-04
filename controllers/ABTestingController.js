@@ -3,7 +3,7 @@ const ABTesting = require("../models/ABTesting"); // Assuming the UserAgent
 exports.getABTestingGroup = async (req, res) => {
   try {
     // Query the database to get the current percentages
-    const groups = await ABTesting.findOne({});
+    const groups = await ABTesting.find({});
 
     if (!groups || groups.length === 0) {
       res.status(404).send("No documents found");
@@ -32,9 +32,7 @@ exports.getABTestingGroup = async (req, res) => {
 
     res.status(201).json({ message: "Success", docName: selectedDoc.group });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching the Chrome version." });
+    res.status(500).json({ error });
   }
 };
 
