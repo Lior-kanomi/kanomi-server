@@ -10,7 +10,7 @@ const ABTestingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  description: {
+  desc: {
     type: Number,
     required: true,
   },
