@@ -50,7 +50,7 @@ exports.addStatsField = async (req, res) => {
 
 exports.updateGroupField = async (req, res) => {
   try {
-    const { desc, id, group } = req.params;
+    const { desc, id, group } = req.query;
 
     const updatedDoc = await ABTesting.findOne({ group });
     // TODO: Validate the id in Mixpanel so you will know the is the same group in both
