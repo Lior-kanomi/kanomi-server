@@ -19,8 +19,8 @@ exports.getABTestingGroup = async (req, res) => {
 
 exports.createABTestingGroup = async (req, res) => {
   try {
-    const { stats, group } = req.body;
-    if (!stats || !group) {
+    const { stats, group, desc } = req.body;
+    if ((!stats || !group, !desc)) {
       return res
         .status(400)
         .json({ error: "Bad Request: Missing required parameters" });
@@ -28,6 +28,7 @@ exports.createABTestingGroup = async (req, res) => {
     const newABTestingGroup = new ABTesting({
       group,
       stats,
+      desc,
     });
     await newABTestingGroup.save();
     res.status(201).json({
