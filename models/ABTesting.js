@@ -10,6 +10,10 @@ const ABTestingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: Number,
+    required: true,
+  },
 });
 
 // Creating the Mongoose model for the button collection

@@ -1,5 +1,5 @@
 const ABTesting = require("../models/ABTesting"); // Assuming the UserAgent
-
+const statHelper = require("../helpers/selectDocBasedOnStats");
 exports.getABTestingGroup = async (req, res) => {
   try {
     // Query the database to get the current percentages
@@ -10,26 +10,7 @@ exports.getABTestingGroup = async (req, res) => {
       return;
     }
 
-    console.log(groups);
-    // Calculate the cumulative stats
-    const cumulativeStats = groups.reduce((acc, doc) => acc + doc.stats, 0);
-
-    console.log(cumulativeStats, "before random number");
-
-    // Randomly generate a number between 0 and the cumulative stats
-    const randomNum = Math.random() * cumulativeStats;
-    console.log(cumulativeStats, randomNum, "after random number");
-    // Determine which document to select based on the random number and cumulative stats
-    let cumulativeCount = 0;
-    let selectedDoc;
-    for (const doc of groups) {
-      cumulativeCount += doc.stats;
-      if (randomNum < cumulativeCount) {
-        selectedDoc = doc;
-        break;
-      }
-    }
-
+    const selectedDoc = statHelper.selectDocBasedOnStats(groups) || "A";
     res.status(201).json({ message: "Success", group: selectedDoc.group });
   } catch (error) {
     res.status(500).json({ error });
