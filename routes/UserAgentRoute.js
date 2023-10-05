@@ -5,12 +5,11 @@ const UserAgentController = require("../controllers/UserAgentController");
 // Route for getting a Chrome Versions
 router.get("/getChromeVersions", UserAgentController.getChromeVersions);
 
-router.get(
-  "/getChromeVersion",
-  UserAgentController.getChromeVersionForUser
-);
+router.get("/getChromeVersion", UserAgentController.getChromeVersionForUser);
 
 router.get("/getChromeVersionTimer", UserAgentController.getChromeVersionTimer);
+
+router.post("/addStatsField", UserAgentController.addStatsField);
 
 // Route for getting a FeedUrl
 router.post("/createChromeVersion", UserAgentController.createChromeVersion);

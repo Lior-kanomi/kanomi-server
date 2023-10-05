@@ -2,6 +2,7 @@ const mixpanel = require("../services/mixpanelService");
 const UserAgent = require("../models/UserAgent"); // Assuming the UserAgent
 const axios = require("axios");
 const versionsHelper = require("../helpers/compareVersions");
+const statHelper = require("../helpers/selectDocBasedOnStats");
 
 exports.createChromeVersion = async (req, res) => {
   try {
@@ -93,9 +94,13 @@ exports.getChromeVersionForUser = async (req, res) => {
         .status(400)
         .json({ error: "Bad Request: Missing required parameters" });
     }
-    const userAgentDocs = await UserAgent.find();
+    const userAgentDocs = await UserAgent.find({});
     // Compare the existing version with the provided version
-    const docToUpdate = versionsHelper.findNewestVersion(userAgentDocs);
+    let docToUpdate = statHelper.selectDocBasedOnStats(userAgentDocs);
+    // If the method return null initial the 'docToUpdate' with the first doc.
+    if (!docToUpdate) {
+      docToUpdate = await UserAgent.findOne({});
+    }
     return res.status(200).json({
       Message: "Success",
       ShouldUpdate: true,
@@ -129,5 +134,20 @@ exports.getChromeVersionForUser = async (req, res) => {
     res
       .status(500)
       .json({ error: "An error occurred while fetching the Chrome version." });
+  }
+};
+
+exports.addStatsField = async (req, res) => {
+  try {
+    // Update all documents in the UserAgent collection to include a 'stats' field with a default value, e.g., 0.5
+    await UserAgent.updateMany({}, { $set: { stats: 0.5 } });
+    res
+      .status(200)
+      .json({ message: "Stats field added successfully to all documents." });
+  } catch (error) {
+    res.status(500).json({
+      error: "An error occurred while adding the stats field.",
+      details: error.message,
+    });
   }
 };

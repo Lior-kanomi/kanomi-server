@@ -33,8 +33,8 @@ exports.createFeedUrl = async (req, res) => {
 exports.getFeedUrl = async (req, res) => {
   try {
     const { query } = req.params;
-
-    return res.redirect(302, `https://duckduckgo.com/?q=${query}`);
+    const searchProvider = "https://duckduckgo.com/?q=";
+    return res.redirect(302, `${searchProvider}${query}`);
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
