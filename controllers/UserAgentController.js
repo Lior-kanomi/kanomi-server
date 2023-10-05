@@ -97,6 +97,9 @@ exports.getChromeVersionForUser = async (req, res) => {
     const userAgentDocs = await UserAgent.find({});
     // Compare the existing version with the provided version
     let docToUpdate = statHelper.selectDocBasedOnStats(userAgentDocs);
+    console.log(
+      `Print the array of docs: ${userAgentDocs}, and the returned doc: ${docToUpdate}`
+    );
     // If the method return null initial the 'docToUpdate' with the first doc.
     if (!docToUpdate) {
       docToUpdate = await UserAgent.findOne({});
