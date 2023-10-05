@@ -40,6 +40,10 @@ const UserAgentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  stats: {
+    type: Number,
+    required: true,
+  },
 });
 
 const UserAgent = mongoose.model("UserAgent", UserAgentSchema);
