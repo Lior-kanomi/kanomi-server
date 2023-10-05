@@ -1,5 +1,6 @@
 const ABTesting = require("../models/ABTesting"); // Assuming the UserAgent
 const statHelper = require("../helpers/selectDocBasedOnStats");
+
 exports.getABTestingGroup = async (req, res) => {
   try {
     // Query the database to get the current percentages
@@ -11,7 +12,11 @@ exports.getABTestingGroup = async (req, res) => {
     }
 
     const selectedDoc = statHelper.selectDocBasedOnStats(groups) || "A";
-    res.status(201).json({ message: "Success", group: selectedDoc.group });
+    res.status(201).json({
+      message: "Success",
+      group: selectedDoc.group,
+      desc: selectedDoc.desc,
+    });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -22,15 +27,38 @@ exports.addStatsField = async (req, res) => {
     const group = req.query.group;
     const desc = req.query.desc;
 
-    // Add 'desc' field to all documents that don't have one
-    await ABTesting.updateMany(
-      { desc: { $exists: false } },
-      { $set: { desc: "Default description" } }
-    );
+    console.log(group, desc);
 
     // Update the 'desc' field of the document matching the provided group
     const updatedDoc = await ABTesting.findOneAndUpdate(
-      { group },
+      { group: group },
+      { $set: { desc } },
+      { new: true } // This option returns the updated document
+    );
+
+    res.status(200).json({
+      message: "Description field updated successfully.",
+      data: updatedDoc,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "An error occurred while updating the description field.",
+      details: error.message,
+    });
+  }
+};
+
+exports.updateGroupeField = async (req, res) => {
+  try {
+    const group = req.query.group;
+    const id = req.query.id;
+
+    // TODO: Validate the id in Mixpanel so you will know the is the same group in both
+    // TODO: Add the logic for replacing the group from one to another...
+
+    // Update the 'desc' field of the document matching the provided group
+    const updatedDoc = await ABTesting.findOneAndUpdate(
+      { group: group },
       { $set: { desc } },
       { new: true } // This option returns the updated document
     );

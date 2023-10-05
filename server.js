@@ -25,7 +25,7 @@ const applicationVarsRoute = require("./routes/applicationVars"); // The Applica
 const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSuggest Variables route
 const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The google trends route
 const feedUrlRoute = require("./routes/feedUrlRoute"); // The feedUrl route
-const ABTestingRoute = require("./routes/ABTesting"); // The feedUrl route
+const ABTestingRoute = require("./routes/ABTestingRoute"); // The feedUrl route
 
 // Browser Chrome extension
 const userAgentRoute = require("./routes/UserAgentRoute"); // The feedUrl route
