@@ -60,7 +60,7 @@ exports.updateGroupField = async (req, res) => {
     if (!updatedDoc) {
       const defaultdDoc = await ABTesting.findOne({ group: "A" });
       return res.status(200).json({
-        message: "Description field updated successfully.",
+        message: "Default ab testing object returned",
         shouldUpdate: true,
         group: defaultdDoc.group || "A",
         desc: updatedDoc.desc || "Default group",
@@ -68,9 +68,10 @@ exports.updateGroupField = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: "Description field updated successfully.",
+      message: "Updated ab testing object returned",
       shouldUpdate: true,
-      group: updatedDoc,
+      group: updatedDoc.group,
+      desc: updatedDoc.desc,
     });
   } catch (error) {
     res.status(500).json({
