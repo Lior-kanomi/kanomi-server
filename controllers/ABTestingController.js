@@ -48,24 +48,29 @@ exports.addStatsField = async (req, res) => {
   }
 };
 
-exports.updateGroupeField = async (req, res) => {
+exports.updateGroupField = async (req, res) => {
   try {
-    const group = req.query.group;
-    const id = req.query.id;
+    const { desc, id, group } = req.params;
 
+    const updatedDoc = await ABTesting.findOne({ group });
     // TODO: Validate the id in Mixpanel so you will know the is the same group in both
     // TODO: Add the logic for replacing the group from one to another...
 
     // Update the 'desc' field of the document matching the provided group
-    const updatedDoc = await ABTesting.findOneAndUpdate(
-      { group: group },
-      { $set: { desc } },
-      { new: true } // This option returns the updated document
-    );
+    if (!updatedDoc) {
+      const defaultdDoc = await ABTesting.findOne({ group: "A" });
+      return res.status(200).json({
+        message: "Description field updated successfully.",
+        shouldUpdate: true,
+        group: defaultdDoc.group || "A",
+        desc: updatedDoc.desc || "Default group",
+      });
+    }
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Description field updated successfully.",
-      data: updatedDoc,
+      shouldUpdate: true,
+      group: updatedDoc,
     });
   } catch (error) {
     res.status(500).json({
