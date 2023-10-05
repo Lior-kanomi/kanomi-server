@@ -17,6 +17,36 @@ exports.getABTestingGroup = async (req, res) => {
   }
 };
 
+exports.addStatsField = async (req, res) => {
+  try {
+    const group = req.query.group;
+    const desc = req.query.desc;
+
+    // Add 'desc' field to all documents that don't have one
+    await ABTesting.updateMany(
+      { desc: { $exists: false } },
+      { $set: { desc: "Default description" } }
+    );
+
+    // Update the 'desc' field of the document matching the provided group
+    const updatedDoc = await ABTesting.findOneAndUpdate(
+      { group },
+      { $set: { desc } },
+      { new: true } // This option returns the updated document
+    );
+
+    res.status(200).json({
+      message: "Description field updated successfully.",
+      data: updatedDoc,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "An error occurred while updating the description field.",
+      details: error.message,
+    });
+  }
+};
+
 exports.createABTestingGroup = async (req, res) => {
   try {
     const { stats, group, desc } = req.body;
