@@ -61,7 +61,6 @@ exports.updateGroupField = async (req, res) => {
       const defaultdDoc = await ABTesting.findOne({ group: "A" });
       return res.status(200).json({
         message: "Default ab testing object returned",
-        shouldUpdate: true,
         group: defaultdDoc.group || "A",
         desc: updatedDoc.desc || "Default group",
       });
