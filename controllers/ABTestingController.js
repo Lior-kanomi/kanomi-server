@@ -68,7 +68,6 @@ exports.updateGroupField = async (req, res) => {
 
     return res.status(200).json({
       message: "Updated ab testing object returned",
-      shouldUpdate: true,
       group: updatedDoc.group,
       desc: updatedDoc.desc,
     });
