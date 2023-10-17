@@ -52,8 +52,7 @@ exports.updateGroupField = async (req, res) => {
   try {
     const { desc, id, group } = req.query;
 
-    const updatedDoc = await ABTesting.findOne({ group });
-    // TODO: Validate the id in Mixpanel so you will know the is the same group in both
+    const updatedDoc = await ABTesting.findOne({ group: "C" }); // TODO: Validate the id in Mixpanel so you will know the is the same group in both
     // TODO: Add the logic for replacing the group from one to another...
 
     // Update the 'desc' field of the document matching the provided group
