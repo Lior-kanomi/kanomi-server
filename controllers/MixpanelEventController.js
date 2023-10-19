@@ -1,5 +1,4 @@
 const MixpanelEvent = require("../models/MixpanelEvent"); // Assuming the path to your model is correct
-
 // Controller function to add a new Mixpanel event
 exports.addMixpanelEvent = async (req, res) => {
   try {
@@ -20,4 +19,13 @@ exports.addMixpanelEvent = async (req, res) => {
       .status(500)
       .json({ error: "An error occurred while adding the Mixpanel event" });
   }
+};
+
+// Controller function to add a new Mixpanel event
+exports.addExtensionEvents = async (req, res) => {
+  const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+  const newEvent = new MixpanelEvent(req.body);
+  const distinct_id = "ROwK4ooVVyNzBPD0BJ0Z99r5x5xpNQWYuoQSsAf4hT4=";
+  mixpanel.track(newEvent, { distinct_id });
+  res.sendStatus(200);
 };
