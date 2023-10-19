@@ -11,6 +11,6 @@ router.post(
 );
 
 // Route for adding a new Mixpanel Event
-router.post("/addExtensionEvents", mixpanelController.addMixpanelEvent);
+router.post("/addExtensionEvents", mixpanelController.addExtensionEvents);
 
 module.exports = router;
