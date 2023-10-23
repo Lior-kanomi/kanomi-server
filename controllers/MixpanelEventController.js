@@ -25,12 +25,39 @@ exports.addMixpanelEvent = async (req, res) => {
 exports.addExtensionEvents = async (req, res) => {
   const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
   const { events, distinct_id } = req.body;
+
   try {
-    if (req.body.length === 0) return res.status(200);
-    mixpanel.track_batch(events, { distinct_id });
-    res.status(200);
+    if (events.length === 0)
+      return res.status(200).send("No events to process.");
+
+    const formattedEvents = events.map((eventString) => {
+      const { MixpanelEventName } = eventString;
+      return {
+        event: MixpanelEventName,
+        properties: {
+          distinct_id: distinct_id,
+          time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+          // ...other event properties
+        },
+      };
+    });
+    console.log(formattedEvents);
+    mixpanel.track_batch(formattedEvents, (error) => {
+      if (error) {
+        console.log(formattedEvents, error);
+
+        console.log("Error:", error);
+        return res.status(400).send(error.message);
+      } else {
+        console.log(formattedEvents, "success");
+
+        return res
+          .status(200)
+          .json({ data: {}, message: "Events tracked successfully." });
+      }
+    });
   } catch (e) {
-    console.log("Error");
-    res.status(400);
+    console.log("Error:", e);
+    res.status(400).send(e.message);
   }
 };
