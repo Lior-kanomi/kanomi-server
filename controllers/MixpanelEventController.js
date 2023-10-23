@@ -24,7 +24,12 @@ exports.addMixpanelEvent = async (req, res) => {
 // Controller function to add a new Mixpanel event
 exports.addExtensionEvents = async (req, res) => {
   const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
-  const distinct_id = "ROwK4ooVVyNzBPD0BJ0Z99r5x5xpNQWYuoQSsAf4hT4=";
-  mixpanel.track(req.body.MixpanelEventName, { distinct_id });
-  res.sendStatus(200);
+  try {
+    const { distinct_id } = req.body;
+    mixpanel.track(req.body.MixpanelEventName, { distinct_id });
+    res.status(200);
+  } catch (e) {
+    console.log("Error");
+    res.status(400);
+  }
 };
