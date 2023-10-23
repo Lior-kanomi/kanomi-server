@@ -41,13 +41,14 @@ exports.addExtensionEvents = async (req, res) => {
         },
       };
     });
-    console.log(formattedEvents);
+    console.log("this is the formattedEvents", formattedEvents);
     mixpanel.track_batch(formattedEvents, (error) => {
       if (error) {
-        console.log(formattedEvents, error);
-
-        console.log("Error:", error);
-        return res.status(400).send(error.message);
+        console.log(
+          "An error inside the track batch callback error",
+          error.message
+        );
+        return res.status(400).json({ message: error.message });
       } else {
         console.log(formattedEvents, "success");
 
@@ -57,7 +58,7 @@ exports.addExtensionEvents = async (req, res) => {
       }
     });
   } catch (e) {
-    console.log("Error:", e);
-    res.status(400).send(e.message);
+    console.log("Error in the catch block", e);
+    res.status(400).json({ message: e.message });
   }
 };
