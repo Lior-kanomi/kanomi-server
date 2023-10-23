@@ -26,7 +26,7 @@ exports.addExtensionEvents = async (req, res) => {
   const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
   try {
     const { distinct_id } = req.body;
-    mixpanel.track_batch([req.body.MixpanelEventName], { distinct_id });
+    mixpanel.track_batch(req.body.MixpanelEventName, { distinct_id });
     res.status(200);
   } catch (e) {
     console.log("Error");
