@@ -33,8 +33,9 @@ exports.createFeedUrl = async (req, res) => {
 exports.getFeedUrl = async (req, res) => {
   try {
     const { query } = req.params;
-    const searchProvider = "https://seekatonce.com?pid=2&tid=1600&q=";
-
+    const searchProvider = process.env.FEED;
+    const feed = await FeedUrl.findOne();
+    console.log(feed?.url || "field is missing");
     return res.redirect(302, `${searchProvider}${query}`);
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
