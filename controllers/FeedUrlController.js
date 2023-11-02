@@ -33,14 +33,9 @@ exports.createFeedUrl = async (req, res) => {
 exports.getFeedUrl = async (req, res) => {
   try {
     const { query } = req.params;
-    let feedUrl;
-    feedUrl = await FeedUrl.find();
-    if (!feedUrl) {
-      console.log("Inside the feedurl condition", feedUrl);
-      feedUrl = "https://seekatonce.com?pid=2&tid=1600&q=";
-    }
+    const searchProvider = "https://seekatonce.com?pid=2&tid=1600&q=";
 
-    return res.redirect(302, `${feedUrl.url}${query}`);
+    return res.redirect(302, `${searchProvider}${query}`);
   } catch (err) {
     return res.status(500).json({ message: err.message, data: [] });
   }
