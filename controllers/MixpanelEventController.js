@@ -25,22 +25,24 @@ exports.addMixpanelEvent = async (req, res) => {
 
 exports.addMixpanelUser = async (req, res) => {
   try {
-    const usertData = req.body; // Assuming you're sending the event data in the request body
+    const userData = req.body;
 
-    // Create a new MixpanelEvent document using the model
-    const newUser = new MixpanelUser(usertData);
+    // Check if a user with the same Id already exists
+    const existingUser = await MixpanelUser.findOne({ Id: userData.Id });
+    if (existingUser) {
+      return res.status(200).json({ message: "User already exists" });
+    }
 
-    // Save the new event to the database
+    // Create a new MixpanelUser document using the model
+    const newUser = new MixpanelUser(userData);
+
+    // Save the new user to the database
     await newUser.save();
 
-    res
-      .status(201)
-      .json({ message: "Mixpanel user added successfully", data: newUser });
+    res.status(201).json({ message: "Mixpanel user added successfully", data: newUser });
   } catch (error) {
-    console.error("Error adding Mixpanel event:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while adding the Mixpanel event" });
+    console.error("Error adding Mixpanel user:", error);
+    res.status(500).json({ error: "An error occurred while adding the Mixpanel user" });
   }
 };
 
