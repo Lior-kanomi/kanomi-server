@@ -28,7 +28,7 @@ exports.addMixpanelUser = async (req, res) => {
     const usertData = req.body; // Assuming you're sending the event data in the request body
 
     // Create a new MixpanelEvent document using the model
-    const newUser = new MixpanelUser(eventData);
+    const newUser = new MixpanelUser(usertData);
 
     // Save the new event to the database
     await newUser.save();
