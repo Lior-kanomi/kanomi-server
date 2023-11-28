@@ -26,6 +26,8 @@ const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSugges
 const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The google trends route
 const feedUrlRoute = require("./routes/feedUrlRoute"); // The feedUrl route
 const ABTestingRoute = require("./routes/ABTestingRoute"); // The feedUrl route
+const mixpanelUsertRoute = require("./routes/mixpanelUserRoute"); // The Mixpanel users' route
+
 
 // Browser Chrome extension
 const userAgentRoute = require("./routes/UserAgentRoute"); // The feedUrl route
@@ -54,6 +56,8 @@ app.use("/api/AICard", AICardRoute);
 
 app.use("/api/event", eventRoute);
 app.use("/api/mixpanelEvent", mixpanelEventRoute);
+app.use("/api/mixpanelUser", mixpanelUsertRoute);
+
 
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);

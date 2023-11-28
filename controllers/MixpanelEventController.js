@@ -1,4 +1,6 @@
-const MixpanelEvent = require("../models/MixpanelEvent"); // Assuming the path to your model is correct
+const MixpanelEvent = require("../models/MixpanelEvent");
+const MixpanelUser = require("../models/MixpanelUser"); // Assuming the path to your model is correct
+ // Assuming the path to your model is correct
 // Controller function to add a new Mixpanel event
 exports.addMixpanelEvent = async (req, res) => {
   try {
@@ -20,6 +22,28 @@ exports.addMixpanelEvent = async (req, res) => {
       .json({ error: "An error occurred while adding the Mixpanel event" });
   }
 };
+
+exports.addMixpanelUser = async (req, res) => {
+  try {
+    const usertData = req.body; // Assuming you're sending the event data in the request body
+
+    // Create a new MixpanelEvent document using the model
+    const newUser = new MixpanelUser(eventData);
+
+    // Save the new event to the database
+    await newUser.save();
+
+    res
+      .status(201)
+      .json({ message: "Mixpanel user added successfully", data: newUser });
+  } catch (error) {
+    console.error("Error adding Mixpanel event:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while adding the Mixpanel event" });
+  }
+};
+
 
 // Controller function to add a new Mixpanel event
 exports.addExtensionEvents = async (req, res) => {
