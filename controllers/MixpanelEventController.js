@@ -28,12 +28,12 @@ exports.postIPController = async (req, res) => {
     const { IP } = req.body; // Assuming the IP is sent in the request body
 
     try {
-        const response = await axios.post('https://www.mulapo.com/report_install', { IP });
+        // const response = await axios.post('https://www.mulapo.com/report_install', { IP });
         
         // Check if the response status is 200
         if (response.status === 200) {
             // Handle the successful response
-            res.status(200).send(response.data);
+            res.status(200).json({IP});
         }
         
         // Handle the response as needed
