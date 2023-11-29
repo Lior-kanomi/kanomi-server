@@ -26,7 +26,7 @@ exports.addMixpanelEvent = async (req, res) => {
 
 exports.postIPController = async (req, res) => {
     const { IP,Id } = req.body; // Assuming the IP is sent in the request body
-    const trackingInfo = {ip:IP,user_id:Id}
+    const trackingInfo = {"ip":IP,"user_id":Id}
 
     console.log(trackingInfo);
 
