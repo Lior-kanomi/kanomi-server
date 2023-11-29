@@ -32,11 +32,11 @@ exports.postIPController = async (req, res) => {
         const response = await axios.post('https://www.mulapo.com/report_install', trackingInfo );
         
         // Check if the response status is 200
-        // if (response.status === 200) {
+        if (response.status === 200) {
             // Handle the successful response
-            res.status(200).json({ message: "Pixel sent successfully from the server", data: trackingInfo });
-        // }
-            res.status(200).json({ message: "Pixel sent successfully without getting any 200 status for the request", data: trackingInfo });
+          return  res.status(200).json({ message: "Pixel sent successfully from the server", data: trackingInfo });
+        }
+         return  res.status(200).json({ message: "Pixel sent successfully without getting any 200 status for the request", data: trackingInfo });
         
     } catch (error) {
         // Handle errors in sending the request
