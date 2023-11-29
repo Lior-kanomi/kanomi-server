@@ -8,6 +8,11 @@ router.post(
   mixpanelController.addMixpanelUser
 );
 
+router.post(
+  "/sendIPToThirdParty",
+  mixpanelController.postIPController
+);
+
 // Route for adding a new Mixpanel Event
 router.post("/addExtensionEvents", mixpanelController.addExtensionEvents);
 

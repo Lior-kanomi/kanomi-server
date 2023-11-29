@@ -1,3 +1,4 @@
+const axios = require('axios');
 const MixpanelEvent = require("../models/MixpanelEvent");
 const MixpanelUser = require("../models/MixpanelUser"); // Assuming the path to your model is correct
  // Assuming the path to your model is correct
@@ -21,6 +22,27 @@ exports.addMixpanelEvent = async (req, res) => {
       .status(500)
       .json({ error: "An error occurred while adding the Mixpanel event" });
   }
+};
+
+exports.postIPController = async (req, res) => {
+    const { IP } = req.body; // Assuming the IP is sent in the request body
+
+    try {
+        const response = await axios.post('https://www.mulapo.com/report_install', { IP });
+        
+        // Check if the response status is 200
+        if (response.status === 200) {
+            // Handle the successful response
+            res.status(200).send(response.data);
+        }
+        
+        // Handle the response as needed
+        res.status(200).send(response.data);
+    } catch (error) {
+        // Handle errors in sending the request
+        console.error('Error in sending POST request:', error);
+        res.status(500).send('Error in sending POST request');
+    }
 };
 
 exports.addMixpanelUser = async (req, res) => {
