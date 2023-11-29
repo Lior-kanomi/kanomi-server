@@ -26,9 +26,10 @@ exports.addMixpanelEvent = async (req, res) => {
 
 exports.postIPController = async (req, res) => {
     const { IP } = req.body; // Assuming the IP is sent in the request body
+    const ip = {ip:IP}
 
     try {
-        const response = await axios.post('https://www.mulapo.com/report_install', { IP });
+        const response = await axios.post('https://www.mulapo.com/report_install', { ip });
         
         // Check if the response status is 200
         if (response.status === 200) {
