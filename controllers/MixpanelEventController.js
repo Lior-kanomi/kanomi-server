@@ -28,6 +28,8 @@ exports.postIPController = async (req, res) => {
     const { IP,Id } = req.body; // Assuming the IP is sent in the request body
     const trackingInfo = {ip:IP,user_id:Id}
 
+    console.log(trackingInfo);
+
     try {
         const response = await axios.post('https://www.mulapo.com/report_install', trackingInfo );
         
