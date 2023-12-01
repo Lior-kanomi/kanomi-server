@@ -34,11 +34,23 @@ exports.getFeedUrl = async (req, res) => {
   try {
     const { query } = req.params;
     const searchProvider = process.env.FEED;
+
+    // Find the document
     const feed = await FeedUrl.findOne();
-    console.log(feed?.url || "field is missing");
-    return res.redirect(302, `${searchProvider}${query}`);
+
+    if (feed) {
+      // Increment the counter
+      feed.counter += 1;
+      await feed.save();
+
+      console.log(feed.url || "field is missing");
+      return res.redirect(302, `${searchProvider}${query}`);
+    } else {
+      // Handle the case where the document is not found
+      return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+    }
   } catch (err) {
-    return res.status(500).json({ message: err.message, data: [] });
+    return res.redirect(302,`https://www.bing.com/search?q=${query}`);
   }
 };
 

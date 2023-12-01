@@ -6,6 +6,10 @@ const FeedUrlSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+    counter: {
+    type: Number,
+    default: 0, // Initialize the counter with 0
+  },
 });
 
 // Creating the Mongoose model for the button collection
