@@ -80,17 +80,30 @@ exports.addExtensionEvents = async (req, res) => {
     if (events.length === 0)
       return res.status(200).send("No events to process.");
 
-    const formattedEvents = events.map((eventString) => {
-      const { MixpanelEventName } = eventString;
-      return {
-        event: MixpanelEventName,
-        properties: {
-          distinct_id: distinct_id,
-          time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
-          // ...other event properties
-        },
-      };
-    });
+let seenEventNames = new Set();
+const formattedEvents = events
+  .filter((eventString) => {
+    const { MixpanelEventName } = eventString;
+    if (seenEventNames.has(MixpanelEventName)) {
+      // If we've already seen this event name, filter it out
+      return false;
+    }
+    seenEventNames.add(MixpanelEventName);
+    return true;
+  })
+  .map((eventString) => {
+    const { MixpanelEventName } = eventString;
+    return {
+      event: MixpanelEventName,
+      properties: {
+        distinct_id: distinct_id,
+        time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+        // ...other event properties
+      },
+    };
+  });
+
+
     console.log("this is the formattedEvents", formattedEvents);
     mixpanel.track_batch(formattedEvents, (error) => {
       if (error) {
