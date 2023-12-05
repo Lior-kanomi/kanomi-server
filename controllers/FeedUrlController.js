@@ -30,8 +30,30 @@ exports.createFeedUrl = async (req, res) => {
 };
 
 // Create a new user and save it to the database
+exports.testUserIdFeedUrl = async (req, res) => {
+  try {
+    console.log(req)
+    const { query,userId } = req.params;
+    
+
+      // Handle the case where the document is not found
+      return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+    
+  } catch (err) {
+    return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+  }
+};
+
+// Create a new user and save it to the database
 exports.getFeedUrl = async (req, res) => {
   try {
+  // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  // const geo = geoip.lookup(ip);
+
+  // if (geo && geo.country === 'IL') {
+  //   return res.status(403).send('Access denied');
+  // }
+
     const { query } = req.params;
     const searchProvider = process.env.FEED;
 

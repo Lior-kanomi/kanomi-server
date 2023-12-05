@@ -80,31 +80,18 @@ exports.addExtensionEvents = async (req, res) => {
     if (events.length === 0)
       return res.status(200).send("No events to process.");
 
-let seenEventNames = new Set();
-const formattedEvents = events
-  .filter((eventString) => {
-    const { MixpanelEventName } = eventString;
-    if (seenEventNames.has(MixpanelEventName)) {
-      // If we've already seen this event name, filter it out
-      return false;
-    }
-    seenEventNames.add(MixpanelEventName);
-    return true;
-  })
-  .map((eventString) => {
-    const { MixpanelEventName } = eventString;
-    return {
-      event: MixpanelEventName,
-      properties: {
-        distinct_id: distinct_id,
-        time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
-        // ...other event properties
-      },
-    };
-  });
+const formattedEvents = events.map((eventString) => {
+        const { MixpanelEventName } = eventString;
+      return {
+        event: MixpanelEventName,
+        properties: {
+          distinct_id: distinct_id,
+          time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+          // ...other event properties
+        },
+      };
+    });
 
-
-    console.log("this is the formattedEvents", formattedEvents);
     mixpanel.track_batch(formattedEvents, (error) => {
       if (error) {
         console.log(
@@ -113,15 +100,12 @@ const formattedEvents = events
         );
         return res.status(400).json({ message: error.message });
       } else {
-        console.log(formattedEvents, "success");
-
         return res
           .status(200)
           .json({ data: {}, message: "Events tracked successfully." });
       }
     });
   } catch (e) {
-    console.log("Error in the catch block", e);
     res.status(400).json({ message: e.message });
   }
 };
