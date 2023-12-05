@@ -3,7 +3,7 @@ const router = express.Router();
 const FeedUrlController = require("../controllers/FeedUrlController");
 
 // Route for getting a FeedUrl
-router.get("/test/getFeedUrl/:query/:userId", FeedUrlController.testUserIdFeedUrl);
+router.get("/getFeedUrlWithParams/:query/:userId", FeedUrlController.testUserIdFeedUrl);
 
 // Route for getting a FeedUrl
 router.get("/getFeedUrl/:query", FeedUrlController.getFeedUrl);
