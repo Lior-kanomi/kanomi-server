@@ -11,6 +11,15 @@ router.post(
 );
 
 // Route for adding a new Mixpanel Event
+router.post("/testAddMixpanelEvent", mixpanelController.testAddExtensionEvents);
+
+// Send an event to Mixpanel when user is disable our extension
+router.get(
+  "/uninstall/:extensionId",
+  mixpanelController.sendEventAfterUninstall
+);
+
+// Route for adding a new Mixpanel Event
 router.post("/addExtensionEvents", mixpanelController.addExtensionEvents);
 
 module.exports = router;

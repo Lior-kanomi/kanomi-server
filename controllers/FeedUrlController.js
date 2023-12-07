@@ -1,4 +1,5 @@
 const FeedUrl = require("../models/FeedUrl");
+
 // Create a AI card and save it to the database
 
 exports.createFeedUrl = async (req, res) => {
@@ -32,27 +33,36 @@ exports.createFeedUrl = async (req, res) => {
 // Create a new user and save it to the database
 exports.testUserIdFeedUrl = async (req, res) => {
   try {
-    console.log(req)
-    const { query,userId } = req.params;
-    
+    const { query, userId, element } = req.params;
+    const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN_TEST);
 
-      // Handle the case where the document is not found
-      return res.redirect(302,`https://www.bing.com/search?q=${query}`);
-    
+    // Handle the case where the document is not found
+    res.redirect(302, `https://www.bing.com/search?q=${query}`);
+    const properties = {
+      eventProperty: `User search through ${element} with the query '${query}`,
+      distinct_id: userId,
+      time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+      // ...other event properties
+    };
+    mixpanel.track("Search", properties, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
   } catch (err) {
-    return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+    return res.redirect(302, `https://www.bing.com/search?q=${query}`);
   }
 };
 
 // Create a new user and save it to the database
 exports.getFeedUrl = async (req, res) => {
   try {
-  // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  // const geo = geoip.lookup(ip);
+    // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    // const geo = geoip.lookup(ip);
 
-  // if (geo && geo.country === 'IL') {
-  //   return res.status(403).send('Access denied');
-  // }
+    // if (geo && geo.country === 'IL') {
+    //   return res.status(403).send('Access denied');
+    // }
 
     const { query } = req.params;
     const searchProvider = process.env.FEED;
@@ -69,10 +79,10 @@ exports.getFeedUrl = async (req, res) => {
       return res.redirect(302, `${searchProvider}${query}`);
     } else {
       // Handle the case where the document is not found
-      return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+      return res.redirect(302, `https://www.bing.com/search?q=${query}`);
     }
   } catch (err) {
-    return res.redirect(302,`https://www.bing.com/search?q=${query}`);
+    return res.redirect(302, `https://www.bing.com/search?q=${query}`);
   }
 };
 
