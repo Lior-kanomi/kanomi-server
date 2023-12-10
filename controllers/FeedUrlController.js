@@ -34,12 +34,14 @@ exports.createFeedUrl = async (req, res) => {
 exports.testUserIdFeedUrl = async (req, res) => {
   try {
     const { query, userId, element } = req.params;
+    const encodedQuery = query ?? encodeURI(query);
+
     const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN_TEST);
 
     // Handle the case where the document is not found
     res.redirect(302, `https://www.bing.com/search?q=${query}`);
     const properties = {
-      eventProperty: `User search through ${element} with the query '${query}`,
+      eventProperty: `User search through ${element} with the query '${encodedQuery}`,
       distinct_id: userId,
       time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
       // ...other event properties
