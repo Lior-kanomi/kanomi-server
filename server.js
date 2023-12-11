@@ -26,8 +26,10 @@ const autoSuggestRoute = require("./routes/autoSuggestRoute"); // The autoSugges
 const googleTrendsRoute = require("./routes/googleTrendsRoute"); // The google trends route
 const feedUrlRoute = require("./routes/feedUrlRoute"); // The feedUrl route
 const ABTestingRoute = require("./routes/ABTestingRoute"); // The feedUrl route
-const mixpanelUsertRoute = require("./routes/mixpanelUserRoute"); // The Mixpanel users' route
+const timerIntervalForFocusCheckRoute = require("./routes/timerIntervalForFocusCheckRoute"); //interval value for focus check
 
+// This is for you DOTAN
+const mixpanelUsertRoute = require("./routes/mixpanelUserRoute"); // The Mixpanel users' route
 
 // Browser Chrome extension
 const userAgentRoute = require("./routes/UserAgentRoute"); // The feedUrl route
@@ -58,7 +60,6 @@ app.use("/api/event", eventRoute);
 app.use("/api/mixpanelEvent", mixpanelEventRoute);
 app.use("/api/mixpanelUser", mixpanelUsertRoute);
 
-
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);
 app.use("/api/autoSuggest", autoSuggestRoute);
@@ -67,6 +68,16 @@ app.use("/api/Feed", feedUrlRoute);
 
 app.use("/api/userAgent", userAgentRoute);
 app.use("/api/ab-test", ABTestingRoute);
+app.use("/api/timerIntervalForFocusCheck", timerIntervalForFocusCheckRoute);
+// app.get("/api/test",(req, res) => {
+//   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+//   const geo = geoip.lookup(ip);
+
+//   if (geo && geo.country === 'IL') {
+//     return res.status(403).send('Access denied');
+//   }
+
+// });
 
 // Define a catch-all route to handle invalid routes
 // app.use((req, res, next) => {
