@@ -36,7 +36,7 @@ exports.testUserIdFeedUrl = async (req, res) => {
     const { query, userId, element } = req.params;
     const encodedQuery = query ?? encodeURI(query);
 
-    const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN_TEST);
+    const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
 
     // Handle the case where the document is not found
     res.redirect(302, `https://www.bing.com/search?q=${query}`);
