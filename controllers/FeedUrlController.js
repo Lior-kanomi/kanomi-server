@@ -35,11 +35,23 @@ exports.testUserIdFeedUrl = async (req, res) => {
   try {
     const { query, userId, element } = req.params;
     const encodedQuery = query ?? encodeURI(query);
-
     const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+    const searchProvider = process.env.FEED;
 
-    // Handle the case where the document is not found
-    res.redirect(302, `https://www.bing.com/search?q=${query}`);
+    // Find the document
+    const feed = await FeedUrl.findOne();
+
+    if (feed) {
+      // Increment the counter
+      feed.counter += 1;
+      await feed.save();
+
+      console.log(feed.url || "field is missing");
+      res.redirect(302, `${searchProvider}${query}`);
+    } else {
+      // Handle the case where the document is not found
+      res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
+    }
     const properties = {
       eventProperty: `User search through ${element} with the query '${encodedQuery}`,
       distinct_id: userId,
@@ -52,7 +64,7 @@ exports.testUserIdFeedUrl = async (req, res) => {
       }
     });
   } catch (err) {
-    return res.redirect(302, `https://www.bing.com/search?q=${query}`);
+    return res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
   }
 };
 
