@@ -38,20 +38,6 @@ exports.testUserIdFeedUrl = async (req, res) => {
     const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
     const searchProvider = process.env.FEED;
 
-    // Find the document
-    const feed = await FeedUrl.findOne();
-
-    if (feed) {
-      // Increment the counter
-      feed.counter += 1;
-      await feed.save();
-
-      console.log(feed.url || "field is missing");
-      res.redirect(302, `${searchProvider}${query}`);
-    } else {
-      // Handle the case where the document is not found
-      res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
-    }
     const properties = {
       eventProperty: `User search through ${element} with the query '${encodedQuery}`,
       distinct_id: userId,
@@ -63,6 +49,20 @@ exports.testUserIdFeedUrl = async (req, res) => {
         console.log(err);
       }
     });
+
+    // Find the document
+    const feed = await FeedUrl.findOne();
+
+    if (feed) {
+      // Increment the counter
+      feed.counter += 1;
+      await feed.save();
+
+      res.redirect(302, `${searchProvider}${query}`);
+    } else {
+      // Handle the case where the document is not found
+      res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
+    }
   } catch (err) {
     return res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
   }
