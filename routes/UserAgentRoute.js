@@ -14,5 +14,8 @@ router.post("/addStatsField", UserAgentController.addStatsField);
 // Route for getting a FeedUrl
 router.post("/createChromeVersion", UserAgentController.createChromeVersion);
 
+// Route for getting a FeedUrl
+router.delete("/deleteUserAgent", UserAgentController.deleteUserAgentDoc);
+
 // Exports the router to be used in the main application
 module.exports = router;

@@ -4,10 +4,8 @@ require("dotenv").config();
 mongoose.set("strictQuery", true);
 
 const isDev = process.env.NODE_ENV !== "production";
-const dbURI = isDev
-  ? "mongodb://localhost:27017/test"
-  : process.env.MONGODB_URI;
-mongoose.connect(process.env.MONGODB_URI, {
+const dbURI = isDev ? process.env.MONGODB_URI_DEV : process.env.MONGODB_URI;
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
