@@ -32,10 +32,16 @@ exports.createFeedUrl = async (req, res) => {
 
 // Create a new user and save it to the database
 exports.testUserIdFeedUrl = async (req, res) => {
+  let defaultQuery = "";
   try {
     const { query, userId, element } = req.params;
+    defaultQuery = query;
     const encodedQuery = query ?? encodeURI(query);
-    const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+    const isDev = process.env.NODE_ENV !== "production";
+    const mixpanelToken = isDev
+      ? process.env.MIXPANEL_TOKEN_TEST
+      : process.env.MIXPANEL_TOKEN;
+    const mixpanel = require("mixpanel").init(mixpanelToken);
     const searchProvider = process.env.FEED;
 
     const properties = {
@@ -58,13 +64,16 @@ exports.testUserIdFeedUrl = async (req, res) => {
       feed.counter += 1;
       await feed.save();
 
-      res.redirect(302, `${searchProvider}${query}`);
+      return res.redirect(302, `${searchProvider}${query}`);
     } else {
       // Handle the case where the document is not found
-      res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
+      return res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
     }
   } catch (err) {
-    return res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
+    return res.redirect(
+      302,
+      `https://search.yahoo.com/search?p=${defaultQuery}`
+    );
   }
 };
 

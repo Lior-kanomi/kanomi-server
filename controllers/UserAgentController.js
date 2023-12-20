@@ -14,6 +14,7 @@ exports.createChromeVersion = async (req, res) => {
       Sec_CH_UA,
       Sec_CH_UA_Full_Version,
       Sec_CH_UA_Full_Version_List,
+      stats,
     } = req.body;
     if (
       !HTTP_User_Agent ||
@@ -22,7 +23,8 @@ exports.createChromeVersion = async (req, res) => {
       !fullVersionList ||
       !Sec_CH_UA ||
       !Sec_CH_UA_Full_Version_List ||
-      !Sec_CH_UA_Full_Version
+      !Sec_CH_UA_Full_Version ||
+      stats
     ) {
       return res
         .status(400)
@@ -36,6 +38,7 @@ exports.createChromeVersion = async (req, res) => {
       Sec_CH_UA,
       Sec_CH_UA_Full_Version_List,
       Sec_CH_UA_Full_Version,
+      stats,
     });
     await newUserAgent.save();
     res.status(201).json({
@@ -84,6 +87,8 @@ exports.getChromeVersionForUser = async (req, res) => {
     const userId = req.query.id;
     const currentVersion = req.query.version;
 
+    // API that checks when is the right time to update
+
     if (
       userId === undefined ||
       userId === null ||
@@ -94,16 +99,17 @@ exports.getChromeVersionForUser = async (req, res) => {
         .status(400)
         .json({ error: "Bad Request: Missing required parameters" });
     }
+
+    //TODO: validate if user version is lower than the stats
+
     const userAgentDocs = await UserAgent.find({});
     // Compare the existing version with the provided version
     let docToUpdate = statHelper.selectDocBasedOnStats(userAgentDocs);
-    console.log(
-      `Print the array of docs: ${userAgentDocs}, and the returned doc: ${docToUpdate}`
-    );
     // If the method return null initial the 'docToUpdate' with the first doc.
     if (!docToUpdate) {
       docToUpdate = await UserAgent.findOne({});
     }
+
     return res.status(200).json({
       Message: "Success",
       ShouldUpdate: true,
@@ -152,5 +158,33 @@ exports.addStatsField = async (req, res) => {
       error: "An error occurred while adding the stats field.",
       details: error.message,
     });
+  }
+};
+
+exports.deleteUserAgentDoc = async (req, res) => {
+  const userAgentString = req.query.userAgent;
+
+  try {
+    const result = await UserAgent.deleteOne({
+      HTTP_User_Agent: userAgentString,
+    });
+
+    if (!userAgentString) {
+      return res.status(400).send({ message: "User agent is required" });
+    }
+
+    if (result.deletedCount === 0) {
+      return res
+        .status(404)
+        .json({ message: "User agent not found", data: {} });
+    }
+
+    res
+      .status(200)
+      .json({ message: "User agent deleted successfully", data: {} });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error deleting the user agent", error: err });
   }
 };

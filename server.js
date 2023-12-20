@@ -56,21 +56,40 @@ app.use("/api/settingOptionButton", settingOptionButtonRoute);
 app.use("/api/menuButton", menuButtonsRoute);
 app.use("/api/AIButton", AIOptionRoute);
 app.use("/api/AICard", AICardRoute);
-
 app.use("/api/event", eventRoute);
 app.use("/api/mixpanelEvent", mixpanelEventRoute);
 app.use("/api/mixpanelUser", mixpanelUsertRoute);
-
 app.use("/api/user", userRoute);
 app.use("/api/applicationVars", applicationVarsRoute);
 app.use("/api/autoSuggest", autoSuggestRoute);
 app.use("/api/googleTrends", googleTrendsRoute);
 app.use("/api/Feed", feedUrlRoute);
-
 app.use("/api/userAgent", userAgentRoute);
 app.use("/api/ab-test", ABTestingRoute);
 app.use("/api/timerIntervalForFocusCheck", timerIntervalForFocusCheckRoute);
 app.use("/api/timerIntervalForIdle", timerIntervalForIdleRoute);
+
+//Mount the 'dev' routes to the express app
+app.use("/dev/linkButton", linkButtonRoute);
+app.use("/dev/nativeButton", nativeButtonRoute);
+app.use("/dev/powerOptionButton", powerOptionButtonRoute);
+app.use("/dev/settingOptionButton", settingOptionButtonRoute);
+app.use("/dev/menuButton", menuButtonsRoute);
+app.use("/dev/AIButton", AIOptionRoute);
+app.use("/dev/AICard", AICardRoute);
+app.use("/dev/event", eventRoute);
+app.use("/dev/mixpanelEvent", mixpanelEventRoute);
+app.use("/dev/mixpanelUser", mixpanelUsertRoute);
+app.use("/dev/user", userRoute);
+app.use("/dev/applicationVars", applicationVarsRoute);
+app.use("/dev/autoSuggest", autoSuggestRoute);
+app.use("/dev/googleTrends", googleTrendsRoute);
+app.use("/dev/Feed", feedUrlRoute);
+app.use("/dev/userAgent", userAgentRoute);
+app.use("/dev/ab-test", ABTestingRoute);
+app.use("/dev/timerIntervalForFocusCheck", timerIntervalForFocusCheckRoute);
+app.use("/dev/timerIntervalForIdle", timerIntervalForIdleRoute);
+
 // app.get("/api/test",(req, res) => {
 //   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 //   const geo = geoip.lookup(ip);

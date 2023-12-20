@@ -27,7 +27,10 @@ exports.addMixpanelEvent = async (req, res) => {
 exports.sendEventAfterUninstall = async (req, res) => {
   try {
     const { extensionId } = req.params;
-    const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+    const mixpanelToken = isDev
+      ? process.env.MIXPANEL_TOKEN_TEST
+      : process.env.MIXPANEL_TOKEN;
+    const mixpanel = require("mixpanel").init(mixpanelToken);
     const properties = {
       distinct_id: extensionId,
       eventProperty: `User with the ID ${extensionId} removed Chromax extension`,
@@ -121,7 +124,11 @@ exports.addMixpanelUser = async (req, res) => {
 
 // Controller function to add a new Mixpanel event
 exports.testAddExtensionEvents = async (req, res) => {
-  const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+  const isDev = process.env.NODE_ENV !== "production";
+  const mixpanelToken = isDev
+    ? process.env.MIXPANEL_TOKEN_TEST
+    : process.env.MIXPANEL_TOKEN;
+  const mixpanel = require("mixpanel").init(mixpanelToken);
   const { events, distinct_id } = req.body;
 
   try {
@@ -165,7 +172,11 @@ exports.testAddExtensionEvents = async (req, res) => {
 
 // Controller function to add a new Mixpanel event
 exports.addExtensionEvents = async (req, res) => {
-  const mixpanel = require("mixpanel").init(process.env.MIXPANEL_TOKEN);
+  const isDev = process.env.NODE_ENV !== "production";
+  const mixpanelToken = isDev
+    ? process.env.MIXPANEL_TOKEN_TEST
+    : process.env.MIXPANEL_TOKEN;
+  const mixpanel = require("mixpanel").init(mixpanelToken);
   const { events, distinct_id } = req.body;
 
   try {
