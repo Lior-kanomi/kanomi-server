@@ -61,6 +61,10 @@ exports.sendEventAfterUninstall = async (req, res) => {
 };
 
 exports.postIPController = async (req, res) => {
+  const isDev = process.env.NODE_ENV !== "production";
+  if (isDev) {
+    return res.status(401).json({ data: [], message: "Unauthorized User" });
+  }
   const { IP, Id } = req.body; // Assuming the IP is sent in the request body
   const trackingInfo = { ip: IP, user_id: Id };
 
