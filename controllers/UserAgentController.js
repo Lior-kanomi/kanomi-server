@@ -111,7 +111,7 @@ exports.getChromeVersionForUser = async (req, res) => {
     }
     if (currentVersion !== docToUpdate) {
       const properties = {
-        eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.stats}`,
+        eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.uaFullVersion}`,
         distinct_id: userId,
         time: Math.floor(Date.now() / 1000) // time should be in seconds since epoch
         // ...other event properties
