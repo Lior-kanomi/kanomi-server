@@ -88,7 +88,6 @@ exports.getChromeVersionForUser = async (req, res) => {
     const currentVersion = req.query.version;
 
     // API that checks when is the right time to update
-
     if (
       userId === undefined ||
       userId === null ||
@@ -103,13 +102,26 @@ exports.getChromeVersionForUser = async (req, res) => {
     //TODO: validate if user version is lower than the stats
 
     const userAgentDocs = await UserAgent.find({});
+
     // Compare the existing version with the provided version
     let docToUpdate = statHelper.selectDocBasedOnStats(userAgentDocs);
     // If the method return null initial the 'docToUpdate' with the first doc.
     if (!docToUpdate) {
       docToUpdate = await UserAgent.findOne({});
     }
-
+    if (currentVersion !== docToUpdate) {
+      const properties = {
+        eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate}`,
+        distinct_id: userId,
+        time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+        // ...other event properties
+      };
+      mixpanel.track("UA updated", properties, (err) => {
+        if (err) {
+          console.log("Mixpanel Error");
+        }
+      });
+    }
     return res.status(200).json({
       Message: "Success",
       ShouldUpdate: true,
