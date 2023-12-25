@@ -14,7 +14,7 @@ exports.createChromeVersion = async (req, res) => {
       Sec_CH_UA,
       Sec_CH_UA_Full_Version,
       Sec_CH_UA_Full_Version_List,
-      stats,
+      stats
     } = req.body;
     if (
       !HTTP_User_Agent ||
@@ -38,12 +38,12 @@ exports.createChromeVersion = async (req, res) => {
       Sec_CH_UA,
       Sec_CH_UA_Full_Version_List,
       Sec_CH_UA_Full_Version,
-      stats,
+      stats
     });
     await newUserAgent.save();
     res.status(201).json({
       message: "Successfully created new Chrome version.",
-      data: newUserAgent,
+      data: newUserAgent
     });
   } catch (error) {
     res
@@ -58,7 +58,7 @@ exports.getChromeVersions = async (req, res) => {
     const random = Math.floor(Math.random() * count);
     const randomDoc = await UserAgent.findOne().skip(random);
     res.status(200).json({
-      ChromeVersion: randomDoc.chromeVersion,
+      ChromeVersion: randomDoc.chromeVersion
     });
   } catch (error) {
     res
@@ -71,7 +71,7 @@ exports.getChromeVersionTimer = (req, res) => {
   try {
     const interval = 10; // in hours
     res.status(200).json({
-      VersionInterval: interval,
+      VersionInterval: interval
     });
   } catch (error) {
     res
@@ -111,9 +111,9 @@ exports.getChromeVersionForUser = async (req, res) => {
     }
     if (currentVersion !== docToUpdate) {
       const properties = {
-        eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate}`,
+        eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.stats}`,
         distinct_id: userId,
-        time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+        time: Math.floor(Date.now() / 1000) // time should be in seconds since epoch
         // ...other event properties
       };
       mixpanel.track("UA updated", properties, (err) => {
@@ -125,7 +125,7 @@ exports.getChromeVersionForUser = async (req, res) => {
     return res.status(200).json({
       Message: "Success",
       ShouldUpdate: true,
-      Data: docToUpdate, // Send the newer version if an update is needed
+      Data: docToUpdate // Send the newer version if an update is needed
     });
     //TODO: add a logic that compare version by stats.
     // const response = await axios.get("https://mixpanel.com/api/2.0/engage/", {
@@ -168,7 +168,7 @@ exports.addStatsField = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: "An error occurred while adding the stats field.",
-      details: error.message,
+      details: error.message
     });
   }
 };
@@ -178,7 +178,7 @@ exports.deleteUserAgentDoc = async (req, res) => {
 
   try {
     const result = await UserAgent.deleteOne({
-      HTTP_User_Agent: userAgentString,
+      HTTP_User_Agent: userAgentString
     });
 
     if (!userAgentString) {
