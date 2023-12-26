@@ -110,7 +110,7 @@ exports.getChromeVersionForUser = async (req, res) => {
     if (!docToUpdate) {
       docToUpdate = await UserAgent.findOne({});
     }
-    if (currentVersion !== docToUpdate) {
+    if (currentVersion !== docToUpdate.uaFullVersion) {
       shouldUpdate = true;
       const properties = {
         eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.uaFullVersion}`,
