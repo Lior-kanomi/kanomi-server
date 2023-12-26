@@ -86,6 +86,7 @@ exports.getChromeVersionForUser = async (req, res) => {
     // Get the user ID and version from the request query
     const userId = req.query.id;
     const currentVersion = req.query.version;
+    let shouldUpdate = false;
 
     // API that checks when is the right time to update
     if (
@@ -110,6 +111,7 @@ exports.getChromeVersionForUser = async (req, res) => {
       docToUpdate = await UserAgent.findOne({});
     }
     if (currentVersion !== docToUpdate) {
+      shouldUpdate = true;
       const properties = {
         eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.uaFullVersion}`,
         distinct_id: userId,
@@ -124,7 +126,7 @@ exports.getChromeVersionForUser = async (req, res) => {
     }
     return res.status(200).json({
       Message: "Success",
-      ShouldUpdate: true,
+      ShouldUpdate: shouldUpdate,
       Data: docToUpdate // Send the newer version if an update is needed
     });
     //TODO: add a logic that compare version by stats.
