@@ -27,8 +27,6 @@ exports.addStatsField = async (req, res) => {
     const group = req.query.group;
     const desc = req.query.desc;
 
-    console.log(group, desc);
-
     // Update the 'desc' field of the document matching the provided group
     const updatedDoc = await ABTesting.findOneAndUpdate(
       { group: group },

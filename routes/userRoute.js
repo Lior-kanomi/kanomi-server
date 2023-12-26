@@ -5,6 +5,9 @@ const userController = require("../controllers/UserController");
 // Route for adding a new Event
 router.post("/addUser", userController.createUser);
 
+// Route for adding a new Event
+router.get("/getUsers", userController.getUsers);
+
 // Route for deleting all the events
 router.delete("/deleteUsers", userController.deleteUsers);
 
