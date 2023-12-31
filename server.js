@@ -10,6 +10,8 @@ dotenv.config();
 // Initial database connection
 const db = require("./data/db");
 
+// New comment
+
 // Import routes
 const linkButtonRoute = require("./routes/linkButtonRoute");
 const nativeButtonRoute = require("./routes/nativeButtonRoute"); // The Native Buttons' route
