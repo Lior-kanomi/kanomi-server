@@ -27,13 +27,14 @@ exports.addMixpanelEvent = async (req, res) => {
 exports.sendEventAfterUninstall = async (req, res) => {
   try {
     const { extensionId } = req.params;
+    const isDev = process.env.NODE_ENV !== "production";
     const mixpanelToken = isDev
       ? process.env.MIXPANEL_TOKEN_TEST
       : process.env.MIXPANEL_TOKEN;
     const mixpanel = require("mixpanel").init(mixpanelToken);
     const properties = {
       distinct_id: extensionId,
-      eventProperty: `User with the ID ${extensionId} removed Chromax extension`,
+      eventProperty: `User with the ID ${extensionId} removed Chromax extension`
     };
     mixpanel.track("Uninstall", properties, (err) => {
       if (err) {
@@ -81,20 +82,20 @@ exports.postIPController = async (req, res) => {
       // Handle the successful response
       return res.status(200).json({
         message: "Pixel sent successfully from the server",
-        data: trackingInfo,
+        data: trackingInfo
       });
     }
     return res.status(200).json({
       message:
         "Pixel sent successfully without getting any 200 status for the request",
-      data: trackingInfo,
+      data: trackingInfo
     });
   } catch (error) {
     // Handle errors in sending the request
     console.error("Error in sending POST request:", error);
     res.status(500).json({
       message: `Error in sending POST request:', ${error}`,
-      data: trackingInfo,
+      data: trackingInfo
     });
   }
 };
@@ -150,9 +151,9 @@ exports.testAddExtensionEvents = async (req, res) => {
         properties: {
           eventProperty,
           distinct_id,
-          time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+          time: Math.floor(Date.now() / 1000) // time should be in seconds since epoch
           // ...other event properties
-        },
+        }
       };
     });
 
@@ -193,9 +194,9 @@ exports.addExtensionEvents = async (req, res) => {
         event: MixpanelEventName,
         properties: {
           distinct_id: distinct_id,
-          time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+          time: Math.floor(Date.now() / 1000) // time should be in seconds since epoch
           // ...other event properties
-        },
+        }
       };
     });
 

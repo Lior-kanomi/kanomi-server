@@ -3,6 +3,7 @@ const UserAgent = require("../models/UserAgent"); // Assuming the UserAgent
 const axios = require("axios");
 const versionsHelper = require("../helpers/compareVersions");
 const statHelper = require("../helpers/selectDocBasedOnStats");
+const versionHelper = require("../helpers/compareVersions");
 
 exports.createChromeVersion = async (req, res) => {
   try {
@@ -100,17 +101,23 @@ exports.getChromeVersionForUser = async (req, res) => {
         .json({ error: "Bad Request: Missing required parameters" });
     }
 
-    //TODO: validate if user version is lower than the stats
-
     const userAgentDocs = await UserAgent.find({});
 
     // Compare the existing version with the provided version
     let docToUpdate = statHelper.selectDocBasedOnStats(userAgentDocs);
     // If the method return null initial the 'docToUpdate' with the first doc.
+
     if (!docToUpdate) {
       docToUpdate = await UserAgent.findOne({});
     }
-    if (currentVersion !== docToUpdate.uaFullVersion) {
+
+    //TODO: validate if user version is lower than the stats
+    const isNewer = versionHelper.findNewestVersion(
+      currentVersion,
+      docToUpdate.uaFullVersion
+    );
+
+    if (!isNewer) {
       shouldUpdate = true;
       const properties = {
         eventPropty: `UA been updated from ${currentVersion} to ${docToUpdate.uaFullVersion}`,
