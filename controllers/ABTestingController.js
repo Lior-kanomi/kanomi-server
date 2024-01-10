@@ -105,7 +105,15 @@ exports.updateGroups = async (req, res) => {
   try {
     const { desc, id, group, behavioralGroup } = req.query;
 
-    const updatedDoc = await ABTesting.findOne({ group: "A" }); // TODO: Validate the id in Mixpanel so you will know the is the same group in both
+    // Query the database to get the current percentages
+    const groups = await ABTesting.find({});
+
+    if (!groups || groups.length === 0) {
+      res.status(404).send("No documents found");
+      return;
+    }
+
+    const updatedDoc = statHelper.selectDocBasedOnStats(groups);
     // TODO: Add the logic for replacing the group from one to another...
 
     // Update the 'desc' field of the document matching the provided group
