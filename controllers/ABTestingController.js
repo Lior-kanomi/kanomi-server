@@ -105,19 +105,12 @@ exports.updateGroups = async (req, res) => {
   try {
     const { desc, id, group, behavioralGroup } = req.query;
 
-    // Query the database to get the current percentages
-    const groups = await ABTesting.find({});
+    // Check if the group is exist
+    const updatedDoc = await ABTesting.find({ group });
 
-    if (!groups || groups.length === 0) {
-      res.status(404).send("No documents found");
-      return;
-    }
-
-    const updatedDoc = statHelper.selectDocBasedOnStats(groups);
-    // TODO: Add the logic for replacing the group from one to another...
-
-    // Update the 'desc' field of the document matching the provided group
+    // Validate the 'updatedDoc' is not null or empty
     if (!updatedDoc) {
+      // Retrun default doc
       const defaultdDoc = await ABTesting.findOne({ group: "A" });
       return res.status(200).json({
         shouldUpdate: true,
@@ -127,14 +120,14 @@ exports.updateGroups = async (req, res) => {
         behavioralGroup: updatedDoc.behavioralGroup || "Power user"
       });
     }
-
     return res.status(200).json({
-      shouldUpdate: true,
+      shouldUpdate: false,
       message: "Updated ab testing object returned",
       group: updatedDoc.group,
       desc: updatedDoc.desc,
       behavioralGroup: updatedDoc.behavioralGroup || "Power user"
     });
+    // // TODO: Add the logic for replacing the group from one to another...
   } catch (error) {
     res.status(500).json({
       shouldUpdate: false,
