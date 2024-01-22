@@ -80,24 +80,15 @@ exports.testUserIdFeedUrl = async (req, res) => {
 // Create a new user and save it to the database
 exports.getFeedFromCouponBuddy = async (req, res) => {
   let defaultQuery = "Coupons for electronics";
+  const searchProvider =
+    process.env.FEED ?? "https://search.yahoo.com/search?p=";
+
   try {
     const { searchTerm } = req.query;
     if (!searchTerm || searchTerm === "") {
       searchTerm = defaultQuery;
     }
-    if (feed) {
-      // Increment the counter
-      feed.counter += 1;
-      await feed.save();
-
-      return res.redirect(302, `${searchProvider}${searchTerm}`);
-    } else {
-      // Handle the case where the document is not found
-      return res.redirect(
-        302,
-        `https://search.yahoo.com/search?p=${searchTerm}`
-      );
-    }
+    return res.redirect(302, `${searchProvider}${searchTerm}`);
   } catch (err) {
     return res.redirect(
       302,
