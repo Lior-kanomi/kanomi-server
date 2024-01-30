@@ -8,6 +8,8 @@ router.get(
   FeedUrlController.testUserIdFeedUrl
 );
 
+router.get("/getFeedFromCouponBuddy", FeedUrlController.getFeedFromCouponBuddy);
+
 // Route for getting a FeedUrl
 router.get("/getFeedUrl/:query", FeedUrlController.getFeedUrl);
 

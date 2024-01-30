@@ -5,24 +5,24 @@ const FeedUrl = require("../models/FeedUrl");
 exports.createFeedUrl = async (req, res) => {
   try {
     const feedUrl = await FeedUrl.findOne({
-      url: req.body.cardName,
+      url: req.body.cardName
     });
     if (!feedUrl) {
       const { url } = req.body;
       const newFeed = new FeedUrl({
-        url,
+        url
       });
       const createdFeed = await FeedUrl.create(newFeed);
       res.status(200).json({
         message: "Feed url created successfully",
-        data: createdFeed,
+        data: createdFeed
       });
     } else {
       newFeed.url = req.body.url;
       const updatedFeed = await FeedUrl.save();
       res.status(200).json({
         message: "Feed url button updated successfully",
-        data: updatedFeed,
+        data: updatedFeed
       });
     }
   } catch (error) {
@@ -47,7 +47,7 @@ exports.testUserIdFeedUrl = async (req, res) => {
     const properties = {
       eventProperty: `User search through ${element} with the query '${encodedQuery}`,
       distinct_id: userId,
-      time: Math.floor(Date.now() / 1000), // time should be in seconds since epoch
+      time: Math.floor(Date.now() / 1000) // time should be in seconds since epoch
       // ...other event properties
     };
     mixpanel.track("Search", properties, (err) => {
@@ -69,6 +69,26 @@ exports.testUserIdFeedUrl = async (req, res) => {
       // Handle the case where the document is not found
       return res.redirect(302, `https://search.yahoo.com/search?p=${query}`);
     }
+  } catch (err) {
+    return res.redirect(
+      302,
+      `https://search.yahoo.com/search?p=${defaultQuery}`
+    );
+  }
+};
+
+// Create a new user and save it to the database
+exports.getFeedFromCouponBuddy = async (req, res) => {
+  let defaultQuery = "Coupons for electronics";
+  const searchProvider =
+    process.env.FEED ?? "https://search.yahoo.com/search?p=";
+
+  try {
+    const { searchTerm } = req.query;
+    if (!searchTerm || searchTerm === "") {
+      searchTerm = defaultQuery;
+    }
+    return res.redirect(302, `${searchProvider}${searchTerm}`);
   } catch (err) {
     return res.redirect(
       302,
@@ -122,8 +142,8 @@ exports.getApplicationVariableFeed = async () => {
       message: "success",
       data: {
         ApplicationVariableName,
-        ApplicationVariableValue,
-      },
+        ApplicationVariableValue
+      }
     };
   } catch (err) {
     return { message: "Connection error", data: null };
