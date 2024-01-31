@@ -1,9 +1,36 @@
 const bannerWebsites = require("../constants/Banner");
+const staticSentences = [
+  "Unlock exclusive deals on searchQuery just for you!",
+  "Check this offer on searchQuery here!",
+  "Grab your chance on searchQuery now!",
+  "Get amazing discounts on searchQuery!",
+  "Your perfect deal on searchQuery is just a click away!"
+];
 
+const staticTitle = [
+  "Bark-tastic savings ahead!",
+  "Tail-waggin' deal found!",
+  "Woof-woof! Save more with Buddy!",
+  "Buddy's deal: Sniffed & approved!",
+  "Paws and check this out!"
+];
+
+function getRandomTitle() {
+  const randomIndex = Math.floor(Math.random() * staticTitle.length);
+  return staticTitle[randomIndex];
+}
+
+function getRandomSentence() {
+  const randomIndex = Math.floor(Math.random() * staticSentences.length);
+  return staticSentences[randomIndex];
+}
 exports.getBannerProps = (hostname) => {
   return {
-    image: "Coupon-buddy-banner-3.png",
-    message: "We found better deals for "
+    BigBannerSrc: "Coupon-buddy-banner-3.png",
+    message: getRandomSentence(),
+    title: getRandomTitle(),
+    MediumBannerSrc: "Coupon-buddy-banner-1.png",
+    MiniBannerSrc: "BuddyBanner.png"
   };
 
   // const style = `
