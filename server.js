@@ -31,6 +31,7 @@ const ABTestingRoute = require("./routes/ABTestingRoute"); // The feedUrl route
 const timerIntervalForFocusCheckRoute = require("./routes/timerIntervalForFocusCheckRoute"); //interval value for focus check
 const timerIntervalForIdleRoute = require("./routes/timerIntervalForIdleRoute"); //interval value for focus check
 const bannerRoute = require("./routes/bannerRoute"); // Banner extension
+const AICardInfoRoute = require("./routes/AICardInfoRoute"); // AICardInfoRoute extension
 
 // This is for you DOTAN
 const mixpanelUsertRoute = require("./routes/mixpanelUserRoute"); // The Mixpanel users' route
@@ -72,6 +73,7 @@ app.use("/api/ab-test", ABTestingRoute);
 app.use("/api/timerIntervalForFocusCheck", timerIntervalForFocusCheckRoute);
 app.use("/api/timerIntervalForIdle", timerIntervalForIdleRoute);
 app.use("/api/bannerRoute", bannerRoute);
+app.use("/api/AICardInfoRoute", AICardInfoRoute);
 
 //Mount the 'dev' routes to the express app
 app.use("/dev/linkButton", linkButtonRoute);
