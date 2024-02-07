@@ -16,6 +16,9 @@ const AICardInfoSchema = new mongoose.Schema({
   icon: {
     type: String
   },
+  description: {
+    type: String
+  },
   counter: {
     type: Number,
     default: 1 // sets a default value of 1 for the counter field
