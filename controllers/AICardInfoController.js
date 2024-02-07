@@ -11,6 +11,18 @@ exports.getAICardsInfo = async (req, res) => {
   }
 };
 
+exports.getAICardsInfoToLinksButtons = async () => {
+  try {
+    const AICardsInfo = await AICardInfo.find({});
+    if (AICardsInfo.length > 0) {
+      return AICardsInfo;
+    }
+    return [];
+  } catch (error) {
+    return [];
+  }
+};
+
 exports.createAICardInfo = async (req, res) => {
   try {
     const { name, rating, icon, lightThemeIcon, url, hint } = req.body;

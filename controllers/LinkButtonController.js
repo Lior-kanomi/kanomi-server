@@ -5,6 +5,7 @@ const PowerController = require("./PowerButtonController");
 const SettingController = require("./SettingButtonController");
 const AIController = require("./AIButtonController");
 const AICardController = require("./AICardController");
+const AICardInfoController = require("./AICardInfoController");
 
 // Create a new user and save it to the database
 exports.createButton = async (req, res) => {
@@ -16,7 +17,7 @@ exports.createButton = async (req, res) => {
       const createdButton = await Button.create(newButton);
       res.status(200).json({
         message: "Button created successfully",
-        data: createdButton,
+        data: createdButton
       });
     } else {
       button.save((error) => {
@@ -39,7 +40,7 @@ exports.updateButtons = async (req, res) => {
       {}, // Update all documents in the collection
       {
         $rename: { [req.body.icon]: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
-        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+        $set: { lightThemeIcon: null } // Add the new "lightThemeIcon" field
       }
     );
     return res.status(200).json({ message: "success", data: buttons });
@@ -99,9 +100,10 @@ exports.getLinks = async (req, res) => {
     const menuButtons = await MenuController.getMenuButtons();
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
     const AIOptionsButtons = await AIController.getAIOptionsButtons();
-    const AICards = await AICardController.getAICards();
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
+    const AIInfoCardsOptionsButtons =
+      await AICardInfoController.getAICardsInfoToLinksButtons();
 
     const linksButtons = newButtons.map((button) => {
       return {
@@ -109,7 +111,7 @@ exports.getLinks = async (req, res) => {
         URL: button.url,
         Icon: button.DarkThemeIcon,
         Hint: button.hint,
-        LightThemeIcon: button.lightThemeIcon,
+        LightThemeIcon: button.lightThemeIcon
       };
     });
 
@@ -120,6 +122,7 @@ exports.getLinks = async (req, res) => {
       powerOptionsButtons,
       settingOptionsButtons,
       AIOptionsButtons,
+      AIInfoCardsOptionsButtons
     };
     return res.status(200).json({ data, message: "success" });
   } catch (err) {
