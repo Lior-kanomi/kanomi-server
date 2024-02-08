@@ -99,7 +99,6 @@ exports.getLinks = async (req, res) => {
     const nativeButtons = await NativeController.getNativeButtons();
     const menuButtons = await MenuController.getMenuButtons();
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
-    const AIOptionsButtons = await AIController.getAIOptionsButtons();
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
     const AIInfoCardsOptionsButtons =
@@ -121,7 +120,6 @@ exports.getLinks = async (req, res) => {
       linksButtons,
       powerOptionsButtons,
       settingOptionsButtons,
-      AIOptionsButtons,
       AIInfoCardsOptionsButtons
     };
     return res.status(200).json({ data, message: "success" });
