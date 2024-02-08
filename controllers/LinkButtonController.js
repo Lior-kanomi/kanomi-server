@@ -101,7 +101,7 @@ exports.getLinks = async (req, res) => {
     const powerOptionsButtons = await PowerController.getPowerOptionsButtons();
     const settingOptionsButtons =
       await SettingController.getSettingOptionsButtons();
-    const AIInfoCardsOptionsButtons =
+    let AIInfoCardsOptionsButtons =
       await AICardInfoController.getAICardsInfoToLinksButtons();
 
     const linksButtons = newButtons.map((button) => {
@@ -109,6 +109,18 @@ exports.getLinks = async (req, res) => {
         Name: button.buttonName,
         URL: button.url,
         Icon: button.DarkThemeIcon,
+        Hint: button.hint,
+        LightThemeIcon: button.lightThemeIcon
+      };
+    });
+
+    AIInfoCardsOptionsButtons = AIInfoCardsOptionsButtons.map((button) => {
+      return {
+        Name: button.name,
+        Rating: button.rating,
+        Description: button.description,
+        URL: button.url,
+        Icon: button.icon,
         Hint: button.hint,
         LightThemeIcon: button.lightThemeIcon
       };
