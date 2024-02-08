@@ -4,7 +4,7 @@ const AIOptionButton = require("../models/AIOptionButton");
 exports.createAIOptionButton = async (req, res) => {
   try {
     const aiOptionButton = await AIOptionButton.findOne({
-      buttonName: req.body.buttonName,
+      buttonName: req.body.buttonName
     });
     if (!aiOptionButton) {
       const { buttonName, hint, icon } = req.body;
@@ -12,7 +12,7 @@ exports.createAIOptionButton = async (req, res) => {
       const createdButton = await AIOptionButton.create(newButton);
       res.status(200).json({
         message: "AI option button created successfully",
-        data: createdButton,
+        data: createdButton
       });
     } else {
       aiOptionButton.buttonName = req.body.buttonName;
@@ -21,7 +21,7 @@ exports.createAIOptionButton = async (req, res) => {
       const updatedButton = await AIOptionButton.save();
       res.status(200).json({
         message: "AI option button updated successfully",
-        data: updatedButton,
+        data: updatedButton
       });
     }
   } catch (error) {
@@ -32,7 +32,7 @@ exports.createAIOptionButton = async (req, res) => {
 exports.getAIOptionsButtons = async (req, res) => {
   try {
     const buttons = await AIOptionButton.find({
-      buttonName: { $ne: "AI" },
+      buttonName: { $ne: "AI" }
     })
       .lean()
       .exec();
@@ -41,7 +41,7 @@ exports.getAIOptionsButtons = async (req, res) => {
         Name: button.buttonName,
         Icon: button.DarkThemeIcon,
         Hint: button.hint,
-        LightThemeIcon: button.lightThemeIcon,
+        LightThemeIcon: button.icon
       };
     });
     return optionsButtons;
@@ -74,7 +74,7 @@ exports.updateAIOptionButton = async (req, res) => {
       {}, // Update all documents in the collection
       {
         $rename: { icon: "DarkThemeIcon" }, // Rename the "icon" field to "DarkThemeIcon"
-        $set: { lightThemeIcon: null }, // Add the new "lightThemeIcon" field
+        $set: { lightThemeIcon: null } // Add the new "lightThemeIcon" field
       }
     );
     return res.status(200).json({ message: "success", data: buttons });

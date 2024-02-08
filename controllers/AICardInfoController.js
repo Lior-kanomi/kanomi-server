@@ -26,7 +26,6 @@ exports.getAICardsInfoToLinksButtons = async () => {
 exports.createAICardInfo = async (req, res) => {
   try {
     const { name, rating, icon, lightThemeIcon, url, hint } = req.body;
-    console.log(name, rating, icon, lightThemeIcon, url, hint);
     const newCard = new AICardInfo({
       name,
       rating,
