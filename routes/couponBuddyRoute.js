@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const couponBuddyController = require("../controllers/couponBuddyController");
+const couponBuddyController = require("../controllers/CouponBuddyController");
 const { getBannerProps } = require("../helpers/getBannerProps");
+
 const axios = require("axios");
 // Route for deleting all the events
 router.post("/getPermissionToBanner", (req, res) => {
