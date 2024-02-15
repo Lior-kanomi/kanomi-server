@@ -15,7 +15,7 @@ exports.getAffiliateUrl = async (req, res) => {
       });
     } else {
       return res.status(200).json({
-        data: [],
+        data: "",
         message: "Website is not supported for coupon generation."
       });
     }
@@ -30,7 +30,7 @@ const generateCouponParams = (platform) => {
     let mkrid = "711-53200-19255-0";
     let siteid = "0";
     let campid = "5338986070";
-    let customid = "couponBuddy2024";
+    let customid = "couponBuddy2024-Server";
     let toolid = "10001";
     let mkevt = "1";
     params = `?mkrid=${mkrid}&siteid=${siteid}&campid=${campid}&customid=${customid}&toolid=${toolid}&mkevt=${mkevt}`;
