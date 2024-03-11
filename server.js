@@ -92,21 +92,6 @@ app.use("/dev/ab-test", ABTestingRoute);
 app.use("/dev/timerIntervalForFocusCheck", timerIntervalForFocusCheckRoute);
 app.use("/dev/timerIntervalForIdle", timerIntervalForIdleRoute);
 
-// app.get("/api/test",(req, res) => {
-//   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-//   const geo = geoip.lookup(ip);
-
-//   if (geo && geo.country === 'IL') {
-//     return res.status(403).send('Access denied');
-//   }
-
-// });
-
-// Define a catch-all route to handle invalid routes
-// app.use((req, res, next) => {
-//   res.status(404).render("error");
-// });
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
